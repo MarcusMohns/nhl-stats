@@ -1,8 +1,14 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
+}
+
+.dark {
+  --background: #1c1919;
+  --foreground: #ededed;
 }
 
 @theme inline {
@@ -12,15 +18,43 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
+  font-family: Arial, Helvetica, sans-serif;
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+.link-hint {
+  display: inline-block;
+  width: 0.6em;
+  height: 0.6em;
+  margin-left: 0.25rem;
+  border-radius: 9999px;
+  background: currentColor;
+  opacity: 0;
+  visibility: hidden; /* reserve space without showing the hint */
+}
+
+.link-hint.is-pending {
+  /* Animation 1: fade in after 100ms and keep final opacity */
+  /* Animation 2: subtle pulsing while pending */
+  visibility: visible;
+  animation-name: fadeIn, pulse;
+  animation-duration: 200ms, 1s;
+  /* Appear only if navigation actually takes time */
+  animation-delay: 100ms, 100ms;
+  animation-timing-function: ease, ease-in-out;
+  animation-iteration-count: 1, infinite;
+  animation-fill-mode: forwards, none;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 0.35;
+  }
+}
+@keyframes pulse {
+  50% {
+    opacity: 0.15;
+  }
 }

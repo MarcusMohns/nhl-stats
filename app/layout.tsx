@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Link from "next/link";
-import LoadingIndicator from "./ui/loading-indicator";
+import { ThemeProvider } from "./theme-provider";
+import Navbar from "./ui/navbar/Navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,18 +25,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <nav>
-          <Link href="/leaderboard">Leaderboard</Link>
-          <Link href="/playoffs">Playoffs</Link>
-          <Link href="/schedule">Schedule</Link>
-          <Link href="/standings">Standings</Link>
-          <LoadingIndicator />
-        </nav>
-        {children}
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Navbar />
+          <main
+            className="flex flex-col justify-center items-center xl:p-10
+    min-h-screen w-full md:pt-15"
+          >
+            {children}
+          </main>
+        </ThemeProvider>
       </body>
     </html>
   );
