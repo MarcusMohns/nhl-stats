@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
+import LoadingIndicator from "./ui/loading-indicator";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,6 +29,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <nav>
+          <Link href="/leaderboard">Leaderboard</Link>
+          <Link href="/playoffs">Playoffs</Link>
+          <Link href="/schedule">Schedule</Link>
+          <Link href="/standings">Standings</Link>
+          <LoadingIndicator />
+        </nav>
         {children}
       </body>
     </html>
