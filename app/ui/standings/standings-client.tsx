@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import LeagueTable from "./_components/tables/league-table";
-import ConferenceTable from "./_components/tables/conference-table";
-import DivisionTable from "./_components/tables/division-table";
-import WildCardTable from "./_components/tables/wild-card-table";
+import LeagueTable from "./tables/league-table";
+import ConferenceTable from "./tables/conference-table";
+import DivisionTable from "./tables/division-table";
+import WildCardTable from "./tables/wild-card-table";
 import startViewTransitionWrapper from "@/app/lib/start-view-transition-wrapper";
 import SelectTableButtons from "../select-table-buttons";
 import type { StandingsType } from "@/app/types";
