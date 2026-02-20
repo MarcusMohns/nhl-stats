@@ -18,13 +18,13 @@ const NavButtons = () => {
     <ul
       className="fixed bottom-0 left-0 z-2 bg-gray-100 dark:bg-stone-800 
       border-t-1 md:border-t-0 md:bg-transparent md:dark:bg-transparent 
-    p-2 md:p-0 md:static flex flex-row justify-center md:justify-start w-full 
+    p-2 md:p-0 md:static flex flex-row justify-around md:justify-center md:justify-start w-full 
    gap-2 md:gap-5 leading-tight tracking-wide select-none"
     >
       {buttons.map((button) => (
         <li
           key={button.name}
-          className={`${button.name === "Home" && "mr-auto"}`}
+          className={`${button.name === "Home" && "md:mr-auto"}`}
         >
           <Link
             href={button.href}
