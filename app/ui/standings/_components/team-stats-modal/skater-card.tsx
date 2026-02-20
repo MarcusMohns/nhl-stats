@@ -1,0 +1,41 @@
+import { SkaterType } from "@/app/types";
+import LinkOut from "@/app/ui/link-out";
+import Image from "next/image";
+
+const SkaterCard = ({ player }: { player: SkaterType }) => {
+  return (
+    <div className="flex flex-row items-center shadow-sm bg-white dark:bg-stone-800 rounded mt-2">
+      <Image
+        src={player.headshot}
+        alt={`Headshot of ${player.firstName.default} ${player.lastName.default}`}
+        width={366}
+        height={366}
+        className="w-16 h-16 rounded-full bg-stone-200 dark:bg-stone-700 ml-1"
+      />
+      <div className="flex w-full flex-col items-center justify-center">
+        <div className="flex w-full text-md uppercase font-bold mb-2">
+          <p className="ml-auto pl-6">
+            {player.firstName.default} {player.lastName.default}
+          </p>
+          <LinkOut
+            linkOutStyles="ml-auto w-6"
+            hrefString={` https://www.nhl.com/player/${player.playerId}`}
+            aria-label={`View NHL profile for ${player.firstName.default} ${player.lastName.default}`}
+          />
+        </div>
+        <div className="grid grid-flow-col grid-rows-2 gap-1 font-medium text-start">
+          <div className="pc-points  sm:mx-3">🎯Points: {player.points} </div>
+          <div className="pc-goals  sm:mx-3">🥅Goals: {player.goals}</div>
+          <div className="pc-assists  sm:mx-3">
+            🤝Assists: {player.assists}{" "}
+          </div>
+          <div className="pc-plusminus  sm:mx-3">
+            ± Plus/Minus: {player.plusMinus}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default SkaterCard;

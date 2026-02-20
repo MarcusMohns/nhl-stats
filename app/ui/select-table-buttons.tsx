@@ -3,7 +3,7 @@ type SelectTableButtonsProps = {
   selectedTable: string;
   handleSelectedTable: (button: string) => void;
 };
-const SelectTableButtons = ({
+export const SelectTableButtons = ({
   buttons = ["League", "Division", "Conference", "Wild Card"],
   selectedTable,
   handleSelectedTable,
