@@ -1,13 +1,13 @@
 import ErrorPage from "./error";
-import { fetchLeaderboard } from "../_actions";
+import { getLeaderboards } from "../_actions";
 import LeaderboardClient from "../ui/leaderboard/leaderboard-client";
 
 const Leaderboard = async () => {
-  const leaderboard = await fetchLeaderboard();
+  const leaderboard = await getLeaderboards();
 
   if (leaderboard instanceof Error) {
     // expected error
-    return <ErrorPage error={leaderboard} reset={fetchLeaderboard} />;
+    return <ErrorPage error={leaderboard} reset={getLeaderboards} />;
   }
   return <LeaderboardClient leaderboard={leaderboard} />;
 };
