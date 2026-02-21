@@ -97,6 +97,13 @@ export type TeamStatsType = {
   topGoalie: GoalieType;
 };
 
+export type GameWeekType = {
+  date: string;
+  dayAbbrev: string;
+  numberOfGames: number;
+  games: GameType[];
+};
+
 export type StandingsType = {
   [key: string]: TeamType[];
   League: TeamType[];

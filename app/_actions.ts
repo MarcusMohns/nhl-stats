@@ -3,6 +3,7 @@ import { TeamType } from "./types";
 import { organizeStandings, fetchStandingsData } from "./lib/standings-utils";
 import { organizedLeaderboards } from "./lib/leaderboard-utils";
 import { organizedTeamStats } from "./lib/team-stats-utils";
+import { fetchSchedule } from "./lib/schedule-utils";
 
 export const getLeaderboards = async () => {
   try {
@@ -28,6 +29,15 @@ export const getTeamStats = async (team: TeamType) => {
     return await organizedTeamStats(team);
   } catch (e) {
     console.error("Error fetching team stats data from API", e);
+    return new Error("Error fetching data from the server ☹️");
+  }
+};
+
+export const getSchedule = async () => {
+  try {
+    return await fetchSchedule();
+  } catch (e) {
+    console.error("Error fetching schedule data from API", e);
     return new Error("Error fetching data from the server ☹️");
   }
 };

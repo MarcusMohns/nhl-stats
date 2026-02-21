@@ -21,9 +21,6 @@ const StandingsClient = ({ standings }: StandingsClientProps) => {
 
   return (
     <section className="standings h-max sm:p-5">
-      <h1 className="font-bold dark:text-stone-300 my-5 py-1 mx-2 text-xl uppercase leading-tight tracking-wide select-none border-b border-gray-300 dark:border-stone-700">
-        Standings
-      </h1>
       <SelectTableButtons
         buttons={["League", "Division", "Conference", "Wild Card"]}
         handleSelectedTable={handleSelectedTable}
