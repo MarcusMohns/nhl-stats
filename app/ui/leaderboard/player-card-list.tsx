@@ -1,12 +1,8 @@
-import { PlayerType, StandingsGoalieType } from "@/app/types";
+import { PlayerType } from "@/app/types";
 // todo check playertpyye goalietype adn skatertype
 import PlayerCard from "./player-card";
 
-const PlayerCardList = ({
-  players,
-}: {
-  players: PlayerType[] | StandingsGoalieType[];
-}) => (
+const PlayerCardList = ({ players }: { players: PlayerType[] }) => (
   <div>
     {players.map((player) => (
       <PlayerCard player={player} key={player.id} />

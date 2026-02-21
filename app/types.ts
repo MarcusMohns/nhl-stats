@@ -74,19 +74,6 @@ export type GoalieType = {
   wins: number;
 };
 
-export type StandingsGoalieType = {
-  id: number;
-  firstName: { default: string };
-  lastName: { default: string };
-  sweaterNumber: number;
-  headshot: string;
-  teamAbbrev: string;
-  teamName: { default: string };
-  teamLogo: string;
-  position: string;
-  value: number;
-};
-
 export type TeamStatsType = {
   skaters: SkaterType[];
   goalies: GoalieType[];
@@ -199,13 +186,13 @@ export type GameType = {
 };
 
 export type LeaderBoardsType = {
-  [key: string]: PlayerType[] | GoalieType[];
+  [key: string]: PlayerType[];
   Goals: PlayerType[];
   Assists: PlayerType[];
   Points: PlayerType[];
-  GAA: GoalieType[];
-  "Save%": GoalieType[];
-  Shutouts: GoalieType[];
+  GAA: PlayerType[];
+  "Save%": PlayerType[];
+  Shutouts: PlayerType[];
 };
 
 export type PlayerType = {
