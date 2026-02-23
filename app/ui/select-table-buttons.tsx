@@ -19,11 +19,11 @@ export const SelectTableButtons = ({
             onClick={() => handleSelectedTable(button)}
             aria-pressed={button === selectedTable}
             aria-label={`Select ${button}`}
-            className={`sm:p-3 p-1 py-3 w-full h-full hover:bg-gray-300 dark:hover:bg-stone-600 border-none cursor-pointer 
+            className={`sm:p-3 p-1 py-3 w-full h-full hover:bg-stone-300 dark:hover:bg-stone-600 border-none cursor-pointer 
              ${
                button === selectedTable
-                 ? "bg-gray-300 dark:bg-stone-600"
-                 : "bg-gray-200 dark:bg-stone-800"
+                 ? "bg-stone-300 dark:bg-stone-600"
+                 : "bg-stone-200 dark:bg-stone-800"
              } ${
                button === buttons[buttons.length - 1] &&
                "border-r-2 rounded-tr-sm rounded-br-sm"

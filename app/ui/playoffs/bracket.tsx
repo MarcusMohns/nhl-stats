@@ -10,7 +10,7 @@ const Bracket = ({
   direction: string;
 }) => {
   return (
-    <div className={`flex flex-row h-full justify-center ${direction} grow`}>
+    <div className={`flex flex-row h-full justify-start ${direction} grow`}>
       <div className="flex flex-col">
         {roundOne.map((team, index) => (
           <Series key={index} series={team} />

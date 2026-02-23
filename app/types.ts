@@ -244,8 +244,8 @@ export type SeriesType = {
   bottomSeedRank: number;
   bottomSeedRankAbbrev?: string;
   bottomSeedWins: number;
-  topSeedTeam?: TeamType;
-  bottomSeedTeam?: TeamType;
+  topSeedTeam?: PlayoffsTeamType;
+  bottomSeedTeam?: PlayoffsTeamType;
   seriesLogo?: string;
   seriesLogoFr?: string;
   winningTeamId?: number;

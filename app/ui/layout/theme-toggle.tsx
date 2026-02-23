@@ -1,7 +1,8 @@
 "use client";
 import { useTheme } from "next-themes";
-import Image from "next/image";
 import startViewTransitionWrapper from "@/app/lib/start-view-transition-wrapper";
+import { MoonIcon } from "@heroicons/react/24/outline";
+import { SunIcon } from "@heroicons/react/24/outline";
 
 const ThemeToggle = () => {
   const { setTheme, resolvedTheme } = useTheme();
@@ -15,22 +16,10 @@ const ThemeToggle = () => {
   return (
     <button
       onClick={toggleDarkMode}
-      className="color-white text-black dark:text-white cursor-pointer p-2 ml-5"
+      className="flex items-center justify-center color-white cursor-pointer group w-10 h-10 ml-10 rounded-md bg-stone-300 dark:bg-stone-900"
     >
-      <Image
-        src="/sun.svg"
-        width={24}
-        height={24}
-        alt="Switch to dark mode"
-        className="dark:hidden hover:fill-yellow-400"
-      />
-      <Image
-        src="/moon.svg"
-        width={24}
-        height={24}
-        alt="Switch to light mode"
-        className="hidden dark:block dark:invert"
-      />
+      <SunIcon className="hidden dark:block h-6 w-6 group-hover:fill-yellow-500 group-hover:stroke-yellow-500 transition-colors duration-300" />
+      <MoonIcon className="dark:hidden h-6 w-6 stroke-stone-600 group-hover:stroke-black transition-colors duration-300" />
     </button>
   );
 };

@@ -60,15 +60,15 @@ const StyledTable = ({
       {modal.open && modal.team && (
         <TeamStatsModal handleCloseModal={handleCloseModal} team={modal.team} />
       )}
-      <h2 className="font-bold dark:text-stone-300 my-5 pt-3 px-1 text-lg uppercase leading-tight tracking-wide select-none">
+      <h2 className="font-bold dark:text-stone-300 my-5 pt-3 pl-2 md:pl-0 text-lg uppercase leading-tight tracking-wide select-none">
         {tableName}
       </h2>
       <table
-        className="dark:bg-stone-900 shadow-lg dark:shadow-sm w-full text-sm text-left rtl:text-right"
+        className="dark:bg-stone-800 shadow-lg dark:shadow-sm w-full text-sm text-left rtl:text-right"
         cellSpacing="5"
         aria-label={`${tableName} Standings Table`}
       >
-        <thead className="bg-stone-200 dark:bg-stone-800">
+        <thead className="bg-stone-200 dark:bg-stone-700 sticky top-0 z-10">
           <tr>
             {headers.full.map((header, idx) => (
               <TableHeader

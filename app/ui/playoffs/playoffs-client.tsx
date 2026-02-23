@@ -1,8 +1,10 @@
 import { PlayoffsType } from "@/app/types";
 import Bracket from "./bracket";
 import Finals from "./finals";
+import Image from "next/image";
 
 const PlayoffsClient = ({ playoffs }: { playoffs: PlayoffsType }) => {
+  console.log(playoffs.bracketLogo);
   const roundOneEasternTop = playoffs.series.slice(0, 2);
   const roundOneEasternBottom = playoffs.series.slice(2, 4);
   const roundOneWesternTop = playoffs.series.slice(4, 6);
@@ -17,14 +19,17 @@ const PlayoffsClient = ({ playoffs }: { playoffs: PlayoffsType }) => {
   const stanleyCupFinals = playoffs.series[14];
 
   return (
-    <section className="playoffs h-max sm:p-5">
+    <section className="playoffs h-max sm:p-5 w-full xl:w-6xl">
       <h2 className="font-bold dark:text-stone-300 my-5 py-1 mx-2 text-xl uppercase leading-tight tracking-wide select-none border-b border-gray-300 dark:border-stone-700">
         Playoffs (2025)
       </h2>
-      <img
+      <Image
         src={playoffs.bracketLogo}
         className="invert dark:invert-0 w-[700px] mx-auto my-5 sm:my-0 px-4"
-        alt="NHL Playoff Bracket Logo"
+        alt="NHL Playoff Logo"
+        width={1993}
+        height={266}
+        loading="eager"
       />
       <div className="flex flex-col w-full">
         <div className="flex align-center justify-center">
@@ -33,7 +38,6 @@ const PlayoffsClient = ({ playoffs }: { playoffs: PlayoffsType }) => {
             roundTwo={roundTwoWesternTop}
             direction="flex-row lg:border-none border-r-2 border-gray-300 dark:border-stone-700"
           />
-
           <Bracket
             roundOne={roundOneEasternTop}
             roundTwo={roundTwoEasternTop}
