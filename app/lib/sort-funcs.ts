@@ -41,30 +41,31 @@ export const reverseStandings = (state: {
   };
 };
 
+const createSort =
+  (compareFn: (a: TeamType, b: TeamType) => number) =>
+  (standings: TeamType[]) =>
+    standings.toSorted(compareFn);
+
 export const sortFunctions: {
+  // Our keys are the same as the buttons that trigger the sort, so we can use them to look up the correct sort function
   [key: string]: (standings: TeamType[]) => TeamType[];
 } = {
-  // All the sort functions for our standings - called by running sortFunctions[key](standings)
-  Team: (standings) =>
-    standings.toSorted((a, b) =>
-      a.teamName.default.localeCompare(b.teamName.default),
-    ),
-  Rank: (standings) => standings.toSorted((a, b) => a.rank - b.rank),
-  "Games Played": (standings) =>
-    standings.toSorted((a, b) => b.gamesPlayed - a.gamesPlayed),
-  Points: (standings) => standings.toSorted((a, b) => b.points - a.points),
-  Wins: (standings) => standings.toSorted((a, b) => b.wins - a.wins),
-  Losses: (standings) => standings.toSorted((a, b) => b.losses - a.losses),
-  "OT Losses": (standings) =>
-    standings.toSorted((a, b) => b.otLosses - a.otLosses),
-  "Goal Difference": (standings) =>
-    standings.toSorted((a, b) => b.goalDifferential - a.goalDifferential),
-  "Last 10": (standings) => standings.toSorted((a, b) => b.l10Wins - a.l10Wins),
-  //   "Last 10": (standings) => todo try
-  //     standings.toSorted((a, b) => {
-  //       const pointsA = a.l10Wins * 2 + a.l10OtLosses;
-  //       const pointsB = b.l10Wins * 2 + b.l10OtLosses;
-  //       return pointsB - pointsA;
-  //     }),
-  Streak: (standings) => sortByStreak(standings),
+  Team: createSort((a, b) =>
+    a.teamName.default.localeCompare(b.teamName.default),
+  ),
+  Rank: createSort((a, b) => a.rank - b.rank),
+  "Games Played": createSort((a, b) => b.gamesPlayed - a.gamesPlayed),
+  Points: createSort((a, b) => b.points - a.points),
+  Wins: createSort((a, b) => b.wins - a.wins),
+  Losses: createSort((a, b) => b.losses - a.losses),
+  "OT Losses": createSort((a, b) => b.otLosses - a.otLosses),
+  "Goal Difference": createSort(
+    (a, b) => b.goalDifferential - a.goalDifferential,
+  ),
+  "Last 10": createSort((a, b) => {
+    const pointsA = a.l10Wins * 2 + a.l10OtLosses;
+    const pointsB = b.l10Wins * 2 + b.l10OtLosses;
+    return pointsB - pointsA;
+  }),
+  Streak: sortByStreak,
 };
