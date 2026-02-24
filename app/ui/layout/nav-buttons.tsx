@@ -55,7 +55,7 @@ const NavButtons = () => {
         <h1
           className={`flex flex-row items-center cursor-pointer 
             md:text-xl font-bold text-stone-600 dark:text-stone-200 
-            group-hover:text-stone-900 dark:group-hover:text-white mb-[-2px] ml-2
+            group-hover:text-stone-900 dark:group-hover:text-white mb-[-2px] ml-1
              ${
                pathname === "/" &&
                "border-stone-900 border-stone-900 dark:border-white text-stone-900 dark:text-white "
@@ -90,7 +90,7 @@ const NavButtons = () => {
               ) : (
                 <button.icon className="h-6 w-6" />
               )}
-              <p>{button.name}</p>
+              <p className="md:ml-1">{button.name}</p>
             </Link>
           </li>
         ))}
