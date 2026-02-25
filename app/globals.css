@@ -2,13 +2,13 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #ededed;
+  --background: #fcfcfc;
   --foreground: #1c1919;
 }
 
 .dark {
   --background: #1c1919;
-  --foreground: #ededed;
+  --foreground: #fcfcfc;
 }
 
 @theme inline {
@@ -16,45 +16,32 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --animate-fade-in: fade-in 250ms ease-out both;
+  --animate-fade-in-drop-down: fade-in-drop-down 400ms ease-out both;
+  --breakpoint-xs: 26rem;
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes fade-in-drop-down {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+  }
 }
 
 body {
   font-family: Arial, Helvetica, sans-serif;
   background: var(--background);
   color: var(--foreground);
-}
-
-.link-hint {
-  display: inline-block;
-  width: 0.6em;
-  height: 0.6em;
-  margin-left: 0.25rem;
-  border-radius: 9999px;
-  background: currentColor;
-  opacity: 0;
-  visibility: hidden; /* reserve space without showing the hint */
-}
-
-.link-hint.is-pending {
-  /* Animation 1: fade in after 100ms and keep final opacity */
-  /* Animation 2: subtle pulsing while pending */
-  visibility: visible;
-  animation-name: fadeIn, pulse;
-  animation-duration: 200ms, 1s;
-  /* Appear only if navigation actually takes time */
-  animation-delay: 100ms, 100ms;
-  animation-timing-function: ease, ease-in-out;
-  animation-iteration-count: 1, infinite;
-  animation-fill-mode: forwards, none;
-}
-
-@keyframes fadeIn {
-  to {
-    opacity: 0.35;
-  }
-}
-@keyframes pulse {
-  50% {
-    opacity: 0.15;
-  }
 }

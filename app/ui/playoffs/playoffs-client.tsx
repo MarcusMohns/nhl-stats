@@ -4,7 +4,6 @@ import Finals from "./finals";
 import Image from "next/image";
 
 const PlayoffsClient = ({ playoffs }: { playoffs: PlayoffsType }) => {
-  console.log(playoffs.bracketLogo);
   const roundOneEasternTop = playoffs.series.slice(0, 2);
   const roundOneEasternBottom = playoffs.series.slice(2, 4);
   const roundOneWesternTop = playoffs.series.slice(4, 6);
@@ -19,40 +18,43 @@ const PlayoffsClient = ({ playoffs }: { playoffs: PlayoffsType }) => {
   const stanleyCupFinals = playoffs.series[14];
 
   return (
-    <section className="playoffs h-max sm:p-5 w-full xl:w-6xl">
-      <h2 className="font-bold dark:text-stone-300 my-5 py-1 mx-2 text-xl uppercase leading-tight tracking-wide select-none border-b border-gray-300 dark:border-stone-700">
-        Playoffs (2025)
-      </h2>
-      <Image
-        src={playoffs.bracketLogo}
-        className="invert dark:invert-0 w-[700px] mx-auto my-5 sm:my-0 px-4"
-        alt="NHL Playoff Logo"
-        width={1993}
-        height={266}
-        loading="eager"
-      />
-      <div className="flex flex-col w-full">
-        <div className="flex align-center justify-center">
+    <section className="playoffs h-max sm:p-5 w-full xl:w-4/5 animate-fade-in mt-5">
+      <div className="flex flex-col w-full justify-center items-center bg-stone-100 dark:bg-stone-800 rounded-lg p-2 sm:p-5 md:p-10">
+        <Image
+          src={playoffs.bracketLogo}
+          className="invert dark:invert-0 mx-auto my-5 sm:my-0 px-4"
+          alt="NHL Playoff Logo"
+          width={1993}
+          height={266}
+          loading="eager"
+        />
+        {/* If The Playoffs Started Today */}
+        {/* Matchups update after each game ends */}
+        <small className="w-[90%] text-center mb-10 text-start text-xs font-semibold text-stone-600 dark:text-stone-400 tracking-wide">
+          If the playoffs started today (updated after each game ends)
+        </small>
+        <div className="flex items-center justify-center gap-1 w-full">
           <Bracket
             roundOne={roundOneWesternTop}
             roundTwo={roundTwoWesternTop}
-            direction="flex-row lg:border-none border-r-2 border-gray-300 dark:border-stone-700"
+            direction="flex-row"
           />
+          <div className="xl:hidden w-px h-48 bg-stone-300 dark:bg-stone-700 mx-2" />
           <Bracket
             roundOne={roundOneEasternTop}
             roundTwo={roundTwoEasternTop}
             direction="flex-row-reverse"
           />
         </div>
-        <div className="flex align-center justify-center my-5 lg:my-0">
-          <Finals series={[westernFinals, stanleyCupFinals, easternFinals]} />
-        </div>
-        <div className="flex align-center justify-center">
+        <Finals series={[westernFinals, stanleyCupFinals, easternFinals]} />
+
+        <div className="flex items-center justify-center gap-1 w-full">
           <Bracket
             roundOne={roundOneWesternBottom}
             roundTwo={roundTwoWesternBottom}
-            direction="flex-row lg:border-none border-r-2 border-gray-300 dark:border-stone-700"
+            direction="flex-row"
           />
+          <div className="xl:hidden w-px h-48 bg-stone-300 dark:bg-stone-700 mx-2" />
           <Bracket
             roundOne={roundOneEasternBottom}
             roundTwo={roundTwoEasternBottom}

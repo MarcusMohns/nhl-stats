@@ -2,10 +2,10 @@ const Footer = () => {
   return (
     <footer
       className="min-h-[250px] w-full flex items-center justify-center 
-    border-t-2 border-stone-300 dark:border-stone-800 text-center p-5"
+    border-t-2 border-stone-100 dark:border-stone-800 text-center p-5"
       aria-label="Footer with creator information"
     >
-      <p className="text-xs font-bold text-stone-700 dark:text-stone-200">
+      <p className="text-xs font-bold text-stone-600 dark:text-stone-200">
         Made by Marcus Mohns using React, TypeScript & Tailwindcss 2025 - Thanks
         to{" "}
         <a

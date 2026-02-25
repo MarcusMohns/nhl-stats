@@ -14,7 +14,10 @@ const Modal = ({ closeModal, children }: ModalProps) => {
       aria-modal="true"
       onClick={closeModal}
     >
-      <div className="fixed inset-0 bg-stone-700/75" aria-hidden="true" />
+      <div
+        className="fixed inset-0 bg-stone-700/75 dark:bg-stone-900/75 backdrop-blur-xs"
+        aria-hidden="true"
+      />
       <div className="fixed inset-0 z-10 w-screen overflow-y-auto transform">
         <div
           className={`flex min-h-full items-center justify-center text-center`}

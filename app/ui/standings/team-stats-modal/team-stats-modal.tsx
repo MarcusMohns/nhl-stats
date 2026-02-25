@@ -52,12 +52,10 @@ export const TeamStatsModal = ({ handleCloseModal, team }: ModalProps) => {
     );
   }
 
-  console.log(team);
-
   return (
     <Modal closeModal={handleCloseModal}>
       <div className="h-180">
-        <h1 className="flex flex-row align-center justify-center items-center text-2xl/7 font-bold sm:truncate sm:text-3xl sm:tracking-tight">
+        <h1 className="flex flex-row justify-center items-center text-2xl/7 font-bold sm:truncate sm:text-3xl sm:tracking-tight">
           {team.teamName.default}
           <LinkOut
             linkOutStyles="ml-3"

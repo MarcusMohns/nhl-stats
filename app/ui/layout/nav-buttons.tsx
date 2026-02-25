@@ -3,13 +3,13 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import {
   TrophyIcon,
-  NumberedListIcon,
+  ChartBarIcon,
   CalendarIcon,
   GlobeEuropeAfricaIcon,
 } from "@heroicons/react/24/outline";
 import {
   TrophyIcon as TrophyIconSolid,
-  NumberedListIcon as NumberedListIconSolid,
+  ChartBarIcon as ChartBarIconSolid,
   CalendarIcon as CalendarIconSolid,
   GlobeEuropeAfricaIcon as GlobeEuropeAfricaIconSolid,
 } from "@heroicons/react/24/solid";
@@ -20,26 +20,34 @@ const NavButtons = () => {
     {
       name: "Standings",
       href: "/standings",
-      icon: NumberedListIcon,
-      iconSolid: NumberedListIconSolid,
+      icon: <ChartBarIcon className="w-6 h-6" />,
+      iconSolid: (
+        <ChartBarIconSolid className="w-6 h-6 text-orange-600 dark:text-orange-400" />
+      ),
     },
     {
       name: "Schedule",
       href: "/schedule",
-      icon: CalendarIcon,
-      iconSolid: CalendarIconSolid,
+      icon: <CalendarIcon className="w-6 h-6" />,
+      iconSolid: (
+        <CalendarIconSolid className="w-6 h-6 text-green-600 dark:text-green-400" />
+      ),
     },
     {
       name: "Leaderboard",
       href: "/leaderboard",
-      icon: TrophyIcon,
-      iconSolid: TrophyIconSolid,
+      icon: <TrophyIcon className="w-6 h-6" />,
+      iconSolid: (
+        <TrophyIconSolid className="w-6 h-6 text-yellow-600 dark:text-yellow-400" />
+      ),
     },
     {
       name: "Playoffs",
       href: "/playoffs",
-      icon: GlobeEuropeAfricaIcon,
-      iconSolid: GlobeEuropeAfricaIconSolid,
+      icon: <GlobeEuropeAfricaIcon className="w-6 h-6" />,
+      iconSolid: (
+        <GlobeEuropeAfricaIconSolid className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+      ),
     },
   ];
 
@@ -65,7 +73,7 @@ const NavButtons = () => {
         </h1>
       </Link>
       <ul
-        className="fixed bottom-0 left-0 z-2 bg-gray-100 dark:bg-stone-800
+        className="fixed bottom-0 left-0 z-2 md:z-0 bg-gray-100 dark:bg-stone-800
       border-t-1 md:border-t-0 border-stone-300 dark:border-stone-700 md:bg-transparent md:dark:bg-transparent 
     p-2 md:p-0 md:static flex flex-row justify-around md:justify-end w-full 
    gap-2 md:gap-5 leading-tight tracking-wide select-none"
@@ -82,14 +90,10 @@ const NavButtons = () => {
             hover:text-stone-900 dark:hover:text-white mb-[-2px]
              ${
                pathname === button.href &&
-               "underline border-stone-900 border-stone-900 dark:border-white text-stone-900 dark:text-white"
+               "md:underline border-stone-900 border-stone-900 dark:border-white text-stone-900 dark:text-white"
              }`}
             >
-              {pathname === button.href ? (
-                <button.iconSolid className="h-6 w-6" />
-              ) : (
-                <button.icon className="h-6 w-6" />
-              )}
+              {pathname === button.href ? button.iconSolid : button.icon}
               <p className="md:ml-1">{button.name}</p>
             </Link>
           </li>

@@ -68,7 +68,7 @@ const StyledTable = ({
         cellSpacing="5"
         aria-label={`${tableName} Standings Table`}
       >
-        <thead className="bg-stone-200 dark:bg-stone-700 sticky top-0 z-10">
+        <thead className="bg-stone-200 dark:bg-stone-700 sticky top-0 z-5">
           <tr>
             {headers.full.map((header, idx) => (
               <TableHeader

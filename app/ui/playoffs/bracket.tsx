@@ -7,16 +7,16 @@ const Bracket = ({
 }: {
   roundOne: SeriesType[];
   roundTwo: SeriesType;
-  direction: string;
+  direction: "flex-row" | "flex-row-reverse";
 }) => {
   return (
     <div className={`flex flex-row h-full justify-start ${direction} grow`}>
-      <div className="flex flex-col">
+      <div className="flex flex-col items-center w-full md:w-auto">
         {roundOne.map((team, index) => (
           <Series key={index} series={team} />
         ))}
       </div>
-      <div className="flex flex-col justify-around">
+      <div className="flex flex-col justify-around items-start ml-1">
         <Series series={roundTwo} />
       </div>
     </div>

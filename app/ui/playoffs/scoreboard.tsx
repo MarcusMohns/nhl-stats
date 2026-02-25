@@ -20,14 +20,14 @@ const Scoreboard = ({
 }: ScoreboardProps) => {
   return (
     <a
-      className="flex flex-col lg:border-1 bg-stone-100 dark:bg-stone-800 border-gray-300 dark:border-stone-700 rounded-lg 
-      w-full h-auto px-1 lg:px-3 py-2 hover:border-stone-500 cursor-pointer"
+      className="flex flex-col justify-center bg-stone-200 dark:bg-stone-700/60 0 rounded-lg max-w-[90%] w-full
+      md:w-50 md:h-30 sm:px-2 md:border-1 border-stone-300 dark:border-stone-600 hover:border-stone-500 cursor-pointer"
       href={`https://www.nhl.com${url}`}
       target="_blank"
       aria-label={`Detailed Game Information for ${homeTeam.name} vs ${awayTeam.name}`}
       rel="noopener noreferrer"
     >
-      <div className="border-b-2 border-gray-300 dark:border-stone-700">
+      <div className="border-b-2 border-stone-300 dark:border-stone-600">
         <Team
           score={homeTeamScore}
           team={homeTeam}

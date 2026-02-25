@@ -21,9 +21,8 @@ const Matchup = ({
   awayTeamDarkLogo,
   awayTeamScore,
 }: MatchupProps) => {
-  console.log(awayTeamDarkLogo);
   return (
-    <div className="flex flex-row items-center justify-center align-center dark:text-stone-300  text-stone-800 w-full font-bold gap-10">
+    <div className="flex flex-row items-center justify-center dark:text-stone-300  text-stone-800 w-full font-bold gap-10">
       <div className="flex flex-row items-center justify-center sm:min-w-30">
         <p>{awayTeamAbbrev}</p>
         <Image

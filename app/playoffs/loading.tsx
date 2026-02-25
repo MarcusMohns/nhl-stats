@@ -6,12 +6,12 @@ const Loading = () => {
       </h2>
       <div className="dark:invert-0 w-[700px] mx-auto my-2 px-4 animate-pulse h-20 bg-stone-200 dark:bg-stone-800 rounded" />
       <div className="flex flex-col w-full">
-        <div className="flex flex-row xl:hidden align-center justify-center items-center">
+        <div className="flex flex-row xl:hidden justify-center items-center">
           <FinalsSkeleton />
         </div>
-        <div className="flex align-center justify-center">
+        <div className="flex justify-center">
           <BracketSkeleton direction={"flex-row"} />
-          <div className="hidden xl:flex flex-row align-center justify-center items-center">
+          <div className="hidden xl:flex flex-row justify-center items-center">
             <FinalsSkeleton />
           </div>
           <BracketSkeleton direction={"flex-row-reverse"} />

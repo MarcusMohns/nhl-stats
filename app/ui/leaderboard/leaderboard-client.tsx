@@ -27,7 +27,7 @@ const LeaderboardClient = ({ leaderboard }: LeaderboardClientProps) => {
   const skaterLeaders = leaderboard[selectedSkaterLeaders];
 
   return (
-    <section className="leaderboard h-max w-full p-2 sm:p-5">
+    <section className="leaderboard h-max  w-full xl:w-7xl p-2 sm:p-5 animate-fade-in">
       <div className="flex flex-col items-center justify-center xl:flex-row w-full gap-10">
         <div className="w-full xl:w-xl">
           <h3 className="font-bold dark:text-stone-300 uppercase leading-tight tracking-wide mt-5 select-none text-2xl">
