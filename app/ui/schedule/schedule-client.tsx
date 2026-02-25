@@ -22,7 +22,7 @@ const ScheduleClient = ({ schedule }: ScheduleClientProps) => {
     <div className="flex flex-col lg:w-4xl w-full px-3 lg:px-0 align-center justify-center content-center">
       {localSchedule.map((day) => (
         <div key={day.date} className="flex flex-col w-full my-4">
-          <h2 className="font-medium dark:text-stone-300 text-stone-800 text-xl mb-4 leading-tight tracking-wide select-none capitalize">
+          <h2 className="font-bold dark:text-stone-300 text-stone-800 text-xl mb-4 leading-tight tracking-wide select-none capitalize">
             <CalendarDaysIcon className="w-6 h-6 inline mb-1 mr-2" />
             {utcToReadableDate(day.date)}
           </h2>
