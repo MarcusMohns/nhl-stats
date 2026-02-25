@@ -14,7 +14,10 @@ export const fetchSchedule = async () => {
   const scheduleUrl = "https://api-web.nhle.com/v1/schedule/now";
 
   try {
-    const response = await fetch(scheduleUrl);
+    const response = await fetch(scheduleUrl, {
+      next: { revalidate: 60 },
+      cache: "force-cache",
+    });
     if (!response.ok) {
       throw new Error(
         `Fetch failed: ${response.status} ${response.statusText}`,

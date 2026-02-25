@@ -11,7 +11,10 @@ type ScheduleResponse = {
 
 const fetchData = async <T>(url: string): Promise<T> => {
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      next: { revalidate: 60 },
+      cache: "force-cache",
+    });
     if (!response.ok) {
       throw new Error(
         `Fetch failed: ${response.status} ${response.statusText}`,

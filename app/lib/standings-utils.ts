@@ -2,7 +2,11 @@ import { StandingsType, TeamType } from "../types";
 
 export const fetchStandingsData = async () => {
   const standingsUrl = "https://api-web.nhle.com/v1/standings/now";
-  const response = await fetch(standingsUrl);
+  const response = await fetch(standingsUrl, {
+    next: { revalidate: 60 },
+    cache: "force-cache",
+  });
+
   if (!response.ok) {
     throw new Error("Failed to fetch standings data");
   }
