@@ -40,5 +40,4 @@ const Dates = ({ localSchedule, dateRefs }: DatesProps) => {
   );
 };
 
-// prevent rerenders when props haven't changed; dateRefs is stable via useRef
 export default Dates;
