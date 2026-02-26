@@ -1,4 +1,3 @@
-import React from "react";
 import type { GameType } from "@/app/types";
 import { utcToReadableDate } from "@/app/lib/schedule-utils";
 import Game from "./game";
@@ -42,4 +41,4 @@ const Dates = ({ localSchedule, dateRefs }: DatesProps) => {
 };
 
 // prevent rerenders when props haven't changed; dateRefs is stable via useRef
-export default React.memo(Dates);
+export default Dates;
