@@ -1,11 +1,11 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import type { GameWeekType } from "@/app/types";
-import Game from "./game";
-import { utcToReadableDate } from "@/app/lib/schedule-utils";
 import { groupGamesByLocalDate } from "@/app/lib/schedule-utils";
-import { CalendarDaysIcon } from "@heroicons/react/24/outline";
+import Dates from "./dates";
+import DateSelector from "./date-selector";
+import { useActiveDate } from "../../lib/hooks/use-active-date";
 
 type ScheduleClientProps = {
   schedule: GameWeekType[];
@@ -18,19 +18,19 @@ const ScheduleClient = ({ schedule }: ScheduleClientProps) => {
     () => groupGamesByLocalDate(schedule),
     [schedule],
   );
+
+  // Put a ref on each date element to track which one is active
+  const dateRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const { activeDate, scrollToDate } = useActiveDate(dateRefs, localSchedule);
+
   return (
-    <div className="flex flex-col lg:w-4xl w-full px-3 lg:px-0 justify-center content-center animate-fade-in">
-      {localSchedule.map((day) => (
-        <div key={day.date} className="flex flex-col w-full my-4">
-          <h2 className="font-bold dark:text-stone-300 text-stone-800 text-xl mb-4 leading-tight tracking-wide select-none capitalize">
-            <CalendarDaysIcon className="w-6 h-6 inline mb-1 mr-2" />
-            {utcToReadableDate(day.date)}
-          </h2>
-          {day.games.map((game) => (
-            <Game key={game.id} game={game} />
-          ))}
-        </div>
-      ))}
+    <div className="flex flex-col md:flex-row lg:w-4xl w-full px-3 lg:px-0 justify-center content-center animate-fade-in relative">
+      <DateSelector
+        localSchedule={localSchedule}
+        activeDate={activeDate}
+        scrollToDate={scrollToDate}
+      />
+      <Dates localSchedule={localSchedule} dateRefs={dateRefs} />
     </div>
   );
 };
