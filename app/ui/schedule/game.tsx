@@ -12,7 +12,7 @@ const Game = ({ game }: GameProps) => {
   return (
     <div key={game.id} className="flex flex-col w-full mb-1">
       <div
-        className={`flex flex-col md:flex-row items-center w-full justify-center shadow-sm bg-stone-100 dark:bg-stone-800 dark:shadow-stone-800  sm:p-1 p-2 rounded ${
+        className={`flex flex-col md:flex-row items-center w-full justify-center shadow-sm bg-stone-100 dark:bg-stone-800 dark:shadow-stone-800 p-1 px-2 rounded ${
           GAME_OVER ? "opacity-40" : ""
         }`}
       >

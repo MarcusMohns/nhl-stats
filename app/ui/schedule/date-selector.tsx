@@ -19,7 +19,7 @@ const DateSelector = ({
 }: DateSelectorProps) => {
   return (
     <div
-      className="flex flex-col h-max sticky items-center shadow-sm justify-start md:justify-center top-0 z-20 bg-white rounded dark:bg-stone-900 py-3 px-3 lg:mx-0 lg:px-0 mb-6 flex overflow-x-auto gap-2 snap-x"
+      className="flex xl:flex-col h-full xl:min-h-100 w-full px-3 my-3 xl:w-40 gap-2 shadow-lg sticky top-0 xl:top-[35vh] xl:mr-auto justify-start xl:justify-around z-20 rounded-md bg-stone-100 dark:bg-stone-800 p-3 xl:mb-6 flex overflow-x-auto"
       style={{ scrollbarWidth: "none" }}
     >
       {localSchedule.map((day) => {
@@ -29,11 +29,11 @@ const DateSelector = ({
             key={day.date}
             onClick={() => scrollToDate(day.date)}
             className={`
-                flex-shrink-0 px-4 py-1.5 rounded-full text-sm font-semibold transition-all duration-300 snap-start border
+                flex-shrink-0 xl:w-full px-4 py-1.5 rounded-full text-sm font-semibold transition-colors duration-300 snap-start cursor-pointer
                 ${
                   isSelected
-                    ? "bg-stone-800 text-white border-stone-800 dark:bg-stone-100 dark:text-stone-900 dark:border-stone-100 shadow-md transform scale-105"
-                    : "bg-white text-stone-600 border-stone-200 hover:border-stone-400 dark:bg-stone-800 dark:text-stone-400 dark:border-stone-700 dark:hover:border-stone-500 hover:bg-stone-50 dark:hover:bg-stone-700"
+                    ? "bg-stone-800 text-white dark:bg-stone-100 dark:text-stone-900 shadow-md"
+                    : "text-stone-600 dark:bg-stone-800 dark:text-stone-400 hover:bg-stone-300 dark:hover:bg-stone-700"
                 }
               `}
           >

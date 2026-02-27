@@ -24,14 +24,14 @@ const ScheduleClient = ({ schedule }: ScheduleClientProps) => {
   const { activeDate, scrollToDate } = useActiveDate(dateRefs, localSchedule);
 
   return (
-    <div className="flex flex-col md:flex-row lg:w-4xl w-full px-3 lg:px-0 justify-center content-center animate-fade-in relative">
+    <section className="schedule flex flex-col xl:flex-row xl:w-7xl w-full px-3 xl:px-0 justify-center items-start animate-fade-in">
       <DateSelector
         localSchedule={localSchedule}
         activeDate={activeDate}
         scrollToDate={scrollToDate}
       />
       <Dates localSchedule={localSchedule} dateRefs={dateRefs} />
-    </div>
+    </section>
   );
 };
 
