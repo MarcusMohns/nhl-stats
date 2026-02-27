@@ -1,10 +1,12 @@
+import { ReactNode } from "react";
+
 type SelectTableButtonsProps = {
-  buttons: string[];
+  buttons: { name: string; icon: ReactNode; iconSolid: ReactNode }[];
   selectedTable: string;
   handleSelectedTable: (button: string) => void;
 };
 export const SelectTableButtons = ({
-  buttons = ["League", "Division", "Conference", "Wild Card"],
+  buttons,
   selectedTable,
   handleSelectedTable,
 }: SelectTableButtonsProps) => {
@@ -14,24 +16,29 @@ export const SelectTableButtons = ({
     shadow-lg sm:w-fit bg-stone-200 dark:bg-stone-800"
     >
       {buttons.map((button) => (
-        <li className="w-full h-auto sm:w-max" key={button}>
+        <li className="w-full h-auto sm:w-max" key={button.name}>
           <button
-            onClick={() => handleSelectedTable(button)}
-            aria-pressed={button === selectedTable}
-            aria-label={`Select ${button}`}
-            className={`sm:p-3 p-1 py-3 w-full h-full hover:bg-stone-300 dark:hover:bg-stone-600 border-none cursor-pointer 
+            onClick={() => handleSelectedTable(button.name)}
+            aria-pressed={button.name === selectedTable}
+            aria-label={`Select ${button.name}`}
+            className={`flex flex-row items-center gap-1 sm:p-3 p-1 py-3 w-full h-full hover:bg-stone-300 dark:hover:bg-stone-600 border-none cursor-pointer 
              ${
-               button === selectedTable
+               button.name === selectedTable
                  ? "bg-stone-300 dark:bg-stone-600"
                  : "bg-stone-200 dark:bg-stone-800"
              } ${
-               button === buttons[buttons.length - 1] &&
+               // last button
+               button.name === buttons[buttons.length - 1].name &&
                "border-r-2 rounded-tr-sm rounded-br-sm"
              }
-          ${button === buttons[0] && "border-l-2 rounded-bl-sm rounded-tl-sm"}
+          ${
+            // first button
+            button === buttons[0] && "border-l-2 rounded-bl-sm rounded-tl-sm"
+          }
         `}
           >
-            {button}
+            {button.name === selectedTable ? button.iconSolid : button.icon}
+            {button.name}
           </button>
         </li>
       ))}

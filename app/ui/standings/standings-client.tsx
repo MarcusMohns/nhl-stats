@@ -8,11 +8,55 @@ import WildCardTable from "./tables/wild-card-table";
 import startViewTransitionWrapper from "@/app/lib/start-view-transition-wrapper";
 import SelectTableButtons from "../select-table-buttons";
 import type { StandingsType } from "@/app/types";
-import { CheckBadgeIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  CheckBadgeIcon,
+  XMarkIcon,
+  GlobeAmericasIcon,
+  ViewColumnsIcon,
+  MapIcon,
+  TicketIcon,
+} from "@heroicons/react/24/outline";
+import {
+  GlobeAmericasIcon as GlobeAmericasIconSolid,
+  ViewColumnsIcon as ViewColumnsIconSolid,
+  MapIcon as MapIconSolid,
+  TicketIcon as TicketIconSolid,
+} from "@heroicons/react/24/solid";
 
 type StandingsClientProps = {
   standings: StandingsType;
 };
+
+const TABLE_TABS = [
+  {
+    name: "League",
+    icon: <GlobeAmericasIcon className="w-5 h-5 inline mr-1" />,
+    iconSolid: (
+      <GlobeAmericasIconSolid className="w-5 h-5 inline mr-1 text-blue-500 dark:text-blue-400" />
+    ),
+  },
+  {
+    name: "Division",
+    icon: <ViewColumnsIcon className="w-5 h-5 inline mr-1" />,
+    iconSolid: (
+      <ViewColumnsIconSolid className="w-5 h-5 inline mr-1 text-red-500 dark:text-red-400" />
+    ),
+  },
+  {
+    name: "Conference",
+    icon: <MapIcon className="w-5 h-5 inline mr-1" />,
+    iconSolid: (
+      <MapIconSolid className="w-5 h-5 inline mr-1 text-emerald-500 dark:text-emerald-400" />
+    ),
+  },
+  {
+    name: "Wild Card",
+    icon: <TicketIcon className="w-5 h-5 inline mr-1" />,
+    iconSolid: (
+      <TicketIconSolid className="w-5 h-5 inline mr-1 text-amber-600 dark:text-amber-400" />
+    ),
+  },
+];
 
 const StandingsClient = ({ standings }: StandingsClientProps) => {
   const [selectedTable, setSelectedTable] = useState<string>("League");
@@ -23,7 +67,7 @@ const StandingsClient = ({ standings }: StandingsClientProps) => {
   return (
     <section className="standings w-full xl:w-6xl animate-fade-in h-max sm:p-5">
       <SelectTableButtons
-        buttons={["League", "Division", "Conference", "Wild Card"]}
+        buttons={TABLE_TABS}
         handleSelectedTable={handleSelectedTable}
         selectedTable={selectedTable}
       />
