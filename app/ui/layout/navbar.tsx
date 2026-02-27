@@ -1,5 +1,3 @@
-import React from "react";
-// import LoadingIndicator from "@/app/ui/loading-indicator";
 import ThemeToggle from "./theme-toggle";
 import NavButtons from "./nav-buttons";
 const Navbar = () => {
@@ -7,7 +5,6 @@ const Navbar = () => {
     <nav className="flex w-full flex-row items-center p-4 bg-stone-100 dark:bg-stone-800">
       <NavButtons />
       <ThemeToggle />
-      {/* <LoadingIndicator /> */}
     </nav>
   );
 };
