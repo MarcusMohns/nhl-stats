@@ -72,12 +72,7 @@ const NavButtons = () => {
           NHL Stats
         </h1>
       </Link>
-      <ul
-        className="fixed bottom-0 left-0 z-2 md:z-0 bg-gray-100 dark:bg-stone-800
-      border-t-1 md:border-t-0 border-stone-300 dark:border-stone-700 md:bg-transparent md:dark:bg-transparent 
-    p-2 md:p-0 md:static flex flex-row justify-around md:justify-end w-full 
-   gap-2 md:gap-5 leading-tight tracking-wide select-none"
-      >
+      <ul className="fixed bottom-0 left-0 z-2 md:z-0 bg-gray-100 dark:bg-stone-800 border-t-1 md:border-t-0 border-stone-300 dark:border-stone-700 md:bg-transparent md:dark:bg-transparent p-2 md:p-0 md:static flex flex-row justify-around md:justify-end w-full gap-2 md:gap-5 leading-tight tracking-wide select-none">
         {buttons.map((button) => (
           <li
             key={button.name}
