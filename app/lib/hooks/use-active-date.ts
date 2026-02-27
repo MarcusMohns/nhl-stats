@@ -12,43 +12,40 @@ export function useActiveDate(
   const [activeDate, setActiveDate] = useState<string>("");
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined" || !dateRefs.current) return;
 
-    const getDateElements = () =>
-      // filter out nulls
-      Object.values(dateRefs.current).filter(
-        (el): el is HTMLDivElement => el !== null,
-      );
-
-    const elements = getDateElements();
+    const elements = Object.values(dateRefs.current).filter(
+      // Filter out null values
+      (el): el is HTMLDivElement => el !== null,
+    );
     if (elements.length === 0) return;
 
     const observer = new IntersectionObserver(
       // Create IntersectionObserver
       () => {
-        const dateElements = getDateElements();
-        if (dateElements.length === 0) return;
-
         // Find the element closest to the center of the viewport and set it as the active date
         const viewportCenter = window.innerHeight / 2;
-        let activeEl: HTMLDivElement | null = null;
-        let bestDistance = Infinity;
 
-        dateElements.forEach((el) => {
-          const rect = el.getBoundingClientRect();
-          const elementCenter = rect.top + rect.height / 2;
-          const distance = Math.abs(elementCenter - viewportCenter);
+        const closest = elements.reduce(
+          (acc, el) => {
+            const rect = el.getBoundingClientRect();
+            const elementCenter = rect.top + rect.height / 2;
+            const distance = Math.abs(elementCenter - viewportCenter);
 
-          if (distance < bestDistance) {
-            bestDistance = distance;
-            activeEl = el;
-          }
-        });
+            if (distance < acc.bestDistance) {
+              return { bestDistance: distance, activeEl: el };
+            }
+            return acc;
+          },
+          { bestDistance: Infinity, activeEl: elements[0] as HTMLDivElement },
+        );
+
+        let activeEl = closest.activeEl;
 
         // If we're at the top of the page, set the active date to the first element regardless
-        const firstElRect = dateElements[0].getBoundingClientRect();
+        const firstElRect = elements[0].getBoundingClientRect();
         if (firstElRect.top > 0 && firstElRect.top < viewportCenter) {
-          activeEl = dateElements[0];
+          activeEl = elements[0];
         }
 
         // Set the active date
@@ -59,8 +56,10 @@ export function useActiveDate(
       },
       { root: null, threshold: [0, 0.5, 1] },
     );
+
     // Observe each element
     elements.forEach((el) => observer.observe(el));
+
     return () => observer.disconnect();
   }, [localSchedule, dateRefs]);
 
