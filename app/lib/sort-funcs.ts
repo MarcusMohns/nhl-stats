@@ -1,17 +1,13 @@
 import type { TeamType } from "@/app/types";
 
-const getStreakPriority = (streakCode: string) => {
-  switch (streakCode) {
-    case "W":
-      return 2;
-    case "OT":
-      return 1;
-    case "L":
-      return 0;
-    default:
-      return -1;
-  }
+const STREAK_PRIORITY: Record<string, number> = {
+  W: 2,
+  OT: 1,
+  L: 0,
 };
+
+const getStreakPriority = (streakCode: string) =>
+  STREAK_PRIORITY[streakCode] ?? -1;
 
 // Sorts by streak
 export const sortByStreak = (standings: TeamType[]) =>
@@ -19,15 +15,14 @@ export const sortByStreak = (standings: TeamType[]) =>
     const primarySort =
       getStreakPriority(b.streakCode) - getStreakPriority(a.streakCode);
 
-    if (primarySort !== 0) {
-      return primarySort;
-    } else if (a.streakCode === "L") {
+    if (primarySort !== 0) return primarySort;
+
+    if (a.streakCode === "L") {
       // Losing streaks: smaller is better (sort ascending)
       return a.streakCount - b.streakCount;
-    } else {
-      // Winning/OT streaks: larger is better (sort descending)
-      return b.streakCount - a.streakCount;
     }
+    // Winning/OT streaks: larger is better (sort descending)
+    return b.streakCount - a.streakCount;
   });
 
 // Reverse the standings (typically called on the second click of the sort button)
@@ -57,7 +52,7 @@ export const sortFunctions: {
   "Games Played": createSort((a, b) => b.gamesPlayed - a.gamesPlayed),
   Points: createSort((a, b) => b.points - a.points),
   Wins: createSort((a, b) => b.wins - a.wins),
-  Losses: createSort((a, b) => b.losses - a.losses),
+  Losses: createSort((a, b) => b.losses - a.losses), // Descending: Most losses first
   "OT Losses": createSort((a, b) => b.otLosses - a.otLosses),
   "Goal Difference": createSort(
     (a, b) => b.goalDifferential - a.goalDifferential,

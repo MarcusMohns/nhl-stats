@@ -1,6 +1,6 @@
 import { StandingsType, TeamType } from "../types";
 
-export const fetchStandingsData = async () => {
+export const fetchStandingsData = async (): Promise<TeamType[]> => {
   const standingsUrl = "https://api-web.nhle.com/v1/standings/now";
   const response = await fetch(standingsUrl, {
     next: { revalidate: 60 },
@@ -10,11 +10,11 @@ export const fetchStandingsData = async () => {
   if (!response.ok) {
     throw new Error("Failed to fetch standings data");
   }
-  const data = await response.json();
-  return data.standings as TeamType[];
+  const data = (await response.json()) as { standings: TeamType[] };
+  return data.standings;
 };
 
-export const organizeStandings = (standingsData: TeamType[]) =>
+export const organizeStandings = (standingsData: TeamType[]): StandingsType =>
   standingsData.reduce(
     // Add the teams into correct League, Conference and Division - then set to state
     (acc: StandingsType, team: TeamType) => {
@@ -25,19 +25,23 @@ export const organizeStandings = (standingsData: TeamType[]) =>
         ...teamAndDarkLogo,
         rank: acc.League.length + 1,
       });
-      if (!acc[team.conferenceName]) {
-        acc[team.conferenceName] = [];
+
+      const conf = team.conferenceName;
+      if (!acc[conf]) {
+        acc[conf] = [];
       }
-      acc[team.conferenceName].push({
+      acc[conf].push({
         ...teamAndDarkLogo,
-        rank: acc[team.conferenceName].length + 1,
+        rank: acc[conf].length + 1,
       });
-      if (!acc[team.divisionName]) {
-        acc[team.divisionName] = [];
+
+      const div = team.divisionName;
+      if (!acc[div]) {
+        acc[div] = [];
       }
-      acc[team.divisionName].push({
+      acc[div].push({
         ...teamAndDarkLogo,
-        rank: acc[team.divisionName].length + 1,
+        rank: acc[div].length + 1,
       });
       return acc;
     },

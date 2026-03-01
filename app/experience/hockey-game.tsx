@@ -2,11 +2,13 @@
 import { useEffect, useRef, useState } from "react";
 import Matter from "matter-js";
 import { XCircleIcon } from "@heroicons/react/24/outline";
+import { useTheme } from "next-themes";
 
 const HockeyGame = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [score, setScore] = useState(0);
   const resetPositionsRef = useRef<(() => void) | null>(null);
+  const { resolvedTheme } = useTheme();
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -24,6 +26,16 @@ const HockeyGame = () => {
       Body,
     } = Matter;
 
+    const isDark = resolvedTheme === "dark";
+
+    const colors = {
+      background: isDark ? "#18181b" : "#e4e4e7", // zinc-900 : zinc-200
+      wall: isDark ? "#52525b" : "#3f3f46", // zinc-600 : zinc-700
+      puck: isDark ? "#e4e4e7" : "#18181b", // zinc-200 : zinc-900
+      striker: isDark ? "#a1a1aa" : "#4c4c52", // zinc-400 : zinc-600
+      goalie: "#ef4444", // red-500
+    };
+
     // Create engine
     const engine = Engine.create();
     engine.gravity.y = 0; // Top-down view (no gravity)
@@ -36,7 +48,7 @@ const HockeyGame = () => {
         width: 500,
         height: 500,
         wireframes: false,
-        background: "#e4e4e7", // zinc-200
+        background: colors.background,
         pixelRatio: window.devicePixelRatio,
       },
     });
@@ -59,7 +71,7 @@ const HockeyGame = () => {
         -wallThickness / 2,
         (width - goalWidth) / 2,
         wallThickness,
-        { isStatic: true, render: { fillStyle: "#3f3f46" } },
+        { isStatic: true, render: { fillStyle: colors.wall } },
       ),
       // Top Right
       Bodies.rectangle(
@@ -67,7 +79,7 @@ const HockeyGame = () => {
         -wallThickness / 2,
         (width - goalWidth) / 2,
         wallThickness,
-        { isStatic: true, render: { fillStyle: "#3f3f46" } },
+        { isStatic: true, render: { fillStyle: colors.wall } },
       ),
       // Bottom
       Bodies.rectangle(
@@ -77,13 +89,13 @@ const HockeyGame = () => {
         wallThickness,
         {
           isStatic: true,
-          render: { fillStyle: "#3f3f46" },
+          render: { fillStyle: colors.wall },
         },
       ),
       // Left
       Bodies.rectangle(-wallThickness / 2, height / 2, wallThickness, height, {
         isStatic: true,
-        render: { fillStyle: "#3f3f46" },
+        render: { fillStyle: colors.wall },
       }),
       // Right
       Bodies.rectangle(
@@ -93,7 +105,7 @@ const HockeyGame = () => {
         height,
         {
           isStatic: true,
-          render: { fillStyle: "#3f3f46" },
+          render: { fillStyle: colors.wall },
         },
       ),
     ];
@@ -118,7 +130,7 @@ const HockeyGame = () => {
       density: 0.002,
       label: "puck",
       render: {
-        fillStyle: "#18181b",
+        fillStyle: colors.puck,
         strokeStyle: "#000",
         lineWidth: 2,
       },
@@ -136,7 +148,7 @@ const HockeyGame = () => {
       frictionAir: 0.05,
       density: 0.01,
       render: {
-        fillStyle: "#4c4c52",
+        fillStyle: colors.striker,
         strokeStyle: "#221e1e",
         lineWidth: 2,
       },
@@ -151,7 +163,7 @@ const HockeyGame = () => {
       isStatic: true, // Static so we can control it manually
       label: "goalie",
       restitution: 1.5, // Extra bouncy
-      render: { fillStyle: "#ef4444" }, // red-500
+      render: { fillStyle: colors.goalie },
     });
 
     Composite.add(engine.world, [...walls, goalSensor, puck, goalie, striker]);
@@ -237,8 +249,9 @@ const HockeyGame = () => {
       Runner.stop(runner);
       Composite.clear(engine.world, false);
       Engine.clear(engine);
+      Mouse.clearSourceEvents(mouse);
     };
-  }, []);
+  }, [resolvedTheme]);
 
   const reset = () => {
     setScore(0);
@@ -261,8 +274,13 @@ const HockeyGame = () => {
         </button>
       </div>
 
-      <div className="relative border-4 border-zinc-700 rounded-xl overflow-hidden shadow-xl bg-white">
-        <canvas ref={canvasRef} width={500} height={500} />
+      <div className="relative border-4 border-zinc-700 dark:border-zinc-600 rounded-xl overflow-hidden shadow-xl bg-white dark:bg-zinc-900 max-w-full">
+        <canvas
+          ref={canvasRef}
+          width={500}
+          height={500}
+          className="max-w-full h-auto"
+        />
       </div>
       <p className="text-zinc-500 text-sm"></p>
     </div>

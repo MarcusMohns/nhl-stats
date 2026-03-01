@@ -1,4 +1,5 @@
 import { organizedTeamStats } from "./team-stats-utils";
+import type { TeamType, TeamStatsType } from "../types";
 
 global.fetch = jest.fn();
 
@@ -8,7 +9,7 @@ describe("team-stats-utils", () => {
   });
 
   it("organizedTeamStats fetches and combines data correctly", async () => {
-    const mockTeam: any = { teamAbbrev: { default: "EDM" } };
+    const mockTeam = { teamAbbrev: { default: "EDM" } } as unknown as TeamType;
 
     const mockTeamStats = {
       skaters: [
@@ -17,8 +18,8 @@ describe("team-stats-utils", () => {
         { id: 3, points: 5 },
       ],
       goalies: [
-        { id: 1, savePercentage: 0.9 },
-        { id: 2, savePercentage: 0.95 }, // Top goalie
+        { id: 1, savePercentage: 0.9, wins: 10 },
+        { id: 2, savePercentage: 0.95, wins: 20 }, // Top goalie
       ],
     };
 
@@ -37,7 +38,7 @@ describe("team-stats-utils", () => {
       return { ok: false };
     });
 
-    const result: any = await organizedTeamStats(mockTeam);
+    const result = (await organizedTeamStats(mockTeam)) as TeamStatsType;
 
     expect(result).not.toBeInstanceOf(Error);
 
@@ -53,7 +54,7 @@ describe("team-stats-utils", () => {
   });
 
   it("handles errors gracefully", async () => {
-    const mockTeam: any = { teamAbbrev: { default: "EDM" } };
+    const mockTeam = { teamAbbrev: { default: "EDM" } } as unknown as TeamType;
     (global.fetch as jest.Mock).mockRejectedValue(new Error("Network Error"));
     const result = await organizedTeamStats(mockTeam);
     expect(result).toBeInstanceOf(Error);

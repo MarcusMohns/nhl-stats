@@ -1,8 +1,10 @@
+import { LeaderBoardsType, PlayerType } from "../types";
+
 export const fetchLeaderboardData = async (
   category: string,
-  goalieOrSkater: string,
+  goalieOrSkater: "skater" | "goalie",
   limit: number = 5,
-) => {
+): Promise<PlayerType[]> => {
   const leadersUrl = `https://api-web.nhle.com/v1/${goalieOrSkater}-stats-leaders/current?categories=${category}&limit=${limit}`;
 
   const res = await fetch(leadersUrl, {
@@ -16,17 +18,17 @@ export const fetchLeaderboardData = async (
 
   const json = await res.json();
   // The API returns an object with 1 key (the category) whose value is the array of leaders
-  return json[category];
+  return json[category] as PlayerType[];
 };
 
-export const organizedLeaderboards = async () => {
+export const organizedLeaderboards = async (): Promise<LeaderBoardsType> => {
   const [goals, assists, points, gaa, savePctg, shutouts] = await Promise.all([
-    fetchLeaderboardData("goals", "skater", 5),
-    fetchLeaderboardData("assists", "skater", 5),
-    fetchLeaderboardData("points", "skater", 5),
-    fetchLeaderboardData("goalsAgainstAverage", "goalie", 5),
-    fetchLeaderboardData("savePctg", "goalie", 5),
-    fetchLeaderboardData("shutouts", "goalie", 5),
+    fetchLeaderboardData("goals", "skater"),
+    fetchLeaderboardData("assists", "skater"),
+    fetchLeaderboardData("points", "skater"),
+    fetchLeaderboardData("goalsAgainstAverage", "goalie"),
+    fetchLeaderboardData("savePctg", "goalie"),
+    fetchLeaderboardData("shutouts", "goalie"),
   ]);
   return {
     Goals: goals,

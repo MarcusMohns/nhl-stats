@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, type RefObject } from "react";
 
 type LocalScheduleItem = {
   date: string;
@@ -6,7 +6,7 @@ type LocalScheduleItem = {
 };
 
 export function useActiveDate(
-  dateRefs: React.RefObject<Record<string, HTMLDivElement | null>>,
+  dateRefs: RefObject<Record<string, HTMLDivElement | null>>,
   localSchedule: LocalScheduleItem[],
 ) {
   const [activeDate, setActiveDate] = useState<string>("");
@@ -66,7 +66,7 @@ export function useActiveDate(
   const scrollToDate = useCallback(
     // onClick to scroll to a specific ref (date)
     (date: string) => {
-      const element = dateRefs.current[date];
+      const element = dateRefs.current?.[date];
       if (element) {
         const headerOffset = 80; // height of sticky header
         const elementPosition =

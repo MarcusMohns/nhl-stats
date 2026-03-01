@@ -1,8 +1,16 @@
-import type { TeamType, SkaterType, GoalieType, GameType } from "../types";
+import type {
+  TeamType,
+  SkaterType,
+  GoalieType,
+  GameType,
+  TeamStatsType,
+} from "../types";
 
 type TeamStatsResponse = {
   skaters: SkaterType[];
   goalies: GoalieType[];
+  season: string;
+  gameType: number;
 };
 
 type ScheduleResponse = {
@@ -27,7 +35,9 @@ const fetchData = async <T>(url: string): Promise<T> => {
   }
 };
 
-export const organizedTeamStats = async (team: TeamType) => {
+export const organizedTeamStats = async (
+  team: TeamType,
+): Promise<TeamStatsType | Error> => {
   const teamUrl = `https://api-web.nhle.com/v1/club-stats/${team.teamAbbrev.default}/now`;
   const gamesUrl = `https://api-web.nhle.com/v1/club-schedule/${team.teamAbbrev.default}/week/now`;
 
