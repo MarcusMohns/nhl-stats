@@ -18,11 +18,11 @@ const PlayoffsClient = ({ playoffs }: { playoffs: PlayoffsType }) => {
   const stanleyCupFinals = playoffs.series[14];
 
   return (
-    <section className="playoffs h-max sm:p-5 w-full xl:w-4/5 animate-fade-in mt-5">
+    <section className="playoffs h-max sm:p-5 w-full xl:w-5/7 animate-fade-in mt-5">
       <div className="flex flex-col w-full justify-center items-center bg-stone-100 dark:bg-stone-800 rounded-lg p-2 sm:p-5 md:p-10">
         <Image
           src={playoffs.bracketLogo}
-          className="invert dark:invert-0 mx-auto my-5 sm:my-0 px-4"
+          className="invert dark:invert-0 mx-auto my-5 sm:my-0 px-4 "
           alt="NHL Playoff Logo"
           width={1993}
           height={266}

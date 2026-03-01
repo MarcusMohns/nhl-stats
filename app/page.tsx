@@ -102,7 +102,7 @@ function FeatureCard({
     <Link
       href={href}
       style={{ animationDelay: delay }}
-      className={`group relative flex flex-col p-6 rounded-2xl bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-800 shadow-sm hover:shadow-xl transition-all hover:-translate-y-1 animate-fade-in-drop-down`}
+      className={`group relative flex flex-col p-6 rounded-2xl bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-800 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 animate-fade-in-drop-down`}
     >
       <div className="mb-4 p-3 rounded-xl bg-stone-100 dark:bg-stone-900/50 w-fit group-hover:scale-110 transition-transform duration-300">
         {icon}

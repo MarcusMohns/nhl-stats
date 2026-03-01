@@ -7,19 +7,19 @@ import SelectTableButtons from "@/app/ui/select-table-buttons";
 import startViewTransitionWrapper from "@/app/lib/start-view-transition-wrapper";
 import {
   StarIcon,
-  UserGroupIcon,
-  TrophyIcon,
+  SparklesIcon,
+  FireIcon,
   ShieldCheckIcon,
-  NoSymbolIcon,
-  PercentBadgeIcon,
+  LockClosedIcon,
+  ChartBarIcon,
 } from "@heroicons/react/24/outline";
 import {
   StarIcon as StarIconSolid,
-  UserGroupIcon as UserGroupIconSolid,
-  TrophyIcon as TrophyIconSolid,
+  SparklesIcon as SparklesIconSolid,
+  FireIcon as FireIconSolid,
   ShieldCheckIcon as ShieldCheckIconSolid,
-  NoSymbolIcon as NoSymbolIconSolid,
-  PercentBadgeIcon as PercentBadgeIconSolid,
+  LockClosedIcon as LockClosedIconSolid,
+  ChartBarIcon as ChartBarIconSolid,
 } from "@heroicons/react/24/solid";
 
 type LeaderboardClientProps = {
@@ -31,44 +31,44 @@ const SKATER_TABS = [
     name: "Points",
     icon: <StarIcon className="w-5 h-5 inline mr-1" />,
     iconSolid: (
-      <StarIconSolid className="w-5 h-5 inline mr-1 text-yellow-500 dark:text-yellow-400" />
+      <StarIconSolid className="w-5 h-5 inline mr-1 text-amber-500 dark:text-amber-400" />
     ),
   },
   {
     name: "Assists",
-    icon: <UserGroupIcon className="w-5 h-5 inline mr-1" />,
+    icon: <SparklesIcon className="w-5 h-5 inline mr-1" />,
     iconSolid: (
-      <UserGroupIconSolid className="w-5 h-5 inline mr-1 text-blue-500 dark:text-blue-400" />
+      <SparklesIconSolid className="w-5 h-5 inline mr-1 text-cyan-500 dark:text-cyan-400" />
     ),
   },
   {
     name: "Goals",
-    icon: <TrophyIcon className="w-5 h-5 inline mr-1" />,
+    icon: <FireIcon className="w-5 h-5 inline mr-1" />,
     iconSolid: (
-      <TrophyIconSolid className="w-5 h-5 inline mr-1 text-orange-500 dark:text-orange-400" />
+      <FireIconSolid className="w-5 h-5 inline mr-1 text-rose-500 dark:text-rose-400" />
     ),
   },
 ];
 const GOALIE_TABS = [
   {
     name: "Save%",
-    icon: <PercentBadgeIcon className="w-5 h-5 inline mr-1" />,
+    icon: <ShieldCheckIcon className="w-5 h-5 inline mr-1" />,
     iconSolid: (
-      <PercentBadgeIconSolid className="w-5 h-5 inline mr-1 text-emerald-500 dark:text-emerald-300" />
+      <ShieldCheckIconSolid className="w-5 h-5 inline mr-1 text-emerald-500 dark:text-emerald-400" />
     ),
   },
   {
     name: "Shutouts",
-    icon: <NoSymbolIcon className="w-5 h-5 inline mr-1" />,
+    icon: <LockClosedIcon className="w-5 h-5 inline mr-1" />,
     iconSolid: (
-      <NoSymbolIconSolid className="w-5 h-5 inline mr-1 text-red-500 dark:text-red-400" />
+      <LockClosedIconSolid className="w-5 h-5 inline mr-1 text-amber-500 dark:text-amber-400" />
     ),
   },
   {
     name: "GAA",
-    icon: <ShieldCheckIcon className="w-5 h-5 inline mr-1" />,
+    icon: <ChartBarIcon className="w-5 h-5 inline mr-1" />,
     iconSolid: (
-      <ShieldCheckIconSolid className="w-5 h-5 inline mr-1 text-indigo-500 dark:text-indigo-300" />
+      <ChartBarIconSolid className="w-5 h-5 inline mr-1 text-blue-500 dark:text-blue-400" />
     ),
   },
 ];
@@ -101,9 +101,6 @@ const LeaderboardClient = ({ leaderboard }: LeaderboardClientProps) => {
             selectedTable={selectedSkaterLeaders}
             handleSelectedTable={handleSelectedSkaterLeaders}
           />
-          <h2 className="font-bold dark:text-stone-300 my-5 pt-2 px-1 text-lg uppercase leading-tight tracking-wide select-none">
-            {selectedSkaterLeaders}
-          </h2>
           <PlayerCardList players={skaterLeaders} />
         </div>
         <div className="w-full xl:w-xl">
@@ -115,9 +112,6 @@ const LeaderboardClient = ({ leaderboard }: LeaderboardClientProps) => {
             selectedTable={selectedGoalieLeaders}
             handleSelectedTable={handleSelectedGoalieLeaders}
           />
-          <h2 className="font-bold dark:text-stone-300 my-5 pt-2 px-1 text-lg uppercase leading-tight tracking-wide select-none">
-            {selectedGoalieLeaders}
-          </h2>
           <PlayerCardList players={goalieLeaders} />
         </div>
       </div>

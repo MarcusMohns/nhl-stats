@@ -39,14 +39,14 @@ const TABLE_TABS = [
     name: "Division",
     icon: <ViewColumnsIcon className="w-5 h-5 inline mr-1" />,
     iconSolid: (
-      <ViewColumnsIconSolid className="w-5 h-5 inline mr-1 text-red-500 dark:text-red-400" />
+      <ViewColumnsIconSolid className="w-5 h-5 inline mr-1 text-teal-500 dark:text-teal-400" />
     ),
   },
   {
     name: "Conference",
     icon: <MapIcon className="w-5 h-5 inline mr-1" />,
     iconSolid: (
-      <MapIconSolid className="w-5 h-5 inline mr-1 text-emerald-500 dark:text-emerald-400" />
+      <MapIconSolid className="w-5 h-5 inline mr-1 text-indigo-500 dark:text-indigo-400" />
     ),
   },
   {
