@@ -36,7 +36,7 @@ ${
 `}
         >
           {game.gameState === "LIVE" ? (
-            <LiveChip gameCenterLink={game.gameCenterLink} />
+            <LiveChip />
           ) : (
             <p className="date min-w-25">{game.gameDate}</p>
           )}
