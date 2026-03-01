@@ -1,4 +1,5 @@
 import { fetchStandingsData, organizeStandings } from "./standings-utils";
+import type { TeamType } from "../types";
 
 global.fetch = jest.fn();
 
@@ -22,7 +23,7 @@ describe("standings-utils", () => {
 
   describe("organizeStandings", () => {
     it("organizes teams into correct hierarchy and adds ranks", () => {
-      const mockTeams: any[] = [
+      const mockTeams = [
         {
           teamAbbrev: { default: "EDM" },
           conferenceName: "Western",
@@ -33,7 +34,7 @@ describe("standings-utils", () => {
           conferenceName: "Eastern",
           divisionName: "Atlantic",
         },
-      ];
+      ] as unknown as TeamType[];
 
       const result = organizeStandings(mockTeams);
 

@@ -3,6 +3,7 @@ import {
   utcToReadableDate,
   groupGamesByLocalDate,
 } from "./schedule-utils";
+import type { GameWeekType } from "../types";
 
 // Mock global fetch
 global.fetch = jest.fn();
@@ -60,7 +61,7 @@ describe("schedule-utils", () => {
   describe("groupGamesByLocalDate", () => {
     it("groups games by local date", () => {
       // Mock data representing a schedule response
-      const mockSchedule: any[] = [
+      const mockSchedule = [
         {
           date: "2023-01-01",
           games: [
@@ -70,7 +71,7 @@ describe("schedule-utils", () => {
             { id: 2, startTimeUTC: "2023-01-01T15:00:00Z" },
           ],
         },
-      ];
+      ] as unknown as GameWeekType[];
 
       const result = groupGamesByLocalDate(mockSchedule);
 
