@@ -39,10 +39,10 @@ const StyledTable = ({
 }: StyledTableProps) => {
   const [modal, setModal] = useState<{
     open: boolean;
-    team: TeamType | null;
+    team: TeamType;
   }>({
     open: false,
-    team: null,
+    team: {} as TeamType,
   });
 
   const handleCloseModal = () => {

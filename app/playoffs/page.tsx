@@ -1,6 +1,5 @@
 import { getPlayoffs } from "../_actions";
 import ErrorPage from "./error";
-// import ScheduleClient from "../ui/schedule/schedule-client";
 import PlayoffsClient from "../ui/playoffs/playoffs-client";
 
 const Schedule = async () => {

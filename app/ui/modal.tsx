@@ -19,9 +19,7 @@ const Modal = ({ closeModal, children }: ModalProps) => {
         aria-hidden="true"
       />
       <div className="fixed inset-0 z-10 w-screen overflow-y-auto transform">
-        <div
-          className={`flex min-h-full items-center justify-center text-center`}
-        >
+        <div className="flex min-h-full items-center justify-center text-center">
           <div
             className={`flex flex-col p-3 overflow-hidden sm:rounded-lg bg-stone-100 dark:bg-stone-900 shadow-2xl w-full sm:max-w-lg`}
             onClick={(e) => e.stopPropagation()}

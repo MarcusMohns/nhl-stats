@@ -29,7 +29,7 @@ const Dates = ({ localSchedule, dateRefs }: DatesProps) => {
             <CalendarDaysIcon className="w-6 h-6 inline mb-1 mr-2 text-stone-500 dark:text-stone-400" />
             {utcToReadableDate(day.date)}
           </h2>
-          <div className="space-y-3">
+          <div className="flex flex-col gap-1">
             {day.games.map((game) => (
               <Game key={game.id} game={game} />
             ))}

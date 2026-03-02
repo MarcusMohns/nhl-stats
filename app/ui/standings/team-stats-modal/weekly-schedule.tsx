@@ -40,7 +40,7 @@ ${
           ) : (
             <p className="date min-w-25">{game.gameDate}</p>
           )}
-          <div className="match w-full flex flex-row self-center justify-center">
+          <div className="match w-full flex flex-row self-center justify-center font-semibold">
             <div className="team flex flex-row">
               <p className="team-name">{game.homeTeam.abbrev}</p>
               <Image

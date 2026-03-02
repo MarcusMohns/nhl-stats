@@ -5,7 +5,7 @@ import Image from "next/image";
 const PlayerCard = ({ player }: { player: PlayerType }) => {
   return (
     <div className="flex flex-row items-center justify-between p-2 shadow-sm my-3 bg-stone-100 dark:bg-stone-800 rounded-lg w-full gap-2">
-      <p className="font-bold text-3xl sm:text-5xl shrink-0 text-center w-24">
+      <p className="font-bold text-3xl sm:text-5xl shrink-0 text-center w-20 md:w-24">
         {player.position === "G" && player.value.toString().length > 3
           ? player.value.toFixed(2) // If Goalie & value is a float, fix decimals
           : player.value}

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import type { TeamType } from "@/app/types";
 import Modal from "@/app/ui/modal";
 import Chip from "@/app/ui/chip";
@@ -10,6 +10,7 @@ import LinkOut from "@/app/ui/link-out";
 import Image from "next/image";
 import { getTeamStats } from "@/app/_actions";
 import ErrorPage from "@/app/ui/error-page";
+import Loading from "./loading";
 
 type ModalProps = {
   handleCloseModal: () => void;
@@ -25,21 +26,24 @@ export const TeamStatsModal = ({ handleCloseModal, team }: ModalProps) => {
     getTeamStats(team).then(setTeamStats);
   }, [team]);
 
-  const chips = [
-    { name: "Rank", value: team.rank },
-    { name: "Points", value: team.points },
-    {
-      name: "Win Percentage",
-      value: `${(team.winPctg * 100).toFixed(1)}%`,
-    },
-    { name: "Conference", value: team.conferenceName },
-    { name: "Division", value: team.divisionName },
-  ];
+  const chips = useMemo(
+    () => [
+      { name: "Rank", value: team.rank },
+      { name: "Points", value: team.points },
+      {
+        name: "Win Percentage",
+        value: `${(team.winPctg * 100).toFixed(1)}%`,
+      },
+      { name: "Conference", value: team.conferenceName },
+      { name: "Division", value: team.divisionName },
+    ],
+    [team],
+  );
 
   if (!teamStats) {
     return (
       <Modal closeModal={handleCloseModal}>
-        <div className="h-180 flex items-center justify-center">Loading...</div>
+        <Loading />
       </Modal>
     );
   }
@@ -92,22 +96,28 @@ export const TeamStatsModal = ({ handleCloseModal, team }: ModalProps) => {
         </div>
         <div className="flex flex-col">
           <div className="top-skater-stats">
-            <h2 className="font-medium text-left ml-2 text-xl">
+            <h2 className="text-start font-semibold text-stone-600 dark:text-stone-300 uppercase text-sm mt-2">
               Top Point Scorers
             </h2>
-            {teamStats.topSkaters.map((player) => (
-              <SkaterCard player={player} key={player.playerId} />
-            ))}
+            <div className="flex flex-col gap-2">
+              {teamStats.topSkaters.map((player) => (
+                <SkaterCard player={player} key={player.playerId} />
+              ))}
+            </div>
           </div>
           <div className="top-goalie-stats">
-            <h2 className="font-medium text-left ml-2 text-xl">Top Goalie</h2>
+            <h2 className="text-start font-semibold text-stone-600 dark:text-stone-300 uppercase text-sm mt-2">
+              Top Goalie
+            </h2>
             <GoalieCard
               player={teamStats.goalies[0]}
               key={teamStats.goalies[0].playerId}
             />
           </div>
         </div>
-        <h2 className="font-medium text-left ml-2 text-xl">This Weeks Games</h2>
+        <h2 className="text-start font-semibold text-stone-600 dark:text-stone-300 uppercase text-sm mt-2">
+          This Weeks Games
+        </h2>
         <TeamThisWeekSchedule
           games={teamStats.games}
           teamAbbrev={team.teamAbbrev.default}
