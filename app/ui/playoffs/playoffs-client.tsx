@@ -3,61 +3,75 @@ import Bracket from "./bracket";
 import Finals from "./finals";
 import Image from "next/image";
 
-const PlayoffsClient = ({ playoffs }: { playoffs: PlayoffsType }) => {
-  const roundOneEasternTop = playoffs.series.slice(0, 2);
-  const roundOneEasternBottom = playoffs.series.slice(2, 4);
-  const roundOneWesternTop = playoffs.series.slice(4, 6);
-  const roundOneWesternBottom = playoffs.series.slice(6, 8);
-  const roundTwoEasternTop = playoffs.series[8];
-  const roundTwoEasternBottom = playoffs.series[9];
-  const roundTwoWesternTop = playoffs.series[10];
-  const roundTwoWesternBottom = playoffs.series[11];
+type PlayoffsClientProps = {
+  playoffs: PlayoffsType;
+};
 
-  const easternFinals = playoffs.series[12];
-  const westernFinals = playoffs.series[13];
+const PlayoffsClient = ({ playoffs }: PlayoffsClientProps) => {
+  // The API returns the series in a specific order, the first four series are the first round the next two are the second round and the last two are the conference finals
+  const eastern = {
+    roundOneTop: playoffs.series.slice(0, 2),
+    roundOneBottom: playoffs.series.slice(2, 4),
+    roundTwoTop: playoffs.series[8],
+    roundTwoBottom: playoffs.series[9],
+    conferenceFinal: playoffs.series[12],
+  };
+
+  const western = {
+    roundOneTop: playoffs.series.slice(4, 6),
+    roundOneBottom: playoffs.series.slice(6, 8),
+    roundTwoTop: playoffs.series[10],
+    roundTwoBottom: playoffs.series[11],
+    conferenceFinal: playoffs.series[13],
+  };
+
   const stanleyCupFinals = playoffs.series[14];
 
   return (
-    <section className="playoffs h-max sm:p-5 w-full xl:w-5/7 animate-fade-in mt-5">
+    <section className="playoffs h-max sm:p-5 w-full max-w-7xl mx-auto animate-fade-in mt-5">
       <div className="flex flex-col w-full justify-center items-center bg-stone-100 dark:bg-stone-800 rounded-lg p-2 sm:p-5 md:p-10">
         <Image
           src={playoffs.bracketLogo}
-          className="invert dark:invert-0 mx-auto my-5 sm:my-0 px-4 "
+          className="invert dark:invert-0 mx-auto my-5 sm:my-0 px-4"
           alt="NHL Playoff Logo"
           width={1993}
           height={266}
           loading="eager"
         />
-        {/* If The Playoffs Started Today */}
-        {/* Matchups update after each game ends */}
-        <small className="w-[90%] text-center mb-10 text-start text-xs font-semibold text-stone-600 dark:text-stone-400 tracking-wide">
+        <small className="w-[90%] text-center mb-10 text-xs font-semibold text-stone-600 dark:text-stone-400 tracking-wide">
           If the playoffs started today (updated after each game ends)
         </small>
         <div className="flex items-center justify-center gap-1 w-full">
           <Bracket
-            roundOne={roundOneWesternTop}
-            roundTwo={roundTwoWesternTop}
+            roundOne={western.roundOneTop}
+            roundTwo={western.roundTwoTop}
             direction="flex-row"
           />
           <div className="xl:hidden w-px h-48 bg-stone-300 dark:bg-stone-700 mx-2" />
           <Bracket
-            roundOne={roundOneEasternTop}
-            roundTwo={roundTwoEasternTop}
+            roundOne={eastern.roundOneTop}
+            roundTwo={eastern.roundTwoTop}
             direction="flex-row-reverse"
           />
         </div>
-        <Finals series={[westernFinals, stanleyCupFinals, easternFinals]} />
+        <Finals
+          series={[
+            western.conferenceFinal,
+            stanleyCupFinals,
+            eastern.conferenceFinal,
+          ]}
+        />
 
         <div className="flex items-center justify-center gap-1 w-full">
           <Bracket
-            roundOne={roundOneWesternBottom}
-            roundTwo={roundTwoWesternBottom}
+            roundOne={western.roundOneBottom}
+            roundTwo={western.roundTwoBottom}
             direction="flex-row"
           />
           <div className="xl:hidden w-px h-48 bg-stone-300 dark:bg-stone-700 mx-2" />
           <Bracket
-            roundOne={roundOneEasternBottom}
-            roundTwo={roundTwoEasternBottom}
+            roundOne={eastern.roundOneBottom}
+            roundTwo={eastern.roundTwoBottom}
             direction="flex-row-reverse"
           />
         </div>

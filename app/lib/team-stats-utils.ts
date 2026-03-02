@@ -52,7 +52,6 @@ export const organizedTeamStats = async (
       .toSorted((a, b) => b.points - a.points)
       .slice(0, 2);
 
-    // todo sort by points
     const topGoalie = teamData.goalies.toSorted(
       (a, b) => b.savePercentage - a.savePercentage,
     )[0];

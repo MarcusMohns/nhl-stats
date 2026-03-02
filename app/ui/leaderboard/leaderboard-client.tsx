@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { LeaderBoardsType } from "@/app/types";
-import PlayerCardList from "./player-card-list";
+import PlayerCard from "./player-card";
 import SelectTableButtons from "@/app/ui/select-table-buttons";
 import startViewTransitionWrapper from "@/app/lib/start-view-transition-wrapper";
 import {
@@ -74,10 +74,12 @@ const GOALIE_TABS = [
 ];
 
 const LeaderboardClient = ({ leaderboard }: LeaderboardClientProps) => {
-  const [selectedSkaterLeaders, setSelectedSkaterLeaders] =
-    useState<string>("Points");
-  const [selectedGoalieLeaders, setSelectedGoalieLeaders] =
-    useState<string>("Save%");
+  const [selectedSkaterLeaders, setSelectedSkaterLeaders] = useState<string>(
+    SKATER_TABS[0].name,
+  );
+  const [selectedGoalieLeaders, setSelectedGoalieLeaders] = useState<string>(
+    GOALIE_TABS[0].name,
+  );
 
   const handleSelectedSkaterLeaders = useCallback((standing: string) => {
     startViewTransitionWrapper(() => setSelectedSkaterLeaders(standing));
@@ -90,9 +92,9 @@ const LeaderboardClient = ({ leaderboard }: LeaderboardClientProps) => {
   const skaterLeaders = leaderboard[selectedSkaterLeaders];
 
   return (
-    <section className="leaderboard h-max w-full xl:w-7xl p-2 sm:p-5 animate-fade-in">
+    <section className="leaderboard h-max w-full p-2 animate-fade-in">
       <div className="flex flex-col items-center justify-center xl:flex-row w-full gap-10">
-        <div className="w-full xl:w-xl">
+        <div className="w-full xl:max-w-2xl">
           <h3 className="font-bold dark:text-stone-300 uppercase leading-tight tracking-wide mt-5 select-none text-2xl">
             Skaters
           </h3>
@@ -101,10 +103,12 @@ const LeaderboardClient = ({ leaderboard }: LeaderboardClientProps) => {
             selectedTable={selectedSkaterLeaders}
             handleSelectedTable={handleSelectedSkaterLeaders}
           />
-          <PlayerCardList players={skaterLeaders} />
+          {skaterLeaders.map((player) => (
+            <PlayerCard player={player} key={player.id} />
+          ))}
         </div>
-        <div className="w-full xl:w-xl">
-          <h3 className="font-bold dark:text-stone-300 uppercase leading-tight tracking-wide mt-5 select-none text-2xl px-2">
+        <div className="w-full xl:max-w-2xl">
+          <h3 className="font-bold dark:text-stone-300 uppercase leading-tight tracking-wide mt-5 select-none text-2xl">
             Goalies
           </h3>
           <SelectTableButtons
@@ -112,7 +116,9 @@ const LeaderboardClient = ({ leaderboard }: LeaderboardClientProps) => {
             selectedTable={selectedGoalieLeaders}
             handleSelectedTable={handleSelectedGoalieLeaders}
           />
-          <PlayerCardList players={goalieLeaders} />
+          {goalieLeaders.map((player) => (
+            <PlayerCard player={player} key={player.id} />
+          ))}
         </div>
       </div>
     </section>
