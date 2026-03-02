@@ -15,9 +15,11 @@ export default function Home() {
       <section className="flex flex-col items-center text-center space-y-6 max-w-4xl px-6">
         <div className="relative">
           <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-blue-600 to-cyan-500 opacity-20 blur-xl" />
-          <h1 className="relative font-extrabold text-5xl md:text-7xl tracking-tight text-stone-800 dark:text-stone-100">
-            NHL Stats{" "}
-            <span className="text-blue-600 dark:text-blue-400">Next</span>
+          <h1 className="flex flex-row items-center justify-center relative font-extrabold text-5xl md:text-7xl tracking-tight text-stone-800 dark:text-stone-100">
+            NHL Stats
+            <span className="text-blue-600 dark:text-blue-400 text-8xl ml-1 animate-fade-in-drop-down">
+              +
+            </span>
           </h1>
         </div>
         <p className="text-lg md:text-xl text-stone-600 dark:text-stone-400 max-w-2xl leading-relaxed">

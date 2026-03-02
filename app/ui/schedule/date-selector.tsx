@@ -19,7 +19,9 @@ const DateSelector = ({
 }: DateSelectorProps) => {
   return (
     <div
-      className="flex xl:flex-col h-full xl:min-h-100 w-full px-3 my-3 xl:w-40 gap-2 shadow-lg sticky top-0 xl:top-[35vh] xl:mr-auto justify-start xl:justify-around z-20 rounded-md bg-stone-100 dark:bg-stone-800 p-3 xl:mb-6 flex overflow-x-auto"
+      role="group"
+      aria-label="Game Dates"
+      className="flex xl:flex-col h-full xl:min-h-100 w-full px-3 my-3 xl:w-40 gap-2 shadow-lg sticky top-0 xl:top-[35vh] xl:mr-auto justify-start xl:justify-around z-20 rounded-md bg-stone-100 dark:bg-stone-800 p-3 xl:mb-6 overflow-x-auto"
       style={{ scrollbarWidth: "none" }}
     >
       {localSchedule.map((day) => {
@@ -28,8 +30,10 @@ const DateSelector = ({
           <button
             key={day.date}
             onClick={() => scrollToDate(day.date)}
+            aria-current={isSelected ? "date" : undefined}
             className={`
                 flex-shrink-0 xl:w-full px-4 py-1.5 rounded-full text-sm font-semibold transition-colors duration-300 snap-start cursor-pointer
+                outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500 dark:focus-visible:ring-offset-stone-800
                 ${
                   isSelected
                     ? "bg-stone-800 text-white dark:bg-stone-100 dark:text-stone-900 shadow-md"

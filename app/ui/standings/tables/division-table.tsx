@@ -80,28 +80,24 @@ const DivisionTable = ({
         tableName={"Central"}
         handleSort={handleSort}
         selectedTable={selectedTable}
-        aria-label="Central Division Standings Table"
       />
       <StyledTable
         standings={atlanticState.standings}
         tableName={"Atlantic"}
         handleSort={handleSort}
         selectedTable={selectedTable}
-        aria-label="Atlantic Division Standings Table"
       />
       <StyledTable
         standings={metropolitanState.standings}
         tableName={"Metropolitan"}
         handleSort={handleSort}
         selectedTable={selectedTable}
-        aria-label="Metropolitan Division Standings Table"
       />
       <StyledTable
         standings={pacificState.standings}
         tableName={"Pacific"}
         handleSort={handleSort}
         selectedTable={selectedTable}
-        aria-label="Pacific Division Standings Table"
       />
     </>
   );

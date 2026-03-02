@@ -28,12 +28,15 @@ const PlayoffsClient = ({ playoffs }: PlayoffsClientProps) => {
   const stanleyCupFinals = playoffs.series[14];
 
   return (
-    <section className="playoffs h-max sm:p-5 w-full max-w-7xl mx-auto animate-fade-in mt-5">
+    <section
+      aria-label="Playoff Bracket"
+      className="playoffs h-max sm:p-5 w-full max-w-7xl mx-auto animate-fade-in mt-5"
+    >
       <div className="flex flex-col w-full justify-center items-center bg-stone-100 dark:bg-stone-800 rounded-lg p-2 sm:p-5 md:p-10">
         <Image
           src={playoffs.bracketLogo}
           className="invert dark:invert-0 mx-auto my-5 sm:my-0 px-4"
-          alt="NHL Playoff Logo"
+          alt="NHL Playoffs"
           width={1993}
           height={266}
           loading="eager"
@@ -47,7 +50,10 @@ const PlayoffsClient = ({ playoffs }: PlayoffsClientProps) => {
             roundTwo={western.roundTwoTop}
             direction="flex-row"
           />
-          <div className="xl:hidden w-px h-48 bg-stone-300 dark:bg-stone-700 mx-2" />
+          <div
+            aria-hidden="true"
+            className="xl:hidden w-px h-48 bg-stone-300 dark:bg-stone-700 mx-2"
+          />
           <Bracket
             roundOne={eastern.roundOneTop}
             roundTwo={eastern.roundTwoTop}
@@ -68,7 +74,10 @@ const PlayoffsClient = ({ playoffs }: PlayoffsClientProps) => {
             roundTwo={western.roundTwoBottom}
             direction="flex-row"
           />
-          <div className="xl:hidden w-px h-48 bg-stone-300 dark:bg-stone-700 mx-2" />
+          <div
+            aria-hidden="true"
+            className="xl:hidden w-px h-48 bg-stone-300 dark:bg-stone-700 mx-2"
+          />
           <Bracket
             roundOne={eastern.roundOneBottom}
             roundTwo={eastern.roundTwoBottom}

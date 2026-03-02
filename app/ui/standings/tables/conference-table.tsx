@@ -58,14 +58,12 @@ const ConferenceTable = ({
       <StyledTable
         standings={easternState.standings}
         tableName={"Eastern"}
-        aria-label="Eastern Conference Standings Table"
         handleSort={handleSort}
         selectedTable={selectedTable}
       />
       <StyledTable
         standings={westernState.standings}
         tableName={"Western"}
-        aria-label="Western Conference Standings Table"
         handleSort={handleSort}
         selectedTable={selectedTable}
       />

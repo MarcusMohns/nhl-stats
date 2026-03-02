@@ -13,7 +13,8 @@ const PlayerCard = ({ player }: { player: PlayerType }) => {
       <div className="flex items-center gap-4 flex-grow min-w-0">
         <Image
           src={player.headshot}
-          alt={`Headshot of ${player.firstName.default} ${player.lastName.default}`}
+          alt=""
+          aria-hidden="true"
           width={366}
           height={366}
           className="w-16 h-16 rounded-full bg-stone-200 dark:bg-stone-700 shrink-0"
@@ -35,7 +36,7 @@ const PlayerCard = ({ player }: { player: PlayerType }) => {
         <Image
           src={player.teamLogo}
           className="w-12 h-12 sm:w-16 sm:h-16 dark:hidden"
-          alt={`${player.teamName} Team Logo`}
+          alt={player.teamName.default}
           width={200}
           height={200}
         />
@@ -47,7 +48,7 @@ const PlayerCard = ({ player }: { player: PlayerType }) => {
               : `https://assets.nhle.com/logos/nhl/svg/${player.teamAbbrev}_dark.svg`
           }
           className="w-12 h-12 sm:w-16 sm:h-16 hidden dark:block"
-          alt={`${player.teamName} Team Logo`}
+          alt={player.teamName.default}
           width={200}
           height={200}
         />

@@ -29,46 +29,66 @@ type LeaderboardClientProps = {
 const SKATER_TABS = [
   {
     name: "Points",
-    icon: <StarIcon className="w-5 h-5 inline mr-1" />,
+    icon: <StarIcon aria-hidden="true" className="w-5 h-5 inline mr-1" />,
     iconSolid: (
-      <StarIconSolid className="w-5 h-5 inline mr-1 text-amber-500 dark:text-amber-400" />
+      <StarIconSolid
+        aria-hidden="true"
+        className="w-5 h-5 inline mr-1 text-amber-500 dark:text-amber-400"
+      />
     ),
   },
   {
     name: "Assists",
-    icon: <SparklesIcon className="w-5 h-5 inline mr-1" />,
+    icon: <SparklesIcon aria-hidden="true" className="w-5 h-5 inline mr-1" />,
     iconSolid: (
-      <SparklesIconSolid className="w-5 h-5 inline mr-1 text-cyan-500 dark:text-cyan-400" />
+      <SparklesIconSolid
+        aria-hidden="true"
+        className="w-5 h-5 inline mr-1 text-cyan-500 dark:text-cyan-400"
+      />
     ),
   },
   {
     name: "Goals",
-    icon: <FireIcon className="w-5 h-5 inline mr-1" />,
+    icon: <FireIcon aria-hidden="true" className="w-5 h-5 inline mr-1" />,
     iconSolid: (
-      <FireIconSolid className="w-5 h-5 inline mr-1 text-rose-500 dark:text-rose-400" />
+      <FireIconSolid
+        aria-hidden="true"
+        className="w-5 h-5 inline mr-1 text-rose-500 dark:text-rose-400"
+      />
     ),
   },
 ];
 const GOALIE_TABS = [
   {
     name: "Save%",
-    icon: <ShieldCheckIcon className="w-5 h-5 inline mr-1" />,
+    icon: (
+      <ShieldCheckIcon aria-hidden="true" className="w-5 h-5 inline mr-1" />
+    ),
     iconSolid: (
-      <ShieldCheckIconSolid className="w-5 h-5 inline mr-1 text-emerald-500 dark:text-emerald-400" />
+      <ShieldCheckIconSolid
+        aria-hidden="true"
+        className="w-5 h-5 inline mr-1 text-emerald-500 dark:text-emerald-400"
+      />
     ),
   },
   {
     name: "Shutouts",
-    icon: <LockClosedIcon className="w-5 h-5 inline mr-1" />,
+    icon: <LockClosedIcon aria-hidden="true" className="w-5 h-5 inline mr-1" />,
     iconSolid: (
-      <LockClosedIconSolid className="w-5 h-5 inline mr-1 text-amber-500 dark:text-amber-400" />
+      <LockClosedIconSolid
+        aria-hidden="true"
+        className="w-5 h-5 inline mr-1 text-amber-500 dark:text-amber-400"
+      />
     ),
   },
   {
     name: "GAA",
-    icon: <ChartBarIcon className="w-5 h-5 inline mr-1" />,
+    icon: <ChartBarIcon aria-hidden="true" className="w-5 h-5 inline mr-1" />,
     iconSolid: (
-      <ChartBarIconSolid className="w-5 h-5 inline mr-1 text-blue-500 dark:text-blue-400" />
+      <ChartBarIconSolid
+        aria-hidden="true"
+        className="w-5 h-5 inline mr-1 text-blue-500 dark:text-blue-400"
+      />
     ),
   },
 ];
@@ -103,9 +123,13 @@ const LeaderboardClient = ({ leaderboard }: LeaderboardClientProps) => {
             selectedTable={selectedSkaterLeaders}
             handleSelectedTable={handleSelectedSkaterLeaders}
           />
-          {skaterLeaders.map((player) => (
-            <PlayerCard player={player} key={player.id} />
-          ))}
+          <ul className="w-full">
+            {skaterLeaders.map((player) => (
+              <li key={player.id}>
+                <PlayerCard player={player} />
+              </li>
+            ))}
+          </ul>
         </div>
         <div className="w-full xl:max-w-2xl">
           <h3 className="font-bold dark:text-stone-300 uppercase leading-tight tracking-wide mt-5 select-none text-2xl">
@@ -116,9 +140,13 @@ const LeaderboardClient = ({ leaderboard }: LeaderboardClientProps) => {
             selectedTable={selectedGoalieLeaders}
             handleSelectedTable={handleSelectedGoalieLeaders}
           />
-          {goalieLeaders.map((player) => (
-            <PlayerCard player={player} key={player.id} />
-          ))}
+          <ul className="w-full">
+            {goalieLeaders.map((player) => (
+              <li key={player.id}>
+                <PlayerCard player={player} />
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

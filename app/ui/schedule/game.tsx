@@ -10,17 +10,17 @@ const Game = ({ game }: GameProps) => {
   const GAME_OVER = game.gameState === "OFF" || game.gameState === "FINAL";
   const GAME_LIVE = game.gameState === "LIVE" || game.gameState === "CRIT";
   return (
-    <div key={game.id} className="flex flex-col w-full mb-1">
+    <div className="flex flex-col w-full mb-1">
       <div
         className={`flex flex-col  items-center w-full justify-center shadow-sm bg-stone-100 dark:bg-stone-800 dark:shadow-stone-800 p-1 px-2 rounded ${
-          GAME_OVER ? "opacity-40" : ""
+          GAME_OVER ? "opacity-60" : ""
         }`}
       >
         <div className="flex flex-row items-center justify-start w-full gap-2">
           {GAME_LIVE ? (
             <LiveChip />
           ) : (
-            <p className="flex items-center btext-sm font-bold rounded">
+            <p className="flex items-center text-sm font-bold rounded">
               {game.localStartTime}
             </p>
           )}

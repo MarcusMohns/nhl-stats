@@ -56,19 +56,20 @@ const NavButtons = () => {
     <>
       <Link
         href={"/"}
-        className="flex flex-row items-center cursor-pointer group w-max shrink-0 mr-auto"
+        aria-current={pathname === "/" ? "page" : undefined}
+        className="flex flex-row items-center cursor-pointer group w-max shrink-0 mr-auto rounded-md outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500 focus-visible:ring-offset-stone-100 dark:focus-visible:ring-offset-stone-800"
       >
-        <span className="text-xl bg-stone-300 dark:bg-stone-700 p-1 mr-1 rounded">
+        <span
+          aria-hidden="true"
+          className="text-xl bg-stone-300 dark:bg-stone-700 p-1 mr-1 rounded"
+        >
           🏒
         </span>
         <h1
           className={`flex flex-row items-center cursor-pointer 
             md:text-xl font-bold text-stone-600 dark:text-stone-200 
             group-hover:text-stone-900 dark:group-hover:text-white mb-[-2px] ml-1
-             ${
-               pathname === "/" &&
-               "border-stone-900 dark:border-white text-stone-900 dark:text-white "
-             }`}
+             ${pathname === "/" ? "text-stone-900 dark:text-white" : ""}`}
         >
           NHL Stats
         </h1>
@@ -81,15 +82,21 @@ const NavButtons = () => {
           >
             <Link
               href={button.href}
+              aria-current={pathname === button.href ? "page" : undefined}
               className={`flex flex-col md:flex-row items-center justify-center cursor-pointer 
             text-sm sm:text-base md:text-xl font-bold text-stone-600 dark:text-stone-200 
-            hover:text-stone-900 dark:hover:text-white mb-[-2px]
+            hover:text-stone-900 dark:hover:text-white mb-[-2px] rounded-md p-1
+            outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500
+            focus-visible:ring-offset-gray-100 md:focus-visible:ring-offset-stone-100 dark:focus-visible:ring-offset-stone-800
              ${
-               pathname === button.href &&
-               "md:underline border-stone-900 dark:border-white text-stone-900 dark:text-white"
+               pathname === button.href
+                 ? "md:underline text-stone-900 dark:text-white"
+                 : ""
              }`}
             >
-              {pathname === button.href ? button.iconSolid : button.icon}
+              <span aria-hidden="true">
+                {pathname === button.href ? button.iconSolid : button.icon}
+              </span>
               <p className="md:ml-1">{button.name}</p>
             </Link>
           </li>
