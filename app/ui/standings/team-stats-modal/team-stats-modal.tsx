@@ -3,14 +3,13 @@ import { useEffect, useState, useMemo } from "react";
 import type { TeamType } from "@/app/types";
 import Modal from "@/app/ui/modal";
 import Chip from "@/app/ui/chip";
-import SkaterCard from "./skater-card";
-import GoalieCard from "./goalie-card";
 import TeamThisWeekSchedule from "./weekly-schedule";
 import LinkOut from "@/app/ui/link-out";
 import Image from "next/image";
 import { getTeamStats } from "@/app/_actions";
 import ErrorPage from "@/app/ui/error-page";
 import Loading from "./loading";
+import PlayerCard from "./player-card";
 
 type ModalProps = {
   handleCloseModal: () => void;
@@ -58,7 +57,7 @@ export const TeamStatsModal = ({ handleCloseModal, team }: ModalProps) => {
 
   return (
     <Modal closeModal={handleCloseModal}>
-      <div className="h-180">
+      <div className="max-h-180 overflow-y-auto">
         <h1 className="flex flex-row justify-center items-center text-2xl/7 font-bold sm:truncate sm:text-3xl sm:tracking-tight">
           {team.teamName.default}
           <LinkOut
@@ -96,32 +95,42 @@ export const TeamStatsModal = ({ handleCloseModal, team }: ModalProps) => {
         </div>
         <div className="flex flex-col">
           <div className="top-skater-stats">
-            <h2 className="text-start font-semibold text-stone-600 dark:text-stone-300 uppercase text-sm mt-2">
-              Top Point Scorers
-            </h2>
+            <div className="flex items-center mt-4 mb-2">
+              <div className="flex-1 border-t border-stone-300 dark:border-stone-600" />
+              <h2 className="px-3 text-center font-semibold text-stone-600 dark:text-stone-300 uppercase text-sm">
+                Top Point Scorers
+              </h2>
+              <div className="flex-1 border-t border-stone-300 dark:border-stone-600" />
+            </div>
             <div className="flex flex-col gap-2">
               {teamStats.topSkaters.map((player) => (
-                <SkaterCard player={player} key={player.playerId} />
+                <PlayerCard player={player} key={player.playerId} />
               ))}
             </div>
           </div>
           <div className="top-goalie-stats">
-            <h2 className="text-start font-semibold text-stone-600 dark:text-stone-300 uppercase text-sm mt-2">
-              Top Goalie
-            </h2>
-            <GoalieCard
-              player={teamStats.goalies[0]}
-              key={teamStats.goalies[0].playerId}
-            />
+            <div className="flex items-center mt-4 mb-2">
+              <div className="flex-1 border-t border-stone-300 dark:border-stone-600" />
+              <h2 className="px-3 text-center font-semibold text-stone-600 dark:text-stone-300 uppercase text-sm">
+                Top Goalies
+              </h2>
+              <div className="flex-1 border-t border-stone-300 dark:border-stone-600" />
+            </div>
+            <div className="flex flex-col gap-2">
+              {teamStats.topGoalies.map((player) => (
+                <PlayerCard player={player} key={player.playerId} />
+              ))}
+            </div>
           </div>
         </div>
-        <h2 className="text-start font-semibold text-stone-600 dark:text-stone-300 uppercase text-sm mt-2">
-          This Weeks Games
-        </h2>
-        <TeamThisWeekSchedule
-          games={teamStats.games}
-          teamAbbrev={team.teamAbbrev.default}
-        />
+        <div className="flex items-center mt-4 mb-2">
+          <div className="flex-1 border-t border-stone-300 dark:border-stone-600" />
+          <h2 className="px-3 text-center font-semibold text-stone-600 dark:text-stone-300 uppercase text-sm">
+            This Weeks Games
+          </h2>
+          <div className="flex-1 border-t border-stone-300 dark:border-stone-600" />
+        </div>
+        <TeamThisWeekSchedule games={teamStats.games} />
       </div>
     </Modal>
   );
