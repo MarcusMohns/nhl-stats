@@ -63,6 +63,10 @@ export type ScheduleTeamType = {
   score?: number;
 };
 
+export type StandingsTableType = {
+  standings: TeamType[];
+  sortedBy: string;
+};
 export type SkaterType = {
   assists: number;
   avgShiftsPerGame: number;
@@ -84,11 +88,6 @@ export type SkaterType = {
   shootingPctg: number;
   shorthandedGoals: number;
   shots: number;
-};
-
-export type StandingsTableType = {
-  standings: TeamType[];
-  sortedBy: string;
 };
 
 export type GoalieType = {
@@ -122,7 +121,7 @@ export type TeamStatsType = {
   games: GameType[];
   season: string;
   topSkaters: SkaterType[];
-  topGoalie: GoalieType;
+  topGoalies: GoalieType[];
 };
 
 export type GameWeekType = {

@@ -19,17 +19,17 @@ const Matchup = ({
     <div
       title={label}
       aria-label={label}
-      className="flex flex-row items-center justify-between sm:justify-center dark:text-stone-300  text-stone-800 w-full font-bold sm:gap-10"
+      className="flex flex-row items-center mt-1 md:mt-0 justify-around sm:justify-center dark:text-stone-300  text-stone-800 w-full font-bold sm:gap-10"
     >
       {/* Home Team  */}
       <div
         title={`${homeTeam.placeName.default} ${homeTeam.commonName.default}`}
         className={`flex flex-row items-center justify-center px-2 rounded ${
-          gameOver && homeTeamWon === true
-            ? "bg-green-200 dark:bg-green-700/30"
-            : gameOver && homeTeamWon === false
-              ? "bg-red-200 dark:bg-red-700/30"
-              : ""
+          gameOver
+            ? homeTeamWon
+              ? "opacity-100"
+              : "opacity-40"
+            : "opacity-100"
         }`}
       >
         <p className="font-bold dark:text-stone-300 text-stone-800 text-3xl ">
@@ -57,12 +57,12 @@ const Matchup = ({
       {/* Away Team  */}
       <div
         title={`${awayTeam.placeName.default} ${awayTeam.commonName.default}`}
-        className={`flex flex-row items-center justify-center px-2 rounded ${
-          gameOver && homeTeamWon === false
-            ? "bg-green-200 dark:bg-green-700/30"
-            : gameOver && homeTeamWon === true
-              ? "bg-red-200 dark:bg-red-700/30"
-              : ""
+        className={`flex flex-row items-center justify-center px-2 rounded  ${
+          gameOver
+            ? homeTeamWon
+              ? "opacity-40"
+              : "opacity-100"
+            : "opacity-100"
         }`}
       >
         <div className="flex flex-row items-center justify-center sm:min-w-28">

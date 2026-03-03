@@ -50,16 +50,16 @@ export const organizedTeamStats = async (
 
     const topSkaters = teamData.skaters
       .toSorted((a, b) => b.points - a.points)
-      .slice(0, 2);
+      .slice(0, 3);
 
-    const topGoalie = teamData.goalies.toSorted(
-      (a, b) => b.savePercentage - a.savePercentage,
-    )[0];
+    const topGoalies = teamData.goalies
+      .toSorted((a, b) => b.savePercentage - a.savePercentage)
+      .slice(0, 2);
 
     return {
       ...teamData,
       topSkaters,
-      topGoalie,
+      topGoalies,
       games: gamesThisWeekData.games,
     };
   } catch (e) {

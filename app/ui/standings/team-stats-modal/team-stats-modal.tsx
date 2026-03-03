@@ -3,7 +3,7 @@ import { useEffect, useState, useMemo } from "react";
 import type { TeamType } from "@/app/types";
 import Modal from "@/app/ui/modal";
 import Chip from "@/app/ui/chip";
-import TeamThisWeekSchedule from "./weekly-schedule";
+import WeeklySchedule from "./weekly-schedule";
 import LinkOut from "@/app/ui/link-out";
 import Image from "next/image";
 import { getTeamStats } from "@/app/_actions";
@@ -130,7 +130,7 @@ export const TeamStatsModal = ({ handleCloseModal, team }: ModalProps) => {
           </h2>
           <div className="flex-1 border-t border-stone-300 dark:border-stone-600" />
         </div>
-        <TeamThisWeekSchedule games={teamStats.games} />
+        <WeeklySchedule games={teamStats.games} />
       </div>
     </Modal>
   );

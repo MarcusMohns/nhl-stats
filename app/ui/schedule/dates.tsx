@@ -24,8 +24,12 @@ const Dates = ({ localSchedule, dateRefs }: DatesProps) => {
           id={`date-${day.date}`}
           key={day.date}
           className="flex flex-col w-full mb-8 xl:px-5"
+          aria-labelledby={`heading-${day.date}`}
         >
-          <h2 className="font-bold dark:text-stone-300 text-stone-800 text-xl mb-4 leading-tight tracking-wide select-none capitalize flex items-center opacity-90">
+          <h2
+            id={`heading-${day.date}`}
+            className="font-bold dark:text-stone-300 text-stone-800 text-xl mb-4 leading-tight tracking-wide capitalize flex items-center opacity-90"
+          >
             <CalendarDaysIcon
               aria-hidden="true"
               className="w-6 h-6 inline mb-1 mr-2 text-stone-500 dark:text-stone-400"

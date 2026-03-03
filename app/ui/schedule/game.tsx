@@ -19,9 +19,8 @@ const Game = ({ game }: GameProps) => {
   return (
     <article
       aria-label={`Game: ${game.awayTeam.abbrev} versus ${game.homeTeam.abbrev}`}
-      className={`flex flex-col items-center w-full justify-center shadow-sm bg-stone-100 dark:bg-stone-800 dark:shadow-stone-800 p-1 px-2 rounded mb-1 ${
-        GAME_OVER ? "opacity-60" : ""
-      }`}
+      className={`flex flex-col items-center w-full border-x-4 justify-center shadow-sm bg-stone-100 dark:bg-stone-800 dark:shadow-stone-800 p-1 px-2 rounded mb-1 ${homeTeamWon !== undefined ? (homeTeamWon ? "border-l-green-500 border-r-red-500" : "border-l-red-500 border-r-green-500") : "border-x-stone-100 dark:border-x-stone-800"}
+      `}
     >
       <div className="flex flex-row items-center justify-start w-full gap-2">
         {GAME_LIVE ? (
@@ -42,7 +41,7 @@ const Game = ({ game }: GameProps) => {
           </p>
         )}
         <LinkOut
-          linkOutStyles="flex items-center justify-end h-auto ml-auto"
+          linkOutStyles="flex items-center justify-end h-auto ml-auto w-5 h-5 mr-1 text-stone-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
           hrefString={`https://www.nhl.com${game.gameCenterLink}`}
           aria-label={`View game details for ${game.homeTeam.commonName} vs ${game.awayTeam.commonName}`}
         />

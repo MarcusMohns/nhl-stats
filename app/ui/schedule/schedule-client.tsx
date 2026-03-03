@@ -24,7 +24,10 @@ const ScheduleClient = ({ schedule }: ScheduleClientProps) => {
   const { activeDate, scrollToDate } = useActiveDate(dateRefs, localSchedule);
 
   return (
-    <section className="schedule flex flex-col xl:flex-row xl:w-7xl w-full px-3 xl:px-0 justify-center items-start animate-fade-in">
+    <section
+      aria-label="Game Schedule"
+      className="schedule flex flex-col xl:flex-row xl:w-7xl w-full px-3 xl:px-0 justify-center items-start animate-fade-in"
+    >
       <DateSelector
         localSchedule={localSchedule}
         activeDate={activeDate}

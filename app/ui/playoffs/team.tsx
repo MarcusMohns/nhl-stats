@@ -7,10 +7,17 @@ type TeamProps = {
   winningTeamId?: number;
 };
 const Team = ({ team, score, winningTeamId }: TeamProps) => {
-  const opacityStyles =
-    team.id === winningTeamId || winningTeamId === undefined
-      ? "opacity-100"
-      : "opacity-40";
+  const isWinner = team.id === winningTeamId;
+  const isLoser = winningTeamId !== undefined && !isWinner;
+  const opacityStyles = isLoser ? "opacity-40" : "opacity-100";
+
+  // Add a description for screen readers about the series outcome for this team
+  const srDescription = isWinner
+    ? "Series Winner"
+    : isLoser
+      ? "Eliminated"
+      : "";
+
   return (
     <div
       className={`flex items-center justify-center min-w-[4.25rem]
@@ -37,6 +44,7 @@ const Team = ({ team, score, winningTeamId }: TeamProps) => {
       </div>
       <p className="font-bold text-xl md:text-2xl tracking-wide leading-tight dark:text-stone-100 ml-auto mr-2 sm:mr-0">
         {score}
+        {srDescription && <span className="sr-only">, {srDescription}</span>}
       </p>
     </div>
   );

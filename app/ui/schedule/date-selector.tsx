@@ -22,7 +22,6 @@ const DateSelector = ({
       role="group"
       aria-label="Game Dates"
       className="flex xl:flex-col h-full xl:min-h-100 w-full px-3 my-3 xl:w-40 gap-2 shadow-lg sticky top-0 xl:top-[35vh] xl:mr-auto justify-start xl:justify-around z-20 rounded-md bg-stone-100 dark:bg-stone-800 p-3 xl:mb-6 overflow-x-auto"
-      style={{ scrollbarWidth: "none" }}
     >
       {localSchedule.map((day) => {
         const isSelected = activeDate === day.date;

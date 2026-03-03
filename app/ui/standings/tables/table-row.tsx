@@ -17,20 +17,33 @@ const TableRow = ({
   team,
   idx,
 }: TableRowProps) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTableRowElement>) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      handleOpenModal(team);
+    }
+  };
+
   const playoffsIndicator = team.clinchIndicator ? (
     team.clinchIndicator === "e" ? (
       // If eliminated, show a red check mark
-      <XMarkIcon className="w-5 h-5 text-red-500" />
+      <span title="Eliminated from playoffs" className="flex items-center">
+        <XMarkIcon className="w-5 h-5 text-red-500" aria-hidden="true" />
+        <span className="sr-only">Eliminated from playoffs</span>
+      </span>
     ) : (
       // If Clinched a playoff spot, show a green check mark
-      <CheckBadgeIcon className="w-5 h-5 text-green-500" />
+      <span title="Clinched playoff spot" className="flex items-center">
+        <CheckBadgeIcon className="w-5 h-5 text-green-500" aria-hidden="true" />
+        <span className="sr-only">Clinched playoff spot</span>
+      </span>
     )
-  ) : (
-    ""
-  );
+  ) : null;
   return (
     <tr
       onClick={() => handleOpenModal(team)}
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
       role="button"
       aria-label={`View details for ${team.teamName.default}`}
       className={`font-bold hover:bg-stone-200 dark:hover:bg-stone-900/40 cursor-pointer select-none border-b-2 ${
@@ -43,7 +56,10 @@ const TableRow = ({
       }`}
     >
       <td className="text-center">{team.rank}</td>
-      <th className="flex wrap flex-col sm:flex-row flex-wrap w-full sm:justify-start items-center sm:px-2 py-2 sm:py-3">
+      <th
+        scope="row"
+        className="flex wrap flex-col sm:flex-row flex-wrap w-full sm:justify-start items-center sm:px-2 py-2 sm:py-3"
+      >
         <div className="flex flex-row items-center">
           <Image
             src={team.teamLogo}

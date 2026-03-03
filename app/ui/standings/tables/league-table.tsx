@@ -37,7 +37,6 @@ const LeagueTable = ({ league, selectedTable }: LeagueTablePropTypes) => {
       handleSort={handleSort}
       tableName={"League"}
       selectedTable={selectedTable}
-      aria-label="League Standings Table"
     />
   );
 };
