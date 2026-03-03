@@ -1,34 +1,87 @@
+const PlayerCardSkeleton = () => (
+  <div className="flex flex-row items-center w-full p-3 shadow-sm bg-stone-200 dark:bg-stone-800/50 rounded-lg border border-stone-300 dark:border-stone-700/50">
+    <div className="relative shrink-0">
+      <div className="w-16 h-16 rounded-full bg-stone-300 dark:bg-stone-700" />
+    </div>
+    <div className="flex flex-col flex-grow ml-4 overflow-hidden gap-2">
+      <div className="h-5 w-48 bg-stone-300 dark:bg-stone-700 rounded" />
+      <div className="flex flex-row gap-4 sm:gap-6">
+        <div className="h-5 w-8 bg-stone-300 dark:bg-stone-700 rounded" />
+        <div className="h-5 w-8 bg-stone-300 dark:bg-stone-700 rounded" />
+        <div className="h-5 w-8 bg-stone-300 dark:bg-stone-700 rounded" />
+        <div className="h-5 w-8 bg-stone-300 dark:bg-stone-700 rounded" />
+      </div>
+    </div>
+  </div>
+);
+
+const GameCardSkeleton = () => (
+  <div className="flex items-center gap-4 p-3 w-full bg-stone-200 dark:bg-stone-800/50 rounded-lg shadow-sm border-l-4 border-stone-400 dark:border-l-stone-600">
+    <div className="flex flex-col items-center justify-center w-12 shrink-0 gap-1">
+      <div className="h-3 w-8 bg-stone-300 dark:bg-stone-700 rounded" />
+      <div className="h-6 w-6 bg-stone-300 dark:bg-stone-700 rounded" />
+    </div>
+    <div className="flex-grow grid grid-cols-[1fr_auto_1fr] items-center gap-2 sm:gap-4">
+      <div className="flex items-center justify-end gap-2">
+        <div className="h-5 w-10 bg-stone-300 dark:bg-stone-700 rounded" />
+        <div className="w-8 h-8 rounded-full bg-stone-300 dark:bg-stone-700" />
+      </div>
+      <div className="h-5 w-5 bg-stone-300 dark:bg-stone-700 rounded" />
+      <div className="flex items-center justify-start gap-2">
+        <div className="w-8 h-8 rounded-full bg-stone-300 dark:bg-stone-700" />
+        <div className="h-5 w-10 bg-stone-300 dark:bg-stone-700 rounded" />
+      </div>
+    </div>
+    <div className="w-5 h-5 bg-stone-300 dark:bg-stone-700 rounded" />
+  </div>
+);
+
+const DividerSkeleton = () => (
+  <div className="flex items-center mt-4 mb-2">
+    <div className="flex-1 border-t border-stone-300 dark:border-stone-600" />
+    <div className="h-6 w-40 mx-3 bg-stone-300 dark:bg-stone-700 rounded" />
+    <div className="flex-1 border-t border-stone-300 dark:border-stone-600" />
+  </div>
+);
+
 const Loading = () => {
-  console.log("is this ireally itt");
   return (
-    <div className="p-4 animate-pulse h-full">
+    <div className="p-4 animate-pulse max-h-180 overflow-y-auto">
       {/* Header */}
-      <div className="h-8 bg-stone-200 dark:bg-stone-700 rounded w-3/4 mx-auto mb-6" />
+      <div className="h-8 bg-stone-300 dark:bg-stone-700 rounded w-3/4 mx-auto mb-4" />
 
       {/* Info Section */}
-      <div className="flex flex-col sm:flex-row items-center gap-4 mb-6">
-        <div className="w-24 h-16 bg-stone-200 dark:bg-stone-700 rounded-md" />
-        <div className="flex-grow flex flex-wrap gap-2">
-          <div className="h-8 w-24 bg-stone-200 dark:bg-stone-700 rounded-full" />
-          <div className="h-8 w-20 bg-stone-200 dark:bg-stone-700 rounded-full" />
-          <div className="h-8 w-32 bg-stone-200 dark:bg-stone-700 rounded-full" />
-          <div className="h-8 w-28 bg-stone-200 dark:bg-stone-700 rounded-full" />
+      <div className="m-2 flex flex-row p-2">
+        <div className="w-30 h-20 rounded-sm bg-stone-300 dark:bg-stone-700 mr-2" />
+        <div className="flex flex-column gap-1 flex-wrap">
+          {[...Array(5)].map((_, i) => (
+            <div
+              key={i}
+              className="h-7 w-32 bg-stone-300 dark:bg-stone-700 rounded-full"
+            />
+          ))}
         </div>
       </div>
 
-      {/* Stats Sections */}
-      <div className="space-y-6">
-        {[...Array(3)].map((_, i) => (
-          <div key={i}>
-            <div className="h-6 w-40 bg-stone-200 dark:bg-stone-700 rounded mb-3" />
-            <div className="space-y-2">
-              <div className="h-20 bg-stone-200 dark:bg-stone-700 rounded" />
-              {i === 0 && (
-                <div className="h-20 bg-stone-200 dark:bg-stone-700 rounded" />
-              )}
-            </div>
-          </div>
-        ))}
+      {/* Top Skaters */}
+      <DividerSkeleton />
+      <div className="flex flex-col gap-2">
+        <PlayerCardSkeleton />
+        <PlayerCardSkeleton />
+      </div>
+
+      {/* Top Goalies */}
+      <DividerSkeleton />
+      <div className="flex flex-col gap-2">
+        <PlayerCardSkeleton />
+        <PlayerCardSkeleton />
+      </div>
+
+      {/* Weekly Schedule */}
+      <DividerSkeleton />
+      <div className="flex flex-col gap-2">
+        <GameCardSkeleton />
+        <GameCardSkeleton />
       </div>
     </div>
   );
