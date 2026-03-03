@@ -40,6 +40,29 @@ export type PlayoffsTeamType = {
   darkLogo: string;
 };
 
+export type ScheduleTeamType = {
+  id: number;
+  commonName: {
+    default: string;
+  };
+  placeName: {
+    default: string;
+    fr?: string;
+  };
+  placeNameWithPreposition: {
+    default: string;
+    fr?: string;
+  };
+  abbrev: string;
+  logo: string;
+  darkLogo: string;
+  awaySplitSquad: boolean;
+  radioLink?: string;
+  hotelLink?: string;
+  hotelDesc?: string;
+  score?: number;
+};
+
 export type SkaterType = {
   assists: number;
   avgShiftsPerGame: number;
@@ -145,50 +168,8 @@ export type GameType = {
     network: string;
     sequenceNumber: number;
   }[];
-  awayTeam: {
-    id: number;
-    commonName: {
-      default: string;
-    };
-    placeName: {
-      default: string;
-      fr?: string;
-    };
-    placeNameWithPreposition: {
-      default: string;
-      fr?: string;
-    };
-    abbrev: string;
-    logo: string;
-    darkLogo: string;
-    awaySplitSquad: boolean;
-    radioLink?: string;
-    hotelLink?: string;
-    hotelDesc?: string;
-    score?: number;
-  };
-  homeTeam: {
-    id: number;
-    commonName: {
-      default: string;
-    };
-    placeName: {
-      default: string;
-      fr?: string;
-    };
-    placeNameWithPreposition: {
-      default: string;
-      fr?: string;
-    };
-    abbrev: string;
-    logo: string;
-    darkLogo: string;
-    homeSplitSquad: boolean;
-    radioLink?: string;
-    hotelLink?: string;
-    hotelDesc?: string;
-    score?: number;
-  };
+  awayTeam: ScheduleTeamType;
+  homeTeam: ScheduleTeamType;
   periodDescriptor: {
     number: number;
     periodType: string;

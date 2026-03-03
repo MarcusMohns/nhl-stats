@@ -1,68 +1,90 @@
 import Image from "next/image";
+import { ScheduleTeamType } from "@/app/types";
 
 type MatchupProps = {
-  homeTeamAbbrev: string;
-  homeTeamLogo: string;
-  homeTeamDarkLogo: string;
-  homeTeamScore?: number;
-  awayTeamAbbrev: string;
-  awayTeamLogo: string;
-  awayTeamDarkLogo: string;
-  awayTeamScore?: number;
+  homeTeam: ScheduleTeamType;
+  awayTeam: ScheduleTeamType;
+  gameOver: boolean;
+  homeTeamWon: boolean | undefined;
 };
 
 const Matchup = ({
-  homeTeamAbbrev,
-  homeTeamLogo,
-  homeTeamDarkLogo,
-  homeTeamScore,
-  awayTeamAbbrev,
-  awayTeamLogo,
-  awayTeamDarkLogo,
-  awayTeamScore,
+  homeTeam,
+  awayTeam,
+  gameOver,
+  homeTeamWon,
 }: MatchupProps) => {
+  const label = `${homeTeam.abbrev} ${homeTeam.score} - ${awayTeam.score} ${awayTeam.abbrev}`;
   return (
-    <div className="flex flex-row items-center justify-center dark:text-stone-300  text-stone-800 w-full font-bold gap-10">
-      <div className="flex flex-row items-center justify-center sm:min-w-30">
-        <p>{awayTeamAbbrev}</p>
-        <Image
-          className="w-10 h-10 md:w-12 md:h-12 dark:hidden"
-          src={awayTeamLogo}
-          alt={awayTeamAbbrev}
-          width={960}
-          height={640}
-        />
-        <Image
-          className="w-10 h-10 md:w-12 md:h-12 hidden dark:block"
-          src={awayTeamDarkLogo}
-          alt={awayTeamAbbrev}
-          width={960}
-          height={640}
-        />
+    <div
+      title={label}
+      aria-label={label}
+      className="flex flex-row items-center justify-between sm:justify-center dark:text-stone-300  text-stone-800 w-full font-bold sm:gap-10"
+    >
+      {/* Home Team  */}
+      <div
+        title={`${homeTeam.placeName.default} ${homeTeam.commonName.default}`}
+        className={`flex flex-row items-center justify-center px-2 rounded ${
+          gameOver && homeTeamWon === true
+            ? "bg-green-200 dark:bg-green-700/30"
+            : gameOver && homeTeamWon === false
+              ? "bg-red-200 dark:bg-red-700/30"
+              : ""
+        }`}
+      >
+        <p className="font-bold dark:text-stone-300 text-stone-800 text-3xl ">
+          {homeTeam.score}
+        </p>
+        <div className="flex flex-row items-center justify-center sm:min-w-28">
+          <Image
+            className="w-12 h-12 md:w-14 md:h-12 dark:hidden"
+            src={homeTeam.logo}
+            alt=""
+            width={960}
+            height={640}
+          />
+          <Image
+            className="w-12 h-12 md:w-14 md:h-12 hidden dark:block"
+            src={homeTeam.darkLogo}
+            alt=""
+            width={960}
+            height={640}
+          />
+          <p>{homeTeam.abbrev}</p>
+        </div>
       </div>
-      <h3 className="font-bold dark:text-stone-300 text-stone-800 text-3xl ">
-        {awayTeamScore}
-      </h3>
-      -
-      <h3 className="font-bold dark:text-stone-300 text-stone-800 text-3xl ">
-        {homeTeamScore}
-      </h3>
-      <div className="flex flex-row items-center justify-center sm:min-w-30">
-        <Image
-          className="w-12 h-12 md:w-14 md:h-12 dark:hidden"
-          src={homeTeamLogo}
-          alt={homeTeamAbbrev}
-          width={960}
-          height={640}
-        />
-        <Image
-          className="w-12 h-12 md:w-14 md:h-12 hidden dark:block"
-          src={homeTeamDarkLogo}
-          alt={homeTeamAbbrev}
-          width={960}
-          height={640}
-        />
-        <p>{homeTeamAbbrev}</p>
+      <span aria-hidden="true">-</span>
+      {/* Away Team  */}
+      <div
+        title={`${awayTeam.placeName.default} ${awayTeam.commonName.default}`}
+        className={`flex flex-row items-center justify-center px-2 rounded ${
+          gameOver && homeTeamWon === false
+            ? "bg-green-200 dark:bg-green-700/30"
+            : gameOver && homeTeamWon === true
+              ? "bg-red-200 dark:bg-red-700/30"
+              : ""
+        }`}
+      >
+        <div className="flex flex-row items-center justify-center sm:min-w-28">
+          <p>{awayTeam.abbrev}</p>
+          <Image
+            className="w-10 h-10 md:w-12 md:h-12 dark:hidden"
+            src={awayTeam.logo}
+            alt=""
+            width={960}
+            height={640}
+          />
+          <Image
+            className="w-10 h-10 md:w-12 md:h-12 hidden dark:block"
+            src={awayTeam.darkLogo}
+            alt=""
+            width={960}
+            height={640}
+          />
+        </div>
+        <p className="font-bold dark:text-stone-300 text-stone-800 text-3xl ">
+          {awayTeam.score}
+        </p>
       </div>
     </div>
   );
