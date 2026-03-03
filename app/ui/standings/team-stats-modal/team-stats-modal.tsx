@@ -58,7 +58,10 @@ export const TeamStatsModal = ({ handleCloseModal, team }: ModalProps) => {
   return (
     <Modal closeModal={handleCloseModal}>
       <div className="max-h-180 overflow-y-auto">
-        <h1 className="flex flex-row justify-center items-center text-2xl/7 font-bold sm:truncate sm:text-3xl sm:tracking-tight">
+        <h1
+          id="modal-title"
+          className="flex flex-row justify-center items-center text-2xl/7 font-bold sm:truncate sm:text-3xl sm:tracking-tight"
+        >
           {team.teamName.default}
           <LinkOut
             linkOutStyles="ml-3"
@@ -66,6 +69,7 @@ export const TeamStatsModal = ({ handleCloseModal, team }: ModalProps) => {
               /\s+/g,
               "",
             )}`}
+            aria-label={`Visit ${team.teamName.default} official site`}
           />
         </h1>
         <div className="m-2 flex flex-row p-2 ">
@@ -83,24 +87,32 @@ export const TeamStatsModal = ({ handleCloseModal, team }: ModalProps) => {
             width={960}
             height={640}
           />
-          <div className="flex flex-column gap-1 flex-wrap">
+          <ul className="flex flex-column gap-1 flex-wrap">
             {chips.map((chip) => (
-              <Chip color="text-white" bgColor="bg-gray-600" key={chip.name}>
-                <p>
-                  {chip.name}: {chip.value}
-                </p>
-              </Chip>
+              <li key={chip.name}>
+                <Chip color="text-white" bgColor="bg-gray-600">
+                  <p>
+                    {chip.name}: {chip.value}
+                  </p>
+                </Chip>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
         <div className="flex flex-col">
           <div className="top-skater-stats">
             <div className="flex items-center mt-4 mb-2">
-              <div className="flex-1 border-t border-stone-300 dark:border-stone-600" />
+              <div
+                className="flex-1 border-t border-stone-300 dark:border-stone-600"
+                aria-hidden="true"
+              />
               <h2 className="px-3 text-center font-semibold text-stone-600 dark:text-stone-300 uppercase text-sm">
                 Top Point Scorers
               </h2>
-              <div className="flex-1 border-t border-stone-300 dark:border-stone-600" />
+              <div
+                className="flex-1 border-t border-stone-300 dark:border-stone-600"
+                aria-hidden="true"
+              />
             </div>
             <div className="flex flex-col gap-2">
               {teamStats.topSkaters.map((player) => (
@@ -110,11 +122,17 @@ export const TeamStatsModal = ({ handleCloseModal, team }: ModalProps) => {
           </div>
           <div className="top-goalie-stats">
             <div className="flex items-center mt-4 mb-2">
-              <div className="flex-1 border-t border-stone-300 dark:border-stone-600" />
+              <div
+                className="flex-1 border-t border-stone-300 dark:border-stone-600"
+                aria-hidden="true"
+              />
               <h2 className="px-3 text-center font-semibold text-stone-600 dark:text-stone-300 uppercase text-sm">
                 Top Goalies
               </h2>
-              <div className="flex-1 border-t border-stone-300 dark:border-stone-600" />
+              <div
+                className="flex-1 border-t border-stone-300 dark:border-stone-600"
+                aria-hidden="true"
+              />
             </div>
             <div className="flex flex-col gap-2">
               {teamStats.topGoalies.map((player) => (
@@ -124,11 +142,17 @@ export const TeamStatsModal = ({ handleCloseModal, team }: ModalProps) => {
           </div>
         </div>
         <div className="flex items-center mt-4 mb-2">
-          <div className="flex-1 border-t border-stone-300 dark:border-stone-600" />
+          <div
+            className="flex-1 border-t border-stone-300 dark:border-stone-600"
+            aria-hidden="true"
+          />
           <h2 className="px-3 text-center font-semibold text-stone-600 dark:text-stone-300 uppercase text-sm">
             This Weeks Games
           </h2>
-          <div className="flex-1 border-t border-stone-300 dark:border-stone-600" />
+          <div
+            className="flex-1 border-t border-stone-300 dark:border-stone-600"
+            aria-hidden="true"
+          />
         </div>
         <WeeklySchedule games={teamStats.games} />
       </div>

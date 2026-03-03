@@ -17,7 +17,7 @@ const WeeklySchedule = ({ games }: WeeklyScheduleProps) => {
   }
 
   return (
-    <div className="flex flex-col gap-2">
+    <ul className="flex flex-col gap-2">
       {games.map((game) => {
         const getGameStatusClass = () => {
           if (
@@ -36,7 +36,7 @@ const WeeklySchedule = ({ games }: WeeklyScheduleProps) => {
         const date = new Date(game.startTimeUTC);
 
         return (
-          <div
+          <li
             key={game.gameDate}
             className={`flex items-center gap-4 p-3 w-full bg-white dark:bg-stone-800 rounded-lg shadow-sm border-x-4 ${getGameStatusClass()}`}
           >
@@ -72,16 +72,18 @@ const WeeklySchedule = ({ games }: WeeklyScheduleProps) => {
                 <Image
                   src={game.homeTeam.logo}
                   className="w-8 h-8 dark:hidden"
-                  alt={`Logo of ${game.homeTeam.abbrev}`}
+                  alt=""
                   width={32}
                   height={32}
+                  aria-hidden="true"
                 />
                 <Image
                   src={game.homeTeam.darkLogo}
                   className="w-8 h-8 hidden dark:block"
-                  alt={`Logo of ${game.homeTeam.abbrev}`}
+                  alt=""
                   width={32}
                   height={32}
+                  aria-hidden="true"
                 />
               </div>
 
@@ -124,34 +126,35 @@ const WeeklySchedule = ({ games }: WeeklyScheduleProps) => {
                 <Image
                   src={game.awayTeam.logo}
                   className="w-8 h-8 dark:hidden"
-                  alt={`Logo of ${game.awayTeam.abbrev}`}
+                  alt=""
                   width={40}
                   height={40}
+                  aria-hidden="true"
                 />
                 <Image
                   src={game.awayTeam.darkLogo}
                   className="w-8 h-8 hidden dark:block"
-                  alt={`Logo of ${game.awayTeam.abbrev}`}
+                  alt=""
                   width={40}
                   height={40}
+                  aria-hidden="true"
                 />
                 <span className="font-semibold text-sm sm:text-base text-left">
                   {game.awayTeam.abbrev}
                 </span>
               </div>
             </div>
-
-            {/* Link Out */}
             {game.gameCenterLink && (
               <LinkOut
                 linkOutStyles="shrink-0 text-stone-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                 hrefString={`https://www.nhl.com${game.gameCenterLink}`}
+                aria-label={`View game center for ${game.homeTeam.abbrev} vs ${game.awayTeam.abbrev}`}
               />
             )}
-          </div>
+          </li>
         );
       })}
-    </div>
+    </ul>
   );
 };
 

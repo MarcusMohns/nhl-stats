@@ -18,14 +18,20 @@ const linkOutIcon = (
 type LinkOutProps = {
   hrefString: string;
   linkOutStyles: string;
+  "aria-label"?: string;
 };
 
-export const LinkOut = ({ hrefString, linkOutStyles }: LinkOutProps) => (
+export const LinkOut = ({
+  hrefString,
+  linkOutStyles,
+  ...props
+}: LinkOutProps) => (
   <a
     className={linkOutStyles}
     href={hrefString}
     target="_blank"
     rel="noopener noreferrer"
+    aria-label={props["aria-label"]}
   >
     {linkOutIcon}
   </a>

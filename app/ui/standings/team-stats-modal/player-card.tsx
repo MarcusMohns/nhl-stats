@@ -51,14 +51,21 @@ const PlayerCard = ({ player }: { player: SkaterType | GoalieType }) => {
 
       <div className="flex flex-col flex-grow ml-4 overflow-hidden">
         <div className="flex flex-row items-center justify-between w-full mb-1">
-          <p className="text-base sm:text-lg font-bold text-stone-800 dark:text-stone-100 truncate">
+          <h3 className="text-base sm:text-lg font-bold text-stone-800 dark:text-stone-100 truncate">
             {player.firstName.default} {player.lastName.default}
             {isGoalie(player) ? (
-              <span className="ml-1">(G)</span>
+              <span className="ml-1" aria-label="Position: Goalie">
+                (G)
+              </span>
             ) : (
-              <span className="ml-1">({player.positionCode})</span>
+              <span
+                className="ml-1"
+                aria-label={`Position: ${player.positionCode}`}
+              >
+                ({player.positionCode})
+              </span>
             )}
-          </p>
+          </h3>
           <LinkOut
             linkOutStyles="w-5 h-5 mr-1 text-stone-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
             hrefString={`https://www.nhl.com/player/${player.playerId}`}
@@ -66,12 +73,17 @@ const PlayerCard = ({ player }: { player: SkaterType | GoalieType }) => {
           />
         </div>
 
-        <div className="flex flex-row flex-wrap gap-4 sm:gap-6 text-sm">
+        <div
+          role="group"
+          aria-label="Player Statistics"
+          className="flex flex-row flex-wrap gap-4 sm:gap-6 text-sm"
+        >
           {stats.map((stat) => (
             <div
               key={stat.label}
               className="flex flex-col items-center"
               title={stat.label}
+              aria-label={`${stat.label}: ${stat.value}`}
             >
               <span className="text-[10px] sm:text-xs font-bold text-stone-500 dark:text-stone-400 uppercase tracking-wider">
                 {stat.short}
