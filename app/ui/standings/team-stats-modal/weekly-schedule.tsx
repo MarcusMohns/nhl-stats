@@ -25,7 +25,7 @@ const WeeklySchedule = ({ games }: WeeklyScheduleProps) => {
             game.homeTeam.score === undefined ||
             game.awayTeam.score === undefined
           ) {
-            return "border-x-stone-100 dark:border-x-stone-800"; // TBD
+            return "border-x-white dark:border-x-stone-800"; // TBD
           }
           const homeTeamWon = game.homeTeam.score > game.awayTeam.score;
           return homeTeamWon

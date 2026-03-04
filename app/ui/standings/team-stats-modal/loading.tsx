@@ -62,7 +62,7 @@ const Loading = () => {
       <div className="m-2 flex flex-row p-2">
         <div className="w-30 h-20 rounded-sm bg-stone-300 dark:bg-stone-700 mr-2 shrink-0" />
         <div className="flex flex-row flex-wrap justify-center items-start gap-2">
-          {[...Array(5)].map((_, i) => (
+          {[...Array(4)].map((_, i) => (
             <div
               key={i}
               className="h-7 w-28 bg-stone-300 dark:bg-stone-700 rounded-full"

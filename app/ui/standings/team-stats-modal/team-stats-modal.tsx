@@ -57,7 +57,7 @@ export const TeamStatsModal = ({ handleCloseModal, team }: ModalProps) => {
 
   return (
     <Modal closeModal={handleCloseModal}>
-      <div className="max-h-180 pr-2 overflow-y-auto [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-stone-100 [&::-webkit-scrollbar-thumb]:bg-stone-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
+      <div className="max-h-180 pr-2 overflow-y-scroll">
         <h1
           id="modal-title"
           className="flex flex-row justify-center items-center text-2xl/7 font-bold sm:truncate sm:text-3xl sm:tracking-tight"
