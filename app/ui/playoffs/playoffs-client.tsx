@@ -30,20 +30,20 @@ const PlayoffsClient = ({ playoffs }: PlayoffsClientProps) => {
   return (
     <section
       aria-label="Playoff Bracket"
-      className="playoffs h-max sm:p-5 w-full max-w-7xl mx-auto animate-fade-in mt-5"
+      className="playoffs h-max lg:p-5 w-full mx-auto animate-fade-in mt-5"
     >
-      <div className="flex flex-col w-full justify-center items-center bg-stone-100 dark:bg-stone-800 rounded-lg p-2 sm:p-5 md:p-10">
+      <div className="flex flex-col w-full justify-center items-center bg-stone-50 dark:bg-stone-800 rounded-lg p-2 lg:p-5 xl:p-10 xl:px-15">
         <Image
           src={playoffs.bracketLogo}
-          className="invert dark:invert-0 mx-auto my-5 sm:my-0 px-4"
+          className="invert dark:invert-0 mx-auto my-5 sm:my-0 px-4 w-200 h-auto"
           alt="NHL Playoffs"
           width={1993}
           height={266}
           loading="eager"
         />
-        <small className="w-[90%] text-center mb-10 text-xs font-semibold text-stone-600 dark:text-stone-400 tracking-wide">
+        {/* <small className="w-[90%] text-center mb-10 text-xs font-semibold text-stone-600 dark:text-stone-400 tracking-wide">
           If the playoffs started today (updated after each game ends)
-        </small>
+        </small> */}
         <div className="flex items-center justify-center gap-1 w-full">
           <Bracket
             roundOne={western.roundOneTop}
@@ -52,7 +52,7 @@ const PlayoffsClient = ({ playoffs }: PlayoffsClientProps) => {
           />
           <div
             aria-hidden="true"
-            className="xl:hidden w-px h-48 bg-stone-300 dark:bg-stone-700 mx-2"
+            className="xl:hidden w-px h-48 bg-stone-300 dark:bg-stone-700"
           />
           <Bracket
             roundOne={eastern.roundOneTop}
@@ -76,7 +76,7 @@ const PlayoffsClient = ({ playoffs }: PlayoffsClientProps) => {
           />
           <div
             aria-hidden="true"
-            className="xl:hidden w-px h-48 bg-stone-300 dark:bg-stone-700 mx-2"
+            className="xl:hidden w-px h-48 bg-stone-300 dark:bg-stone-700"
           />
           <Bracket
             roundOne={eastern.roundOneBottom}

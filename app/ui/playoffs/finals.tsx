@@ -6,7 +6,7 @@ type FinalsProps = {
 };
 const Finals = ({ series }: FinalsProps) => {
   return (
-    <div className="flex items-center justify-center my-5 lg:my-0">
+    <div className="flex items-center justify-around gap-10">
       {series.map((team, index) => (
         <Series key={index} series={team} />
       ))}

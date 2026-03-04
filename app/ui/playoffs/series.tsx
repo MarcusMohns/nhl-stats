@@ -5,7 +5,7 @@ import Image from "next/image";
 const GameSeries = ({ series }: { series: SeriesType }) => {
   return (
     <div
-      className={`flex flex-col text-center justify-center items-center md:mx-2 my-1 w-full md:w-auto`}
+      className={`flex flex-col text-center justify-center items-center w-full h-full xl:w-auto xl:h-auto`}
     >
       <p className="font-bold dark:text-stone-300 leading-tight tracking-wide select-none text-sm">
         {series.seriesAbbrev}
@@ -20,7 +20,10 @@ const GameSeries = ({ series }: { series: SeriesType }) => {
           url={series.seriesUrl}
         />
       ) : series.seriesLogo ? (
-        <div className="border lg:border-2 p-2 rounded border-gray-300 dark:border-stone-700">
+        <div
+          title={series.seriesTitle}
+          className="flex justify-center items-center border lg:border-2 p-2 rounded border-gray-300 dark:border-stone-700 xl:min-h-32 xl:min-w-64"
+        >
           <Image
             src={series.seriesLogo}
             alt={series.seriesTitle}
@@ -32,8 +35,8 @@ const GameSeries = ({ series }: { series: SeriesType }) => {
         </div>
       ) : (
         <div
-          className="flex flex-col justify-center bg-stone-200/50 dark:bg-stone-700/60 rounded-lg 
-      lg:w-48 lg:h-28 min-h-20 min-w-[4.25rem] md:px-3 max-w-[90%] w-full text-sm font-semibold text-stone-500 dark:text-stone-400 italic grow"
+          title={series.seriesTitle}
+          className="flex items-center w-[90%] md:w-full justify-center h-[40%] xl:h-32 xl:w-56 text-xs italic border-2 border-dashed border-gray-300 dark:border-stone-700 rounded"
         >
           {series.seriesTitle}
         </div>
