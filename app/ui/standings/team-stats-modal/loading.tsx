@@ -36,50 +36,58 @@ const GameCardSkeleton = () => (
   </div>
 );
 
-const DividerSkeleton = () => (
+const DividerSkeleton = ({ textWidth = "w-40" }: { textWidth?: string }) => (
   <div className="flex items-center mt-4 mb-2">
-    <div className="flex-1 border-t border-stone-300 dark:border-stone-600" />
-    <div className="h-6 w-40 mx-3 bg-stone-300 dark:bg-stone-700 rounded" />
-    <div className="flex-1 border-t border-stone-300 dark:border-stone-600" />
+    <div
+      className="flex-1 border-t border-stone-300 dark:border-stone-600"
+      aria-hidden="true"
+    />
+    <div
+      className={`h-5 mx-3 bg-stone-300 dark:bg-stone-700 rounded ${textWidth}`}
+    />
+    <div
+      className="flex-1 border-t border-stone-300 dark:border-stone-600"
+      aria-hidden="true"
+    />
   </div>
 );
 
 const Loading = () => {
   return (
-    <div className="p-4 animate-pulse max-h-180 overflow-y-auto">
+    <div className="animate-pulse max-h-180 pr-2 overflow-y-auto">
       {/* Header */}
-      <div className="h-8 bg-stone-300 dark:bg-stone-700 rounded w-3/4 mx-auto mb-4" />
+      <div className="h-8 bg-stone-300 dark:bg-stone-700 rounded w-3/4 mx-auto mt-2 mb-4" />
 
       {/* Info Section */}
       <div className="m-2 flex flex-row p-2">
-        <div className="w-30 h-20 rounded-sm bg-stone-300 dark:bg-stone-700 mr-2" />
-        <div className="flex flex-column gap-1 flex-wrap">
+        <div className="w-30 h-20 rounded-sm bg-stone-300 dark:bg-stone-700 mr-2 shrink-0" />
+        <div className="flex flex-row flex-wrap justify-center items-start gap-2">
           {[...Array(5)].map((_, i) => (
             <div
               key={i}
-              className="h-7 w-32 bg-stone-300 dark:bg-stone-700 rounded-full"
+              className="h-7 w-28 bg-stone-300 dark:bg-stone-700 rounded-full"
             />
           ))}
         </div>
       </div>
 
       {/* Top Skaters */}
-      <DividerSkeleton />
-      <div className="flex flex-col gap-2">
+      <DividerSkeleton textWidth="w-48" />
+      <div className="flex flex-col gap-2 px-2">
         <PlayerCardSkeleton />
         <PlayerCardSkeleton />
       </div>
 
       {/* Top Goalies */}
-      <DividerSkeleton />
-      <div className="flex flex-col gap-2">
+      <DividerSkeleton textWidth="w-32" />
+      <div className="flex flex-col gap-2 px-2">
         <PlayerCardSkeleton />
         <PlayerCardSkeleton />
       </div>
 
       {/* Weekly Schedule */}
-      <DividerSkeleton />
-      <div className="flex flex-col gap-2">
+      <DividerSkeleton textWidth="w-44" />
+      <div className="flex flex-col gap-2 px-2 pb-2">
         <GameCardSkeleton />
         <GameCardSkeleton />
       </div>
