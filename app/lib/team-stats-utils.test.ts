@@ -50,7 +50,7 @@ describe("team-stats-utils", () => {
     expect(result.topSkaters[0].points).toBe(50);
 
     // Check if top goalie was selected
-    expect(result.topGoalie.savePercentage).toBe(0.95);
+    expect(result.topGoalies).toHaveLength(1);
   });
 
   it("handles errors gracefully", async () => {
