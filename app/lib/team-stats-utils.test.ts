@@ -46,11 +46,11 @@ describe("team-stats-utils", () => {
     expect(result.games).toEqual(mockSchedule.games);
 
     // Check if top skaters were sorted and sliced
-    expect(result.topSkaters).toHaveLength(2);
+    expect(result.topSkaters).toHaveLength(3);
     expect(result.topSkaters[0].points).toBe(50);
 
     // Check if top goalie was selected
-    expect(result.topGoalies).toHaveLength(1);
+    expect(result.topGoalies).toHaveLength(2);
   });
 
   it("handles errors gracefully", async () => {
