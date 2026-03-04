@@ -57,7 +57,7 @@ export const TeamStatsModal = ({ handleCloseModal, team }: ModalProps) => {
 
   return (
     <Modal closeModal={handleCloseModal}>
-      <div className="max-h-180 overflow-y-auto">
+      <div className="max-h-180 pr-2 overflow-y-auto [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-stone-100 [&::-webkit-scrollbar-thumb]:bg-stone-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
         <h1
           id="modal-title"
           className="flex flex-row justify-center items-center text-2xl/7 font-bold sm:truncate sm:text-3xl sm:tracking-tight"
@@ -87,13 +87,12 @@ export const TeamStatsModal = ({ handleCloseModal, team }: ModalProps) => {
             width={960}
             height={640}
           />
-          <ul className="flex flex-column gap-1 flex-wrap">
+          <ul className="flex flex-row flex-wrap justify-center items-start gap-1">
             {chips.map((chip) => (
               <li key={chip.name}>
-                <Chip color="text-white" bgColor="bg-gray-600">
-                  <p>
-                    {chip.name}: {chip.value}
-                  </p>
+                <Chip className="bg-stone-200 text-stone-800 dark:bg-stone-700 dark:text-stone-200">
+                  <span className="font-medium opacity-80">{chip.name}:</span>
+                  <span className="ml-1">{chip.value}</span>
                 </Chip>
               </li>
             ))}

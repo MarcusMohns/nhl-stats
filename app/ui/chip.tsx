@@ -1,14 +1,13 @@
-import { ReactElement } from "react";
-
 type ChipProps = {
-  color: string;
-  bgColor: string;
-  children: ReactElement | string | number;
+  children: React.ReactNode;
+  className?: string;
 };
-const Chip = ({ color, bgColor, children }: ChipProps) => {
+const Chip = ({ children, className }: ChipProps) => {
   return (
     <div
-      className={`flex justify-center items-center ${color} ${bgColor} rounded-full px-2 text-xs font-semibold text-sm`}
+      className={`flex justify-center items-center h-7 w-max rounded-full px-3 text-xs font-bold ${
+        className || ""
+      }`}
     >
       {children}
     </div>
