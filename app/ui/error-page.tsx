@@ -9,16 +9,14 @@ type ErrorProps = {
 
 export default function ErrorPage({ error, reset }: ErrorProps) {
   useEffect(() => {
-    // Log the error to an error reporting service
     console.error(error);
   }, [error]);
 
   return (
     <Alert
+      variant="error"
       messageHeader={`${"Error"} (${error.name})`}
-      bgColor="bg-red-100"
-      borderColor="border-red-500"
-      textColor="text-red-700"
+      className="w-max m-auto"
     >
       <p>{error.message}</p>
       <button

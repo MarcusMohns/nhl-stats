@@ -1,24 +1,25 @@
-type AlertProps = {
-  messageHeader: string;
-  bgColor: string;
-  borderColor: string;
-  textColor: string;
-  children: React.ReactNode;
+const variants = {
+  error: "bg-red-100 border-red-500 text-red-700",
+  success: "bg-green-100 border-green-500 text-green-700",
+  warning: "bg-yellow-100 border-yellow-500 text-yellow-700",
+  info: "bg-blue-100 border-blue-500 text-blue-700",
 };
 
-const Alert = ({
-  messageHeader,
-  bgColor,
-  borderColor,
-  textColor,
-  children,
-}: AlertProps) => {
+type AlertProps = {
+  messageHeader: string;
+  variant: keyof typeof variants;
+  children: React.ReactNode;
+  className?: string;
+};
+
+const Alert = ({ messageHeader, variant, children, className }: AlertProps) => {
+  const variantClasses = variants[variant];
   return (
     <div
-      className={`${bgColor} border-l-4 ${borderColor} ${textColor} p-4 w-max m-auto`}
+      className={`border-l-4 p-4 ${variantClasses} ${className || ""}`}
       role="alert"
     >
-      <p className="font-bold">{messageHeader}</p>
+      <h2 className="font-bold">{messageHeader}</h2>
       {children}
     </div>
   );
