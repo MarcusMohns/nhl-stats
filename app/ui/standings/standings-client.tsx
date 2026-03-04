@@ -30,30 +30,46 @@ type StandingsClientProps = {
 const TABLE_TABS = [
   {
     name: "League",
-    icon: <GlobeAmericasIcon className="w-5 h-5 inline mr-1" />,
+    icon: (
+      <GlobeAmericasIcon className="w-5 h-5 inline mr-1" aria-hidden="true" />
+    ),
     iconSolid: (
-      <GlobeAmericasIconSolid className="w-5 h-5 inline mr-1 text-blue-500 dark:text-blue-400" />
+      <GlobeAmericasIconSolid
+        className="w-5 h-5 inline mr-1 text-blue-600 dark:text-blue-400"
+        aria-hidden="true"
+      />
     ),
   },
   {
     name: "Division",
-    icon: <ViewColumnsIcon className="w-5 h-5 inline mr-1" />,
+    icon: (
+      <ViewColumnsIcon className="w-5 h-5 inline mr-1" aria-hidden="true" />
+    ),
     iconSolid: (
-      <ViewColumnsIconSolid className="w-5 h-5 inline mr-1 text-teal-500 dark:text-teal-400" />
+      <ViewColumnsIconSolid
+        className="w-5 h-5 inline mr-1 text-teal-700 dark:text-teal-400"
+        aria-hidden="true"
+      />
     ),
   },
   {
     name: "Conference",
-    icon: <MapIcon className="w-5 h-5 inline mr-1" />,
+    icon: <MapIcon className="w-5 h-5 inline mr-1" aria-hidden="true" />,
     iconSolid: (
-      <MapIconSolid className="w-5 h-5 inline mr-1 text-indigo-500 dark:text-indigo-400" />
+      <MapIconSolid
+        className="w-5 h-5 inline mr-1 text-indigo-600 dark:text-indigo-400"
+        aria-hidden="true"
+      />
     ),
   },
   {
     name: "Wild Card",
-    icon: <TicketIcon className="w-5 h-5 inline mr-1" />,
+    icon: <TicketIcon className="w-5 h-5 inline mr-1" aria-hidden="true" />,
     iconSolid: (
-      <TicketIconSolid className="w-5 h-5 inline mr-1 text-amber-600 dark:text-amber-400" />
+      <TicketIconSolid
+        className="w-5 h-5 inline mr-1 text-amber-700 dark:text-amber-400"
+        aria-hidden="true"
+      />
     ),
   },
 ];
@@ -102,9 +118,18 @@ const StandingsClient = ({ standings }: StandingsClientProps) => {
           selectedTable={selectedTable}
         />
       )}
-      <div className="flex flex-row text-sm font-semibold uppercase p-3 gap-1">
-        <XMarkIcon className="w-5 h-5 text-red-500" /> = Eliminated{" "}
-        <CheckBadgeIcon className="w-5 h-5 text-green-500" /> = Qualified
+      <div
+        className="flex flex-row flex-wrap text-sm font-semibold uppercase p-3 gap-4"
+        aria-hidden="true"
+      >
+        <span className="flex items-center gap-1">
+          <XMarkIcon className="w-5 h-5 text-red-600 dark:text-red-500" /> =
+          Eliminated
+        </span>
+        <span className="flex items-center gap-1">
+          <CheckBadgeIcon className="w-5 h-5 text-green-600 dark:text-green-500" />{" "}
+          = Qualified
+        </span>
       </div>
     </section>
   );
