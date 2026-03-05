@@ -62,7 +62,6 @@ const Modal = ({ closeModal, children }: ModalProps) => {
     >
       <div
         className="fixed inset-0 z-10 w-screen transform bg-stone-700/75 dark:bg-stone-900/75 backdrop-blur-xs"
-        aria-hidden="true"
         onClick={closeModal}
       >
         <div className="flex min-h-full items-center justify-center text-center">
