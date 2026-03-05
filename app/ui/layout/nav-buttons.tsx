@@ -13,6 +13,7 @@ import {
   CalendarIcon as CalendarIconSolid,
   GlobeEuropeAfricaIcon as GlobeEuropeAfricaIconSolid,
 } from "@heroicons/react/24/solid";
+import Image from "next/image";
 
 const buttons = [
   {
@@ -60,11 +61,15 @@ const NavButtons = () => {
         aria-current={pathname === "/" ? "page" : undefined}
         className="flex flex-row items-center cursor-pointer group w-max shrink-0 mr-auto rounded-md outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500 focus-visible:ring-offset-stone-100 dark:focus-visible:ring-offset-stone-800"
       >
-        <span
-          aria-hidden="true"
-          className="text-xl bg-stone-300 dark:bg-stone-700 p-1 mr-1 rounded"
-        >
-          🏒
+        <span aria-hidden="true" className="text-xl rounded flex items-center">
+          <Image
+            src="/home-icon.png"
+            alt=""
+            width={32}
+            height={32}
+            priority
+            className={`transition-all ${pathname === "/" ? "" : "grayscale contrast-50 group-hover:grayscale-0 group-hover:contrast-100"}`}
+          />
         </span>
         <h1
           className={`flex flex-row items-center cursor-pointer lg:text-xl font-bold text-stone-600 dark:text-stone-200 group-hover:text-stone-900 dark:group-hover:text-white mb-[-2px] ml-1 ${pathname === "/" ? "text-stone-900 dark:text-white" : ""}`}

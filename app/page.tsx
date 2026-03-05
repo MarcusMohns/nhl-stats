@@ -17,7 +17,7 @@ export default function Home() {
           <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-blue-600 to-cyan-500 opacity-20 blur-xl" />
           <h1 className="flex flex-row items-center justify-center relative font-extrabold text-5xl md:text-7xl tracking-tight text-stone-800 dark:text-stone-100">
             NHL Stats
-            <span className="text-blue-600 dark:text-blue-400 text-8xl ml-1">
+            <span className="text-blue-600 dark:text-blue-400 text-7xl ml-1">
               +
             </span>
           </h1>

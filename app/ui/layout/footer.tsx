@@ -6,11 +6,11 @@ const Footer = () => {
       className="min-h-[250px] w-full flex items-center justify-center border-t-2 border-stone-100 dark:border-stone-800 text-center p-5"
       aria-label="Footer with creator information"
     >
-      <p className="text-xs font-bold text-stone-600 dark:text-stone-200">
+      <p className="text-xs font-semibold text-stone-700 dark:text-stone-300">
         Made by Marcus Mohns using React, TypeScript & Tailwind CSS{" "}
         {currentYear} - Thanks to{" "}
         <a
-          className="text-blue-600 dark:text-blue-400 hover:underline"
+          className="text-blue-800 dark:text-blue-400 underline"
           href="https://github.com/Zmalski/"
           target="_blank"
           rel="noopener noreferrer"
@@ -19,7 +19,7 @@ const Footer = () => {
         </a>{" "}
         for the{" "}
         <a
-          className="text-blue-600 dark:text-blue-400 hover:underline"
+          className="text-blue-800 dark:text-blue-400 underline"
           href="https://github.com/Zmalski/NHL-API-Reference"
           target="_blank"
           rel="noopener noreferrer"

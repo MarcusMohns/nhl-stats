@@ -115,9 +115,9 @@ const LeaderboardClient = ({ leaderboard }: LeaderboardClientProps) => {
     <section className="leaderboard h-max w-full p-2 animate-fade-in">
       <div className="flex flex-col items-center justify-center xl:flex-row w-full gap-10">
         <div className="w-full xl:max-w-2xl">
-          <h3 className="font-bold dark:text-stone-300 uppercase leading-tight tracking-wide mt-5 select-none text-2xl">
+          <h1 className="font-bold dark:text-stone-300 uppercase leading-tight tracking-wide mt-5 select-none text-2xl">
             Skaters
-          </h3>
+          </h1>
           <SelectTableButtons
             buttons={SKATER_TABS}
             selectedTable={selectedSkaterLeaders}
@@ -132,9 +132,9 @@ const LeaderboardClient = ({ leaderboard }: LeaderboardClientProps) => {
           </ul>
         </div>
         <div className="w-full xl:max-w-2xl">
-          <h3 className="font-bold dark:text-stone-300 uppercase leading-tight tracking-wide mt-5 select-none text-2xl">
+          <h1 className="font-bold dark:text-stone-300 uppercase leading-tight tracking-wide mt-5 select-none text-2xl">
             Goalies
-          </h3>
+          </h1>
           <SelectTableButtons
             buttons={GOALIE_TABS}
             selectedTable={selectedGoalieLeaders}

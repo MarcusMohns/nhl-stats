@@ -30,9 +30,9 @@ const FeatureCard = ({
       >
         {icon}
       </div>
-      <h3 className="text-xl font-bold text-stone-800 dark:text-stone-100 mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+      <h2 className="text-xl font-bold text-stone-800 dark:text-stone-100 mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
         {title}
-      </h3>
+      </h2>
       <p className="text-stone-600 dark:text-stone-400 leading-relaxed">
         {description}
       </p>
