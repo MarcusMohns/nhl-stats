@@ -67,7 +67,7 @@ const NavButtons = () => {
             alt="Logo of NHL Stats"
             width={32}
             height={32}
-            priority
+            loading="eager"
             className={`transition-all ${pathname === "/" ? "" : "grayscale contrast-50 group-hover:grayscale-0 group-hover:contrast-100"}`}
           />
         </span>
@@ -77,7 +77,7 @@ const NavButtons = () => {
           NHL Stats
         </h1>
       </Link>
-      <ul className="fixed bottom-0 left-0 z-10 lg:z-0 bg-gray-100 dark:bg-stone-800 border-t lg:border-t-0 border-stone-300 dark:border-stone-700 lg:bg-transparent lg:dark:bg-transparent p-2 lg:p-0 lg:static flex flex-row justify-around lg:justify-end w-full gap-2 lg:gap-5 leading-tight tracking-wide select-none">
+      <ul className="fixed bottom-0 left-0 z-10 lg:z-0 bg-gray-100 dark:bg-stone-800 border-t lg:border-t-0 border-stone-300 dark:border-stone-700 lg:bg-transparent lg:dark:bg-transparent p-2 lg:p-0 lg:static flex flex-row justify-around lg:justify-end w-full xs:gap-2 lg:gap-5 leading-tight tracking-wide select-none overflow-x-auto xs:overflow-hidden">
         {buttons.map((button) => (
           <li
             key={button.name}

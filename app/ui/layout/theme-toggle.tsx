@@ -17,7 +17,7 @@ const ThemeToggle = () => {
     <button
       aria-label="Toggle theme"
       onClick={toggleDarkMode}
-      className="flex items-center justify-center cursor-pointer group w-10 h-10 rounded-md bg-stone-300 dark:bg-stone-900 ml-10"
+      className="flex items-center justify-center cursor-pointer group w-10 h-10 rounded-md bg-stone-200 dark:bg-stone-900 ml-10"
     >
       <SunIcon
         aria-hidden="true"
