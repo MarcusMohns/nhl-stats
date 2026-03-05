@@ -13,7 +13,7 @@ export const SelectTableButtons = ({
   return (
     <div
       role="group"
-      className="flex flex-col justify-center items-center xs:flex-row text-sm sm:text-base mt-5 sm:mt-0 sm:w-fit font-bold mt-1 shadow-lg bg-stone-200 dark:bg-stone-800 sm:rounded-md overflow-hidden"
+      className="flex flex-col justify-center items-center xs:flex-row text-sm sm:text-base sm:mt-0 mt-5 sm:w-fit font-bold shadow-lg bg-stone-200 dark:bg-stone-800 sm:rounded-md overflow-hidden"
     >
       {buttons.map((button) => (
         <button

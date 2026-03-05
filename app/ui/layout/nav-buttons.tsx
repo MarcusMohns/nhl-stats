@@ -59,12 +59,12 @@ const NavButtons = () => {
       <Link
         href={"/"}
         aria-current={pathname === "/" ? "page" : undefined}
-        className="flex flex-row items-center cursor-pointer group w-max shrink-0 mr-auto rounded-md outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500 focus-visible:ring-offset-stone-100 dark:focus-visible:ring-offset-stone-800"
+        className="flex flex-row items-center group w-max shrink-0 mr-auto rounded-md outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500 focus-visible:ring-offset-stone-100 dark:focus-visible:ring-offset-stone-800"
       >
         <span aria-hidden="true" className="text-xl rounded flex items-center">
           <Image
             src="/home-icon.png"
-            alt=""
+            alt="Logo of NHL Stats"
             width={32}
             height={32}
             priority
@@ -72,7 +72,7 @@ const NavButtons = () => {
           />
         </span>
         <h1
-          className={`flex flex-row items-center cursor-pointer lg:text-xl font-bold text-stone-600 dark:text-stone-200 group-hover:text-stone-900 dark:group-hover:text-white mb-[-2px] ml-1 ${pathname === "/" ? "text-stone-900 dark:text-white" : ""}`}
+          className={`flex flex-row items-center lg:text-xl font-bold text-stone-600 dark:text-stone-200 group-hover:text-stone-900 dark:group-hover:text-white mb-[-2px] ml-1 ${pathname === "/" ? "text-stone-900 dark:text-white" : ""}`}
         >
           NHL Stats
         </h1>
@@ -86,7 +86,7 @@ const NavButtons = () => {
             <Link
               href={button.href}
               aria-current={pathname === button.href ? "page" : undefined}
-              className={`flex flex-col lg:flex-row items-center justify-center cursor-pointer text-sm sm:text-base lg:text-xl font-bold text-stone-600 dark:text-stone-200 hover:text-stone-900 dark:hover:text-white mb-[-2px] rounded-md p-1 outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500 focus-visible:ring-offset-gray-100 lg:focus-visible:ring-offset-stone-100 dark:focus-visible:ring-offset-stone-800
+              className={`flex flex-col lg:flex-row items-center justify-center text-sm sm:text-base lg:text-xl font-bold text-stone-600 dark:text-stone-200 hover:text-stone-900 dark:hover:text-white mb-[-2px] rounded-md p-1 outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500 focus-visible:ring-offset-gray-100 lg:focus-visible:ring-offset-stone-100 dark:focus-visible:ring-offset-stone-800
              ${
                pathname === button.href
                  ? "lg:underline text-stone-900 dark:text-white"

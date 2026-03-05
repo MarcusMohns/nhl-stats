@@ -9,7 +9,7 @@ import Image from "next/image";
 import { getTeamStats } from "@/app/_actions";
 import ErrorPage from "@/app/ui/error-page";
 import Loading from "./loading";
-import PlayerCard from "./player-card";
+import TeamStatsPlayerCard from "./team-stats-player-card";
 
 type ModalProps = {
   handleCloseModal: () => void;
@@ -115,7 +115,7 @@ export const TeamStatsModal = ({ handleCloseModal, team }: ModalProps) => {
             </div>
             <div className="flex flex-col gap-2">
               {teamStats.topSkaters.map((player) => (
-                <PlayerCard player={player} key={player.playerId} />
+                <TeamStatsPlayerCard player={player} key={player.playerId} />
               ))}
             </div>
           </div>
@@ -135,7 +135,7 @@ export const TeamStatsModal = ({ handleCloseModal, team }: ModalProps) => {
             </div>
             <div className="flex flex-col gap-2">
               {teamStats.topGoalies.map((player) => (
-                <PlayerCard player={player} key={player.playerId} />
+                <TeamStatsPlayerCard player={player} key={player.playerId} />
               ))}
             </div>
           </div>

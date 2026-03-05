@@ -39,14 +39,14 @@ const Matchup = ({
           <Image
             className="w-12 h-12 md:w-14 md:h-12 dark:hidden"
             src={homeTeam.logo}
-            alt=""
+            alt={`logo of the ${homeTeam.placeName.default} ${homeTeam.commonName.default}`}
             width={960}
             height={640}
           />
           <Image
             className="w-12 h-12 md:w-14 md:h-12 hidden dark:block"
             src={homeTeam.darkLogo}
-            alt=""
+            alt={`logo of the ${homeTeam.placeName.default} ${homeTeam.commonName.default}`}
             width={960}
             height={640}
           />
@@ -70,14 +70,14 @@ const Matchup = ({
           <Image
             className="w-10 h-10 md:w-12 md:h-12 dark:hidden"
             src={awayTeam.logo}
-            alt=""
+            alt={`logo of the ${awayTeam.placeName.default} ${awayTeam.commonName.default}`}
             width={960}
             height={640}
           />
           <Image
             className="w-10 h-10 md:w-12 md:h-12 hidden dark:block"
             src={awayTeam.darkLogo}
-            alt=""
+            alt={`logo of the ${awayTeam.placeName.default} ${awayTeam.commonName.default}`}
             width={960}
             height={640}
           />

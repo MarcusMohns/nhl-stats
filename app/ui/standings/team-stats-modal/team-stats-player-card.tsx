@@ -2,7 +2,11 @@ import { GoalieType, SkaterType } from "@/app/types";
 import LinkOut from "@/app/ui/link-out";
 import Image from "next/image";
 
-const PlayerCard = ({ player }: { player: SkaterType | GoalieType }) => {
+const TeamStatsPlayerCard = ({
+  player,
+}: {
+  player: SkaterType | GoalieType;
+}) => {
   //Check if player is a goalie
   const isGoalie = (p: SkaterType | GoalieType): p is GoalieType =>
     "savePercentage" in p;
@@ -99,4 +103,4 @@ const PlayerCard = ({ player }: { player: SkaterType | GoalieType }) => {
   );
 };
 
-export default PlayerCard;
+export default TeamStatsPlayerCard;

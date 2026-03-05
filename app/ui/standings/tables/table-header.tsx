@@ -1,4 +1,3 @@
-import React from "react";
 import type { TeamType } from "@/app/types";
 
 type TableHeaderProps = {
