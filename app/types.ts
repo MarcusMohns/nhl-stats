@@ -233,3 +233,28 @@ export type SeriesType = {
   seriesLogoFr?: string;
   winningTeamId?: number;
 };
+
+export type DivisionTablePropsType = {
+  central: TeamType[];
+  atlantic: TeamType[];
+  metropolitan: TeamType[];
+  pacific: TeamType[];
+  selectedTable: string;
+};
+
+export type ConferenceTableProps = {
+  eastern: TeamType[];
+  western: TeamType[];
+  selectedTable: string;
+};
+
+export type TableStateType = {
+  [key: string]: StandingsTableType;
+};
+
+export type ActionType = {
+  type: "SORT";
+  tableName: string;
+  sortBy: string;
+  currentStandings: TeamType[];
+};

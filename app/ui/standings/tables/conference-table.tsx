@@ -1,68 +1,51 @@
-import { TeamType, StandingsTableType } from "@/app/types";
+import type {
+  TeamType,
+  ConferenceTableProps,
+  TableStateType,
+} from "@/app/types";
 import StyledTable from "./styled-table";
-import { useState, useCallback, Dispatch, SetStateAction } from "react";
-import { reverseStandings, sortFunctions } from "@/app/lib/sort-funcs";
+import { useCallback, useReducer } from "react";
 import startViewTransitionWrapper from "@/app/lib/start-view-transition-wrapper";
-
-type ConferenceTableProps = {
-  eastern: TeamType[];
-  western: TeamType[];
-  selectedTable: string;
-};
+import { reducer } from "@/app/lib/standings-utils";
 
 const ConferenceTable = ({
   eastern,
   western,
   selectedTable,
 }: ConferenceTableProps) => {
-  const [easternState, setEasternState] = useState<StandingsTableType>({
-    standings: eastern,
-    sortedBy: "Points",
-  });
-  const [westernState, setWesternState] = useState<StandingsTableType>({
-    standings: western,
-    sortedBy: "Points",
-  });
+  const initialState: TableStateType = {
+    Eastern: { standings: eastern, sortedBy: "Points" },
+    Western: { standings: western, sortedBy: "Points" },
+  };
+
+  // Create a table state using the reducer
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const handleSort = useCallback(
     (oldStandings: TeamType[], sortBy: string, argument: string) => {
-      const newStandings = sortFunctions[sortBy](oldStandings);
-      // Sort newStandings by sortBy argument
-      let stateSetter: Dispatch<SetStateAction<StandingsTableType>> | undefined;
-      switch (argument) {
-        // Set which state is to be updated
-        case "Western":
-          stateSetter = setWesternState;
-          break;
-        case "Eastern":
-          stateSetter = setEasternState;
-          break;
-        default:
-          throw new Error(`Invalid argument: ${argument}`);
-      }
-
       startViewTransitionWrapper(() =>
-        // Set selected state to the new sorted standings
-        stateSetter((prevState) =>
-          prevState.sortedBy === sortBy
-            ? reverseStandings(prevState)
-            : { standings: newStandings, sortedBy: sortBy },
-        ),
+        // use the reducer to update the state
+        dispatch({
+          type: "SORT",
+          tableName: argument,
+          sortBy,
+          currentStandings: oldStandings,
+        }),
       );
     },
-    [setEasternState, setWesternState],
+    [],
   );
 
   return (
     <>
       <StyledTable
-        standings={easternState.standings}
+        standings={state.Eastern.standings}
         tableName={"Eastern"}
         handleSort={handleSort}
         selectedTable={selectedTable}
       />
       <StyledTable
-        standings={westernState.standings}
+        standings={state.Western.standings}
         tableName={"Western"}
         handleSort={handleSort}
         selectedTable={selectedTable}

@@ -1,18 +1,14 @@
 "use client";
 
-import type { StandingsTableType, TeamType } from "@/app/types";
+import type {
+  TeamType,
+  DivisionTablePropsType,
+  TableStateType,
+} from "@/app/types";
 import StyledTable from "./styled-table";
-import { useCallback, useState, SetStateAction, Dispatch } from "react";
-import { reverseStandings, sortFunctions } from "@/app/lib/sort-funcs";
+import { useCallback, useReducer } from "react";
 import startViewTransitionWrapper from "@/app/lib/start-view-transition-wrapper";
-
-type DivisionTablePropTypes = {
-  central: TeamType[];
-  atlantic: TeamType[];
-  metropolitan: TeamType[];
-  pacific: TeamType[];
-  selectedTable: string;
-};
+import { reducer } from "@/app/lib/standings-utils";
 
 const DivisionTable = ({
   central,
@@ -20,81 +16,54 @@ const DivisionTable = ({
   metropolitan,
   pacific,
   selectedTable,
-}: DivisionTablePropTypes) => {
-  const [centralState, setCentralState] = useState<StandingsTableType>({
-    standings: central,
-    sortedBy: "Points",
-  });
-  const [atlanticState, setAtlanticState] = useState<StandingsTableType>({
-    standings: atlantic,
-    sortedBy: "Points",
-  });
-  const [metropolitanState, setMetropolitanState] =
-    useState<StandingsTableType>({
-      standings: metropolitan,
-      sortedBy: "Points",
-    });
-  const [pacificState, setPacificState] = useState<StandingsTableType>({
-    standings: pacific,
-    sortedBy: "Points",
-  });
+}: DivisionTablePropsType) => {
+  const initialState: TableStateType = {
+    Central: { standings: central, sortedBy: "Points" },
+    Atlantic: { standings: atlantic, sortedBy: "Points" },
+    Metropolitan: { standings: metropolitan, sortedBy: "Points" },
+    Pacific: { standings: pacific, sortedBy: "Points" },
+  };
+
+  // Create a table state using the reducer
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const handleSort = useCallback(
     (oldStandings: TeamType[], sortBy: string, argument: string) => {
-      const newStandings = sortFunctions[sortBy](oldStandings);
-      // Sort newStandings by sortBy argument
-      let stateSetter: Dispatch<SetStateAction<StandingsTableType>> | undefined;
-      switch (argument) {
-        // Set which state is to be updated
-        case "Central":
-          stateSetter = setCentralState;
-          break;
-        case "Atlantic":
-          stateSetter = setAtlanticState;
-          break;
-        case "Metropolitan":
-          stateSetter = setMetropolitanState;
-          break;
-        case "Pacific":
-          stateSetter = setPacificState;
-          break;
-        default:
-          throw new Error(`Invalid argument: ${argument}`);
-      }
       startViewTransitionWrapper(() =>
-        // Set selected state to the new sorted standings
-        stateSetter((prevState) =>
-          prevState.sortedBy === sortBy
-            ? reverseStandings(prevState)
-            : { standings: newStandings, sortedBy: sortBy },
-        ),
+        // use the reducer to update the state
+        dispatch({
+          type: "SORT",
+          tableName: argument,
+          sortBy,
+          currentStandings: oldStandings,
+        }),
       );
     },
-    [setCentralState, setAtlanticState, setMetropolitanState, setPacificState],
+    [],
   );
 
   return (
     <>
       <StyledTable
-        standings={centralState.standings}
+        standings={state.Central.standings}
         tableName={"Central"}
         handleSort={handleSort}
         selectedTable={selectedTable}
       />
       <StyledTable
-        standings={atlanticState.standings}
+        standings={state.Atlantic.standings}
         tableName={"Atlantic"}
         handleSort={handleSort}
         selectedTable={selectedTable}
       />
       <StyledTable
-        standings={metropolitanState.standings}
+        standings={state.Metropolitan.standings}
         tableName={"Metropolitan"}
         handleSort={handleSort}
         selectedTable={selectedTable}
       />
       <StyledTable
-        standings={pacificState.standings}
+        standings={state.Pacific.standings}
         tableName={"Pacific"}
         handleSort={handleSort}
         selectedTable={selectedTable}

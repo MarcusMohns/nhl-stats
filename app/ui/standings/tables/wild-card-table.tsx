@@ -1,14 +1,8 @@
-import { TeamType, StandingsTableType } from "@/app/types";
-import { reverseStandings, sortFunctions } from "@/app/lib/sort-funcs";
-import {
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useState,
-  useMemo,
-} from "react";
+import type { TeamType, TableStateType } from "@/app/types";
+import { useCallback, useMemo, useReducer } from "react";
 import StyledTable from "./styled-table";
 import startViewTransitionWrapper from "@/app/lib/start-view-transition-wrapper";
+import { reducer } from "@/app/lib/standings-utils";
 
 type WildCardTableProps = {
   central: TeamType[];
@@ -29,157 +23,100 @@ const WildCardTable = ({
   eastern,
   selectedTable,
 }: WildCardTableProps) => {
-  const topThreeCentral = central.slice(0, 3);
-  const topThreeAtlantic = atlantic.slice(0, 3);
-  const topThreeMetropolitan = metropolitan.slice(0, 3);
-  const topThreePacific = pacific.slice(0, 3);
+  const qualified = useMemo(() => {
+    // Create an object containing the top 3 teams from each conference
+    const topThreeCentral = central.slice(0, 3);
+    const topThreeAtlantic = atlantic.slice(0, 3);
+    const topThreeMetropolitan = metropolitan.slice(0, 3);
+    const topThreePacific = pacific.slice(0, 3);
+    const teamsQualified = [
+      // Create filter array of currently already qualified teams (not eligible to be a wild card team)
+      ...topThreeCentral.map((team) => team.teamName.default),
+      ...topThreeAtlantic.map((team) => team.teamName.default),
+      ...topThreeMetropolitan.map((team) => team.teamName.default),
+      ...topThreePacific.map((team) => team.teamName.default),
+    ];
+    return {
+      // Keep all teams eligible for wild card (those not already qualified)
+      east: eastern.filter(
+        (team) => !teamsQualified.includes(team.teamName.default),
+      ),
+      // Keep all teams eligible for wild card (those not already qualified)
+      west: western.filter(
+        (team) => !teamsQualified.includes(team.teamName.default),
+      ),
+      // Return top 3 teams from each conference (The 3 currently qualified teams)
+      central: topThreeCentral,
+      atlantic: topThreeAtlantic,
+      metropolitan: topThreeMetropolitan,
+      pacific: topThreePacific,
+    };
+  }, [central, atlantic, metropolitan, pacific, eastern, western]);
 
-  const teamsQualified = useMemo(
-    // All qualified Teams
-    () =>
-      [
-        ...topThreeCentral,
-        ...topThreeAtlantic,
-        ...topThreeMetropolitan,
-        ...topThreePacific,
-      ].map((team) => team.teamName.default),
-    [topThreeCentral, topThreeAtlantic, topThreeMetropolitan, topThreePacific],
-  );
+  const initialState: TableStateType = {
+    Central: { standings: qualified.central, sortedBy: "Points" },
+    Atlantic: { standings: qualified.atlantic, sortedBy: "Points" },
+    Metropolitan: { standings: qualified.metropolitan, sortedBy: "Points" },
+    Pacific: { standings: qualified.pacific, sortedBy: "Points" },
+    Western: { standings: qualified.west, sortedBy: "Points" },
+    Eastern: { standings: qualified.east, sortedBy: "Points" },
+  };
 
-  const EasternWildCards = useMemo(
-    // Qualified Teams from the East
-    () =>
-      eastern.filter((team) => !teamsQualified.includes(team.teamName.default)),
-    [eastern, teamsQualified],
-  );
-
-  const WesternWildCards = useMemo(
-    // Qualified Teams from the West
-    () =>
-      western.filter((team) => !teamsQualified.includes(team.teamName.default)),
-    [western, teamsQualified],
-  );
-
-  const [qualifiedCentral, setQualifiedCentral] = useState<StandingsTableType>({
-    // Qualified Teams from Central
-    standings: topThreeCentral,
-    sortedBy: "Points",
-  });
-  const [qualifiedAtlantic, setQualifiedAtlantic] =
-    useState<StandingsTableType>(
-      // Qualified Teams from Atlantic
-      {
-        standings: topThreeAtlantic,
-        sortedBy: "Points",
-      },
-    );
-
-  // States
-  const [qualifiedMetropolitan, setQualifiedMetropolitan] =
-    useState<StandingsTableType>({
-      standings: topThreeMetropolitan,
-      sortedBy: "Points",
-    });
-  const [qualifiedPacific, setQualifiedPacific] = useState<StandingsTableType>({
-    standings: topThreePacific,
-    sortedBy: "Points",
-  });
-  const [unqualifiedWest, setUnqualifiedWest] = useState<StandingsTableType>({
-    standings: WesternWildCards,
-    sortedBy: "Points",
-  });
-  const [unqualifiedEast, setUnqualifiedEast] = useState<StandingsTableType>({
-    standings: EasternWildCards,
-    sortedBy: "Points",
-  });
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const handleSort = useCallback(
     (oldStandings: TeamType[], sortBy: string, argument: string) => {
-      const newStandings = sortFunctions[sortBy](oldStandings);
-      // Sort newStandings by sortBy argument
-      let stateSetter: Dispatch<SetStateAction<StandingsTableType>> | undefined;
-      switch (argument) {
-        // Set which state is to be updated
-        case "Central":
-          stateSetter = setQualifiedCentral;
-          break;
-        case "Atlantic":
-          stateSetter = setQualifiedAtlantic;
-          break;
-        case "Metropolitan":
-          stateSetter = setQualifiedMetropolitan;
-          break;
-        case "Pacific":
-          stateSetter = setQualifiedPacific;
-          break;
-        case "Western":
-          stateSetter = setUnqualifiedWest;
-          break;
-        case "Eastern":
-          stateSetter = setUnqualifiedEast;
-          break;
-        default:
-          throw new Error(`Invalid argument: ${argument}`);
-      }
       startViewTransitionWrapper(() =>
-        // Set selected state to the new sorted standings
-        stateSetter((prevState) =>
-          prevState.sortedBy === sortBy
-            ? reverseStandings(prevState)
-            : { standings: newStandings, sortedBy: sortBy },
-        ),
+        dispatch({
+          type: "SORT",
+          tableName: argument,
+          sortBy,
+          currentStandings: oldStandings,
+        }),
       );
     },
-    [
-      setQualifiedCentral,
-      setQualifiedAtlantic,
-      setQualifiedMetropolitan,
-      setQualifiedPacific,
-      setUnqualifiedWest,
-      setUnqualifiedEast,
-    ],
+    [],
   );
 
   return (
     <>
       <StyledTable
-        standings={qualifiedAtlantic.standings}
+        standings={state.Atlantic.standings}
         tableName={"Atlantic"}
         aria-label="Atlantic Division Wild Card Standings Table"
         handleSort={handleSort}
         selectedTable={selectedTable}
       />
       <StyledTable
-        standings={qualifiedMetropolitan.standings}
+        standings={state.Metropolitan.standings}
         tableName={"Metropolitan"}
         aria-label="Metropolitan Division Wild Card Standings Table"
         handleSort={handleSort}
         selectedTable={selectedTable}
       />
       <StyledTable
-        standings={unqualifiedEast.standings}
+        standings={state.Eastern.standings}
         tableName={"Eastern"}
         aria-label="Eastern Division Wild Card Standings Table"
         handleSort={handleSort}
         selectedTable={selectedTable}
       />
-
       <StyledTable
-        standings={qualifiedCentral.standings}
+        standings={state.Central.standings}
         tableName={"Central"}
         aria-label="Central Division Wild Card Standings Table"
         handleSort={handleSort}
         selectedTable={selectedTable}
       />
       <StyledTable
-        standings={qualifiedPacific.standings}
+        standings={state.Pacific.standings}
         tableName={"Pacific"}
         aria-label="Pacific Division Wild Card Standings Table"
         handleSort={handleSort}
         selectedTable={selectedTable}
       />
       <StyledTable
-        standings={unqualifiedWest.standings}
+        standings={state.Western.standings}
         tableName={"Western"}
         aria-label="Western Division Wild Card Standings Table"
         handleSort={handleSort}

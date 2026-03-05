@@ -4,7 +4,7 @@ import { TeamType, StandingsTableType } from "@/app/types";
 import StyledTable from "./styled-table";
 import { useState, useCallback } from "react";
 import startViewTransitionWrapper from "@/app/lib/start-view-transition-wrapper";
-import { reverseStandings, sortFunctions } from "@/app/lib/sort-funcs";
+import { reverseStandings, sortFunctions } from "@/app/lib/standings-utils";
 
 type LeagueTablePropTypes = {
   league: TeamType[];
