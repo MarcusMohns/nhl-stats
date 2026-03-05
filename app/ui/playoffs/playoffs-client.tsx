@@ -32,7 +32,7 @@ const PlayoffsClient = ({ playoffs }: PlayoffsClientProps) => {
       aria-label="Playoff Bracket"
       className="playoffs h-max lg:p-5 w-full mx-auto animate-fade-in mt-5"
     >
-      <div className="flex flex-col w-full justify-center items-center bg-stone-50 dark:bg-stone-800 rounded-lg p-2 lg:p-5 xl:p-10 xl:px-15">
+      <div className="flex flex-col w-full justify-center items-center bg-stone-100 dark:bg-stone-800 rounded-lg p-2 lg:p-5 xl:p-10 xl:px-15">
         <Image
           src={playoffs.bracketLogo}
           className="invert dark:invert-0 mx-auto my-5 sm:my-0 px-4 w-200 h-auto"

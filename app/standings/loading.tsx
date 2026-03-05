@@ -57,7 +57,8 @@ const TableSkeleton = () => (
 
 export default function Loading() {
   return (
-    <section className="standings w-full xl:w-6xl animate-pulse h-max sm:p-5">
+    <div className="w-full xl:w-6xl animate-pulse h-max sm:p-5" role="status">
+      <span className="sr-only">Loading...</span>
       {/* Tabs */}
       <div className="flex sm:flex-wrap text-sm sm:text-base font-bold mt-1 sm:rounded-sm shadow-lg sm:w-fit bg-stone-200 dark:bg-stone-800 p-1">
         {[...Array(4)].map((_, i) => (
@@ -72,6 +73,6 @@ export default function Loading() {
       </div>
 
       <TableSkeleton />
-    </section>
+    </div>
   );
 }

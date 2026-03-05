@@ -28,7 +28,11 @@ const FinalsSkeleton = () => (
 
 const Loading = () => {
   return (
-    <section className="playoffs h-max sm:p-5 w-full max-w-7xl mx-auto mt-5">
+    <div
+      className="playoffs h-max sm:p-5 w-full max-w-7xl mx-auto mt-5"
+      role="status"
+    >
+      <span className="sr-only">Loading...</span>
       <div className="flex flex-col w-full justify-center items-center bg-stone-100 dark:bg-stone-800 rounded-lg p-2 sm:p-5 lg:p-10">
         {/* Logo Skeleton */}
         <div className="w-full h-32 bg-stone-200 dark:bg-stone-700 animate-pulse rounded mb-5" />
@@ -52,7 +56,7 @@ const Loading = () => {
           <BracketSkeleton direction="flex-row-reverse" />
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

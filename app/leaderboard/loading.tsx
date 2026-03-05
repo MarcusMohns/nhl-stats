@@ -38,7 +38,8 @@ const LeadersSkeleton = () => {
 
 export default function Loading() {
   return (
-    <div className="section-loading h-max w-full p-2">
+    <div className="section-loading h-max w-full p-2" role="status">
+      <span className="sr-only">Loading...</span>
       <div className="flex flex-col items-center justify-center xl:flex-row w-full gap-10">
         <LeadersSkeleton />
         <LeadersSkeleton />

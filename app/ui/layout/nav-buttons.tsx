@@ -34,17 +34,18 @@ const buttons = [
   {
     name: "Leaderboard",
     href: "/leaderboard",
-    icon: <TrophyIcon className="w-6 h-6" />,
+    icon: <GlobeEuropeAfricaIcon className="w-6 h-6" />,
     iconSolid: (
-      <TrophyIconSolid className="w-6 h-6 text-yellow-600 dark:text-yellow-400" />
+      <GlobeEuropeAfricaIconSolid className="w-6 h-6 text-blue-600 dark:text-blue-400" />
     ),
   },
   {
     name: "Playoffs",
     href: "/playoffs",
-    icon: <GlobeEuropeAfricaIcon className="w-6 h-6" />,
+    icon: <TrophyIcon className="w-6 h-6" />,
+
     iconSolid: (
-      <GlobeEuropeAfricaIconSolid className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+      <TrophyIconSolid className="w-6 h-6 text-yellow-600 dark:text-yellow-400" />
     ),
   },
 ];
@@ -66,10 +67,7 @@ const NavButtons = () => {
           🏒
         </span>
         <h1
-          className={`flex flex-row items-center cursor-pointer 
-            lg:text-xl font-bold text-stone-600 dark:text-stone-200 
-            group-hover:text-stone-900 dark:group-hover:text-white mb-[-2px] ml-1
-             ${pathname === "/" ? "text-stone-900 dark:text-white" : ""}`}
+          className={`flex flex-row items-center cursor-pointer lg:text-xl font-bold text-stone-600 dark:text-stone-200 group-hover:text-stone-900 dark:group-hover:text-white mb-[-2px] ml-1 ${pathname === "/" ? "text-stone-900 dark:text-white" : ""}`}
         >
           NHL Stats
         </h1>

@@ -17,14 +17,14 @@ export default function Home() {
           <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-blue-600 to-cyan-500 opacity-20 blur-xl" />
           <h1 className="flex flex-row items-center justify-center relative font-extrabold text-5xl md:text-7xl tracking-tight text-stone-800 dark:text-stone-100">
             NHL Stats
-            <span className="text-blue-600 dark:text-blue-400 text-8xl ml-1 animate-fade-in-drop-down">
+            <span className="text-blue-600 dark:text-blue-400 text-8xl ml-1">
               +
             </span>
           </h1>
         </div>
         <p className="text-lg md:text-xl text-stone-600 dark:text-stone-400 max-w-2xl leading-relaxed">
-          Your modern hub for real-time hockey scores, comprehensive standings,
-          player leaderboards, and playoff brackets.
+          A modern lightweight app for real-time hockey scores, comprehensive
+          standings, player leaderboards, and playoff brackets.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <Link
@@ -45,20 +45,20 @@ export default function Home() {
       {/* Features Grid */}
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-7xl px-6">
         <FeatureCard
-          href="/schedule"
-          title="Schedule"
-          description="Live scores, upcoming matchups, and game results."
-          icon={
-            <CalendarDaysIcon className="w-8 h-8 text-green-700 dark:text-green-500" />
-          }
-          delay="0s"
-        />
-        <FeatureCard
           href="/standings"
           title="Standings"
           description="Division, conference, and league-wide team rankings."
           icon={
             <ChartBarIcon className="w-8 h-8 text-orange-500 dark:text-orange-500" />
+          }
+          delay="0s"
+        />
+        <FeatureCard
+          href="/schedule"
+          title="Schedule"
+          description="Live scores, upcoming matchups, and game results."
+          icon={
+            <CalendarDaysIcon className="w-8 h-8 text-green-700 dark:text-green-500" />
           }
           delay="0.1s"
         />

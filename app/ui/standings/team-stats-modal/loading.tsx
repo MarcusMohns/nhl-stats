@@ -54,7 +54,8 @@ const DividerSkeleton = ({ textWidth = "w-40" }: { textWidth?: string }) => (
 
 const Loading = () => {
   return (
-    <div className="animate-pulse max-h-180 pr-2 overflow-y-auto">
+    <div className="animate-pulse max-h-180 pr-2 overflow-y-auto" role="status">
+      <span className="sr-only">Loading...</span>
       {/* Header */}
       <div className="h-8 bg-stone-300 dark:bg-stone-700 rounded w-3/4 mx-auto mt-2 mb-4" />
 

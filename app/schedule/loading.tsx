@@ -50,9 +50,13 @@ const DatesSkeleton = () => (
 
 export default function Loading() {
   return (
-    <section className="schedule flex flex-col xl:flex-row xl:w-7xl w-full px-3 xl:px-0 justify-center items-start">
+    <div
+      className="flex flex-col xl:flex-row xl:w-7xl w-full px-3 xl:px-0 justify-center items-start"
+      role="status"
+    >
+      <span className="sr-only">Loading...</span>
       <DateSelectorSkeleton />
       <DatesSkeleton />
-    </section>
+    </div>
   );
 }
