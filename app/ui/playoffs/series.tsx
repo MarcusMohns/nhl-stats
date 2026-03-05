@@ -3,6 +3,7 @@ import Scoreboard from "./scoreboard";
 import Image from "next/image";
 
 const GameSeries = ({ series }: { series: SeriesType }) => {
+  const isFinals = series.seriesAbbrev === "SCF";
   return (
     <div
       className={`flex flex-col text-center justify-center items-center w-full h-full xl:w-auto xl:h-auto`}
@@ -22,14 +23,18 @@ const GameSeries = ({ series }: { series: SeriesType }) => {
       ) : series.seriesLogo ? (
         <div
           title={series.seriesTitle}
-          className="flex justify-center items-center border lg:border-2 p-2 rounded border-gray-300 dark:border-stone-700 xl:min-h-32 xl:min-w-64"
+          className={`flex justify-center items-center border lg:border-2 p-2 rounded border-gray-300 dark:border-stone-700 ${
+            isFinals
+              ? "w-full h-full xs:w-32 xs:h-52 lg:h-64 lg:w-64"
+              : "w-full h-full xs:w-32 xs:h-32 lg:h-32 lg:w-64"
+          }`}
         >
           <Image
             src={series.seriesLogo}
             alt={series.seriesTitle}
-            className="md:max-w-40 w-auto invert dark:invert-0 "
-            width={883}
-            height={251}
+            className="h-full w-full object-contain invert dark:invert-0"
+            width={isFinals ? 360 : 452}
+            height={isFinals ? 537 : 120}
             loading="eager"
           />
         </div>
