@@ -19,7 +19,8 @@ export default function Home() {
             NHL Stats
             <span
               aria-hidden="true"
-              className="text-blue-600 dark:text-blue-400 text-7xl ml-1"
+              className="text-blue-600 dark:text-blue-400 text-7xl ml-1 animate-fade-in-drop-down"
+              style={{ animationDelay: "0.5s" }}
             >
               +
             </span>
