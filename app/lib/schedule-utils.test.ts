@@ -29,21 +29,23 @@ describe("schedule-utils", () => {
       );
     });
 
-    it("returns an Error object on fetch failure", async () => {
+    it("throws an Error on fetch failure", async () => {
       (global.fetch as jest.Mock).mockResolvedValue({
         ok: false,
         status: 500,
         statusText: "Internal Server Error",
       });
 
-      const result = await fetchSchedule();
-      expect(result).toBeInstanceOf(Error);
+      await expect(fetchSchedule()).rejects.toThrow(
+        "Error fetching data from the server ☹️",
+      );
     });
 
-    it("returns an Error object on exception", async () => {
+    it("throws an Error on exception", async () => {
       (global.fetch as jest.Mock).mockRejectedValue(new Error("Network error"));
-      const result = await fetchSchedule();
-      expect(result).toBeInstanceOf(Error);
+      await expect(fetchSchedule()).rejects.toThrow(
+        "Error fetching data from the server ☹️",
+      );
     });
   });
 

@@ -3,13 +3,14 @@ import { getLeaderboards } from "../_actions";
 import LeaderboardClient from "../ui/leaderboard/leaderboard-client";
 
 const Leaderboard = async () => {
-  const leaderboard = await getLeaderboards();
+  const result = await getLeaderboards();
 
-  if (leaderboard instanceof Error) {
-    // expected error
-    return <ErrorPage error={leaderboard} reset={getLeaderboards} />;
+  if (!result.success) {
+    return (
+      <ErrorPage error={new Error(result.error)} reset={getLeaderboards} />
+    );
   }
-  return <LeaderboardClient leaderboard={leaderboard} />;
+  return <LeaderboardClient leaderboard={result.data} />;
 };
 
 export default Leaderboard;

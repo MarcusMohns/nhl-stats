@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState, useMemo } from "react";
-import type { TeamType } from "@/app/types";
+import type { TeamType, Result, TeamStatsType } from "@/app/types";
 import Modal from "@/app/ui/modal";
 import Chip from "@/app/ui/chip";
 import WeeklySchedule from "./weekly-schedule";
@@ -17,9 +17,9 @@ type ModalProps = {
 };
 
 export const TeamStatsModal = ({ handleCloseModal, team }: ModalProps) => {
-  const [teamStats, setTeamStats] = useState<Awaited<
-    ReturnType<typeof getTeamStats>
-  > | null>(null);
+  const [teamStats, setTeamStats] = useState<Result<TeamStatsType> | null>(
+    null,
+  );
 
   useEffect(() => {
     getTeamStats(team).then(setTeamStats);
@@ -47,10 +47,13 @@ export const TeamStatsModal = ({ handleCloseModal, team }: ModalProps) => {
     );
   }
 
-  if (teamStats instanceof Error) {
+  if (!teamStats.success) {
     return (
       <Modal closeModal={handleCloseModal}>
-        <ErrorPage error={teamStats} reset={handleCloseModal} />
+        <ErrorPage
+          error={new Error(teamStats.error)}
+          reset={handleCloseModal}
+        />
       </Modal>
     );
   }
@@ -114,7 +117,7 @@ export const TeamStatsModal = ({ handleCloseModal, team }: ModalProps) => {
               />
             </div>
             <div className="flex flex-col gap-2">
-              {teamStats.topSkaters.map((player) => (
+              {teamStats.data.topSkaters.map((player) => (
                 <TeamStatsPlayerCard player={player} key={player.playerId} />
               ))}
             </div>
@@ -134,7 +137,7 @@ export const TeamStatsModal = ({ handleCloseModal, team }: ModalProps) => {
               />
             </div>
             <div className="flex flex-col gap-2">
-              {teamStats.topGoalies.map((player) => (
+              {teamStats.data.topGoalies.map((player) => (
                 <TeamStatsPlayerCard player={player} key={player.playerId} />
               ))}
             </div>
@@ -153,7 +156,7 @@ export const TeamStatsModal = ({ handleCloseModal, team }: ModalProps) => {
             aria-hidden="true"
           />
         </div>
-        <WeeklySchedule games={teamStats.games} />
+        <WeeklySchedule games={teamStats.data.games} />
       </div>
     </Modal>
   );

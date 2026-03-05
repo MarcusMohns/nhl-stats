@@ -37,7 +37,7 @@ const fetchData = async <T>(url: string): Promise<T> => {
 
 export const organizedTeamStats = async (
   team: TeamType,
-): Promise<TeamStatsType | Error> => {
+): Promise<TeamStatsType> => {
   const teamUrl = `https://api-web.nhle.com/v1/club-stats/${team.teamAbbrev.default}/now`;
   const gamesUrl = `https://api-web.nhle.com/v1/club-schedule/${team.teamAbbrev.default}/week/now`;
 
@@ -64,6 +64,6 @@ export const organizedTeamStats = async (
     };
   } catch (e) {
     console.error("Error fetching team data from API", e);
-    return new Error("Error fetching data from the server ☹️");
+    throw new Error("Error fetching data from the server ☹️");
   }
 };

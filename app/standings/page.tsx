@@ -3,13 +3,12 @@ import { getStandings } from "../_actions";
 import StandingsClient from "../ui/standings/standings-client";
 
 const Standings = async () => {
-  const standings = await getStandings();
+  const result = await getStandings();
 
-  if (standings instanceof Error) {
-    // expected error
-    return <ErrorPage error={standings} reset={getStandings} />;
+  if (!result.success) {
+    return <ErrorPage error={new Error(result.error)} reset={getStandings} />;
   }
-  return <StandingsClient standings={standings} />;
+  return <StandingsClient standings={result.data} />;
 };
 
 export default Standings;

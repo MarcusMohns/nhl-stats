@@ -26,7 +26,7 @@ jest.mock("../../error-page", () => ({
     <div data-testid="error-page">{error.message}</div>
   ),
 }));
-jest.mock("./player-card", () => ({
+jest.mock("./team-stats-player-card", () => ({
   __esModule: true,
   default: ({ player }: { player: SkaterType | GoalieType }) => (
     <div data-testid="player-card">
@@ -141,18 +141,21 @@ describe("TeamStatsModal", () => {
   });
 
   it("shows an error UI when fetching fails", async () => {
-    const error = new Error("fetch failed");
+    const error = { success: false, error: "fetch failed" };
     (getTeamStats as jest.Mock).mockResolvedValueOnce(error);
     render(
       <TeamStatsModal team={mockTeam} handleCloseModal={handleCloseModal} />,
     );
     const el = await screen.findByTestId("error-page");
     expect(el).toBeInTheDocument();
-    expect(screen.getByText(error.message)).toBeInTheDocument();
+    expect(screen.getByText("fetch failed")).toBeInTheDocument();
   });
 
   it("renders team details and child components when fetch succeeds", async () => {
-    (getTeamStats as jest.Mock).mockResolvedValueOnce(mockTeamStats);
+    (getTeamStats as jest.Mock).mockResolvedValueOnce({
+      success: true,
+      data: mockTeamStats,
+    });
     render(
       <TeamStatsModal team={mockTeam} handleCloseModal={handleCloseModal} />,
     );

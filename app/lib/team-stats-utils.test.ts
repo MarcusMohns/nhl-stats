@@ -56,7 +56,8 @@ describe("team-stats-utils", () => {
   it("handles errors gracefully", async () => {
     const mockTeam = { teamAbbrev: { default: "EDM" } } as unknown as TeamType;
     (global.fetch as jest.Mock).mockRejectedValue(new Error("Network Error"));
-    const result = await organizedTeamStats(mockTeam);
-    expect(result).toBeInstanceOf(Error);
+    await expect(organizedTeamStats(mockTeam)).rejects.toThrow(
+      "Error fetching data from the server ☹️",
+    );
   });
 });

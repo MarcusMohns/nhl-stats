@@ -3,13 +3,12 @@ import ErrorPage from "./error";
 import PlayoffsClient from "../ui/playoffs/playoffs-client";
 
 const Schedule = async () => {
-  const playoffs = await getPlayoffs();
+  const result = await getPlayoffs();
 
-  if (playoffs instanceof Error) {
-    // expected error
-    return <ErrorPage error={playoffs} reset={getPlayoffs} />;
+  if (!result.success) {
+    return <ErrorPage error={new Error(result.error)} reset={getPlayoffs} />;
   }
-  return <PlayoffsClient playoffs={playoffs} />;
+  return <PlayoffsClient playoffs={result.data} />;
 };
 
 export default Schedule;

@@ -10,7 +10,7 @@ export const weekDays = [
   "Saturday",
 ];
 
-export const fetchSchedule = async (): Promise<GameWeekType[] | Error> => {
+export const fetchSchedule = async (): Promise<GameWeekType[]> => {
   const scheduleUrl = "https://api-web.nhle.com/v1/schedule/now";
 
   try {
@@ -27,7 +27,7 @@ export const fetchSchedule = async (): Promise<GameWeekType[] | Error> => {
     return data.gameWeek;
   } catch (e) {
     console.error("Error fetching schedule data from API", e);
-    return new Error("Error fetching data from the server ☹️");
+    throw new Error("Error fetching data from the server ☹️");
   }
 };
 
