@@ -61,6 +61,7 @@ export const groupGamesByLocalDate = (
           // initialize the array for this date if it doesn't exist
           acc[localDateKey] = [];
         }
+        console.log(locale);
         acc[localDateKey].push({
           // add the game to the array for this date, along with the local start time
           ...game,
