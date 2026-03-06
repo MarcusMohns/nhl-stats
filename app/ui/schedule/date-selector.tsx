@@ -1,7 +1,5 @@
 "use client";
-
 import type { GameType } from "@/app/types";
-import FormattedDate from "./formatted-date";
 
 type DateSelectorProps = {
   localSchedule: {
@@ -42,7 +40,7 @@ const DateSelector = ({
                 }
               `}
           >
-            <FormattedDate date={day.date} />
+            {day.date}
           </button>
         );
       })}

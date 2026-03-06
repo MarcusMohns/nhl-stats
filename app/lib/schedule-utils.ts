@@ -31,6 +31,17 @@ export const fetchSchedule = async (): Promise<GameWeekType[]> => {
   }
 };
 
+export const utcToReadableDate = (utc: string) => {
+  const date = new Date(utc);
+  const options: Intl.DateTimeFormatOptions = {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+  };
+  // undefined so the browser will use the locale of the user
+  return new Intl.DateTimeFormat(undefined, options).format(date);
+};
+
 export const groupGamesByLocalDate = (schedule: GameWeekType[]) => {
   // Group games by local date (based on the startTimeUTC inside the game, converted to local time)
   const groupedGames = schedule
@@ -65,8 +76,8 @@ export const groupGamesByLocalDate = (schedule: GameWeekType[]) => {
       // Sort the entries by date
       .sort(([dateA], [dateB]) => dateA.localeCompare(dateB))
       .map(([date, games]) => ({
-        date,
         games,
+        date: utcToReadableDate(date),
       }))
   );
 };
