@@ -15,6 +15,7 @@ export const fetchSchedule = async (): Promise<GameWeekType[]> => {
 
   try {
     const response = await fetch(scheduleUrl, {
+      // Cache the data for 1 minute server side
       next: { revalidate: 60 },
       cache: "force-cache",
     });

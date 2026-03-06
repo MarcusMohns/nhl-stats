@@ -8,7 +8,7 @@ export const fetchLeaderboardData = async (
   const leadersUrl = `https://api-web.nhle.com/v1/${goalieOrSkater}-stats-leaders/current?categories=${category}&limit=${limit}`;
 
   const res = await fetch(leadersUrl, {
-    // Cache the data for 2 minutes to avoid hitting API rate limits
+    // Cache the data for 1 minute server side
     next: { revalidate: 60 },
     cache: "force-cache",
   });

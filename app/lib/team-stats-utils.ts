@@ -20,6 +20,7 @@ type ScheduleResponse = {
 const fetchData = async <T>(url: string): Promise<T> => {
   try {
     const response = await fetch(url, {
+      // Cache the data for 1 minute server side
       next: { revalidate: 60 },
       cache: "force-cache",
     });

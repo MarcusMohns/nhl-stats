@@ -2,6 +2,7 @@ export const fetchPlayoffs = async () => {
   const playoffsUrl = "https://api-web.nhle.com/v1/playoff-bracket/2026";
 
   const response = await fetch(playoffsUrl, {
+    // Cache the data for 1 minute server side
     next: { revalidate: 60 },
     cache: "force-cache",
   });
