@@ -12,7 +12,10 @@ type ScheduleClientProps = {
 };
 
 const ScheduleClient = ({ schedule }: ScheduleClientProps) => {
-  const locale = navigator.language;
+  const locale = useMemo(() => {
+    // Get the user's locale from the browser (only on client side)
+    return typeof navigator !== "undefined" ? navigator.language : "en-US";
+  }, []);
 
   const localSchedule = useMemo(
     // Group games by local date since the API returns all times in UTC, but the day and date are based on US Eastern time,
