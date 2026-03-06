@@ -11,7 +11,7 @@ export const DateSelectorSkeleton = () => (
 
 const GameSkeleton = () => (
   <div className="flex flex-col w-full mb-1">
-    <div className="flex flex-col items-center w-full justify-center shadow-sm bg-stone-100 dark:bg-stone-800 p-2 rounded h-24 animate-pulse">
+    <div className="flex flex-col items-center w-full justify-center shadow-sm bg-stone-100 dark:bg-stone-800 rounded h-22 animate-pulse">
       {/* Header line */}
       <div className="flex w-full justify-between mb-2 px-2">
         <div className="w-20 h-4 bg-stone-200 dark:bg-stone-700 rounded" />
@@ -19,14 +19,22 @@ const GameSkeleton = () => (
       </div>
       {/* Matchup line */}
       <div className="flex flex-row w-full justify-center items-center gap-4 sm:gap-10">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-4 bg-stone-200 dark:bg-stone-700 rounded hidden sm:block" />
-          <div className="w-10 h-10 rounded-full bg-stone-200 dark:bg-stone-700" />
+        {/* Home Team */}
+        <div className="flex items-center justify-center gap-3">
+          <div className="flex items-center justify-center gap-2 sm:min-w-28">
+            <div className="w-12 h-12 rounded-full bg-stone-200 dark:bg-stone-700" />
+            <div className="w-10 h-5 bg-stone-200 dark:bg-stone-700 rounded" />
+          </div>
+          <div className="w-8 h-8 bg-stone-200 dark:bg-stone-700 rounded" />
         </div>
-        <div className="w-20 h-8 bg-stone-200 dark:bg-stone-700 rounded" />
-        <div className="flex items-center gap-2">
-          <div className="w-10 h-10 rounded-full bg-stone-200 dark:bg-stone-700" />
-          <div className="w-8 h-4 bg-stone-200 dark:bg-stone-700 rounded hidden sm:block" />
+        <div className="w-4 h-1 bg-stone-200 dark:bg-stone-700 rounded" />
+        {/* Away Team */}
+        <div className="flex items-center justify-center gap-3">
+          <div className="w-8 h-8 bg-stone-200 dark:bg-stone-700 rounded" />
+          <div className="flex items-center justify-center gap-2 sm:min-w-28">
+            <div className="w-10 h-5 bg-stone-200 dark:bg-stone-700 rounded" />
+            <div className="w-12 h-12 rounded-full bg-stone-200 dark:bg-stone-700" />
+          </div>
         </div>
       </div>
     </div>
