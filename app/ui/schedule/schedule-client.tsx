@@ -3,18 +3,16 @@
 import { useMemo, useRef } from "react";
 import type { GameWeekType } from "@/app/types";
 import { groupGamesByLocalDate } from "@/app/lib/schedule-utils";
-import { useLocale } from "@/app/locale-context";
 import Dates from "./dates";
 import DateSelector from "./date-selector";
 import { useActiveDate } from "../../lib/hooks/use-active-date";
 
 type ScheduleClientProps = {
   schedule: GameWeekType[];
+  locale: string;
 };
 
-const ScheduleClient = ({ schedule }: ScheduleClientProps) => {
-  const locale = useLocale();
-
+const ScheduleClient = ({ schedule, locale }: ScheduleClientProps) => {
   const localSchedule = useMemo(
     // Group games by local date since the API returns all times in UTC,
     // but the day and date are based on US Eastern time,
