@@ -3,7 +3,7 @@ import Game from "./game";
 import { CalendarDaysIcon } from "@heroicons/react/24/outline";
 
 type DatesProps = {
-  localSchedule: {
+  userLocalSchedule: {
     date: string;
     games: (GameType & {
       localStartTime: string;
@@ -12,10 +12,10 @@ type DatesProps = {
   dateRefs: React.RefObject<Record<string, HTMLDivElement | null>>;
 };
 
-const Dates = ({ localSchedule, dateRefs }: DatesProps) => {
+const Dates = ({ userLocalSchedule, dateRefs }: DatesProps) => {
   return (
     <div className="flex flex-col w-full xl:w-5xl xl:mr-auto xl:pr-40">
-      {localSchedule.map((day) => (
+      {userLocalSchedule.map((day) => (
         <div
           ref={(el) => {
             dateRefs.current[day.date] = el;

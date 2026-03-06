@@ -14,10 +14,9 @@ type ScheduleClientProps = {
 };
 
 const ScheduleClient = ({ schedule }: ScheduleClientProps) => {
-  const localSchedule = useMemo(
-    // Group games by local date since the API returns all times in UTC,
-    // but the day and date are based on US Eastern time,
-    // which can cause confusion for users in other timezones.
+  const userLocalSchedule = useMemo(
+    // Group games converted to users local time since the API returns all times in UTC,
+    // but the day and date are based on US Eastern time which can cause confusion for users in other timezones.
     () => groupGamesByLocalDate(schedule),
     [schedule],
   );
@@ -31,7 +30,7 @@ const ScheduleClient = ({ schedule }: ScheduleClientProps) => {
   // Get the date currently in view and a function to scroll to a date (initialized after hydration)
   const { activeDate, scrollToDate } = useActiveDate(
     dateRefs,
-    localSchedule,
+    userLocalSchedule,
     hydrated,
   );
 
@@ -40,17 +39,17 @@ const ScheduleClient = ({ schedule }: ScheduleClientProps) => {
       aria-label="Game Schedule"
       className="schedule flex flex-col xl:flex-row xl:w-7xl w-full px-3 xl:px-0 justify-center items-start animate-fade-in"
     >
-      {/* localSchedule relies on the users locale & timezone to format the dates which isn't available on the server.
+      {/* userLocalSchedule relies on the users locale & timezone to format the dates which isn't available on the server.
        Therefore, wait for the client to hydrate before rendering the schedule
       */}
       {hydrated ? (
         <>
           <DateSelector
-            localSchedule={localSchedule}
+            userLocalSchedule={userLocalSchedule}
             activeDate={activeDate}
             scrollToDate={scrollToDate}
           />
-          <Dates localSchedule={localSchedule} dateRefs={dateRefs} />
+          <Dates userLocalSchedule={userLocalSchedule} dateRefs={dateRefs} />
         </>
       ) : (
         <>

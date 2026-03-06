@@ -1,7 +1,7 @@
 import type { GameType } from "@/app/types";
 
 type DateSelectorProps = {
-  localSchedule: {
+  userLocalSchedule: {
     date: string;
     games: (GameType & {
       localStartTime: string;
@@ -12,7 +12,7 @@ type DateSelectorProps = {
 };
 
 const DateSelector = ({
-  localSchedule,
+  userLocalSchedule,
   activeDate,
   scrollToDate,
 }: DateSelectorProps) => {
@@ -22,7 +22,7 @@ const DateSelector = ({
       aria-label="Game Dates"
       className="flex xl:flex-col h-full xl:min-h-100 w-full px-3 my-3 xl:w-40 gap-2 shadow-lg sticky top-0 xl:top-[35vh] xl:mr-auto justify-start xl:justify-around z-20 rounded-md bg-stone-100 dark:bg-stone-800 p-3 xl:mb-6 overflow-x-auto"
     >
-      {localSchedule.map((day) => {
+      {userLocalSchedule.map((day) => {
         const isSelected = activeDate === day.date;
         return (
           <button
