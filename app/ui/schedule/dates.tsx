@@ -1,5 +1,7 @@
+"use client";
+
 import type { GameType } from "@/app/types";
-import { utcToReadableDate } from "@/app/lib/schedule-utils";
+import FormattedDate from "./formatted-date";
 import Game from "./game";
 import { CalendarDaysIcon } from "@heroicons/react/24/outline";
 
@@ -34,7 +36,7 @@ const Dates = ({ localSchedule, dateRefs }: DatesProps) => {
               aria-hidden="true"
               className="w-6 h-6 inline mb-1 mr-2 text-stone-500 dark:text-stone-400"
             />
-            {utcToReadableDate(day.date)}
+            <FormattedDate date={day.date} />
           </h2>
           <ul className="flex flex-col gap-1">
             {day.games.map((game) => (

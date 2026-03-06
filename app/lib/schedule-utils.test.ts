@@ -1,8 +1,4 @@
-import {
-  fetchSchedule,
-  utcToReadableDate,
-  groupGamesByLocalDate,
-} from "./schedule-utils";
+import { fetchSchedule, groupGamesByLocalDate } from "./schedule-utils";
 import type { GameWeekType } from "../types";
 
 // Mock global fetch
@@ -46,17 +42,6 @@ describe("schedule-utils", () => {
       await expect(fetchSchedule()).rejects.toThrow(
         "Error fetching data from the server ☹️",
       );
-    });
-  });
-
-  describe("utcToReadableDate", () => {
-    it("formats date correctly", () => {
-      // Note: The exact output depends on the system locale, so we check for string type
-      // and ensure it doesn't throw.
-      const dateStr = "2023-10-12T19:00:00Z";
-      const result = utcToReadableDate(dateStr);
-      expect(typeof result).toBe("string");
-      expect(result.length).toBeGreaterThan(0);
     });
   });
 
