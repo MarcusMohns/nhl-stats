@@ -4,14 +4,16 @@ import { ScheduleTeamType } from "@/app/types";
 type MatchupProps = {
   homeTeam: ScheduleTeamType;
   awayTeam: ScheduleTeamType;
-  gameOver: boolean;
   homeTeamWon: boolean | undefined;
+  isDone: boolean;
+  isScheduled: boolean;
 };
 
 const Matchup = ({
   homeTeam,
   awayTeam,
-  gameOver,
+  isDone,
+  isScheduled,
   homeTeamWon,
 }: MatchupProps) => {
   const label = `${homeTeam.abbrev} ${homeTeam.score} - ${awayTeam.score} ${awayTeam.abbrev}`;
@@ -26,14 +28,20 @@ const Matchup = ({
         <div
           title={`${homeTeam.placeName.default} ${homeTeam.commonName.default}`}
           className={`flex flex-row items-center justify-start px-2 gap-3 rounded ${
-            gameOver
+            isDone
               ? homeTeamWon
                 ? "opacity-100"
                 : "opacity-40"
               : "opacity-100"
           }`}
         >
-          <div className="flex flex-row items-center justify-center md:justify-start w-full">
+          <div
+            className={`flex items-center justify-center w-full ${
+              isScheduled
+                ? "justify-start flex-row-reverse"
+                : "justify-start flex-row"
+            }`}
+          >
             <Image
               className="w-12 h-12 md:w-16 md:h-16 dark:hidden"
               src={homeTeam.logo}
@@ -53,8 +61,12 @@ const Matchup = ({
             <p className="md:hidden font-semibold dark:text-stone-300 text-stone-800 text-xl">
               {homeTeam.abbrev}
             </p>
-            <div className="mr-5">
-              <p className="hidden md:block font-semibold dark:text-stone-300 text-stone-800 text-xs">
+            <div>
+              <p
+                className={`hidden md:block font-semibold dark:text-stone-300 text-stone-800 text-xs ${
+                  isScheduled ? "md:text-end" : "md:text-end"
+                }`}
+              >
                 {homeTeam.placeName.default}
               </p>
               <p className="hidden md:block font-bold dark:text-stone-50 text-stone-800 text-lg">
@@ -76,7 +88,7 @@ const Matchup = ({
         <div
           title={`${awayTeam.placeName.default} ${awayTeam.commonName.default}`}
           className={`flex flex-row items-center justify-start px-2 gap-3 rounded  ${
-            gameOver
+            isDone
               ? homeTeamWon
                 ? "opacity-40"
                 : "opacity-100"
@@ -86,12 +98,23 @@ const Matchup = ({
           <p className="font-bold dark:text-stone-300 text-stone-800 text-4xl md:text-5xl">
             {awayTeam.score}
           </p>
-          <div className="flex flex-row items-center justify-center md:justify-end w-full">
+          <div
+            className={`flex flex-row items-center w-full 
+             ${
+               isScheduled
+                 ? "justify-end flex-row-reverse"
+                 : "justify-start flex-row"
+             }`}
+          >
             <p className="md:hidden font-semibold dark:text-stone-300 text-stone-800 text-xl">
               {awayTeam.abbrev}
             </p>
             <div>
-              <p className="hidden md:block font-semibold dark:text-stone-300 text-stone-800 text-xs text-end">
+              <p
+                className={`hidden md:block font-semibold dark:text-stone-300 text-stone-800 text-xs ${
+                  isScheduled ? "md:text-start" : "md:text-end"
+                }`}
+              >
                 {awayTeam.placeName.default}
               </p>
               <p className="hidden md:block font-bold dark:text-stone-50 text-stone-800 text-lg">

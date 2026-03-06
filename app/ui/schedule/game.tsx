@@ -7,10 +7,17 @@ type GameProps = {
   game: GameType & { localStartTime: string };
 };
 const Game = ({ game }: GameProps) => {
-  const GAME_OVER = game.gameState === "OFF" || game.gameState === "FINAL";
-  const GAME_LIVE = game.gameState === "LIVE" || game.gameState === "CRIT";
+  const gameState =
+    game.gameState === "OFF" || game.gameState === "FINAL"
+      ? "Done"
+      : game.gameState === "LIVE" || game.gameState === "CRIT"
+        ? "Live"
+        : game.gameState === "FUT"
+          ? "Scheduled"
+          : game.gameState;
+
   const homeTeamWon =
-    GAME_OVER &&
+    gameState === "Done" &&
     game.homeTeam.score !== undefined &&
     game.awayTeam.score !== undefined
       ? game.homeTeam.score > game.awayTeam.score
@@ -23,7 +30,7 @@ const Game = ({ game }: GameProps) => {
       `}
     >
       <div className="flex flex-row items-center justify-start w-full gap-2">
-        {GAME_LIVE ? (
+        {gameState === "Live" ? (
           <LiveChip />
         ) : (
           <p className="flex items-center text-sm font-bold rounded">
@@ -31,9 +38,7 @@ const Game = ({ game }: GameProps) => {
           </p>
         )}
         <div className="font-bold dark:text-stone-300 text-stone-800 bg-stone-200 dark:bg-stone-700 p-2 py-1 rounded text-xs w-max">
-          {GAME_LIVE
-            ? `Period: ${game.periodDescriptor.number}`
-            : game.gameState}
+          {gameState}
         </div>
         {homeTeamWon !== undefined && (
           <p className="font-bold dark:text-stone-300 text-stone-800 bg-stone-200 dark:bg-stone-700 p-2 py-1 rounded text-xs w-max">
@@ -49,8 +54,9 @@ const Game = ({ game }: GameProps) => {
       <Matchup
         homeTeam={game.homeTeam}
         awayTeam={game.awayTeam}
-        gameOver={GAME_OVER}
         homeTeamWon={homeTeamWon}
+        isDone={gameState === "Done"}
+        isScheduled={gameState === "Scheduled"}
       />
     </article>
   );
