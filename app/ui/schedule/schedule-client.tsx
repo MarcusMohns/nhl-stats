@@ -12,11 +12,13 @@ type ScheduleClientProps = {
 };
 
 const ScheduleClient = ({ schedule }: ScheduleClientProps) => {
+  const locale = navigator.language;
+
   const localSchedule = useMemo(
     // Group games by local date since the API returns all times in UTC, but the day and date are based on US Eastern time,
     // which can cause confusion for users in other timezones.
-    () => groupGamesByLocalDate(schedule),
-    [schedule],
+    () => groupGamesByLocalDate(schedule, locale),
+    [schedule, locale],
   );
 
   // Put a ref on each date element to track which one is active

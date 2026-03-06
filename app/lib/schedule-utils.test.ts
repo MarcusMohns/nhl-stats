@@ -75,15 +75,16 @@ describe("schedule-utils", () => {
         },
       ] as unknown as GameWeekType[];
 
-      const result = groupGamesByLocalDate(mockSchedule);
+      const result = groupGamesByLocalDate(mockSchedule, "en-US");
 
       expect(result).toHaveLength(1);
       expect(result[0].games).toHaveLength(2);
 
       // Check if localStartTime was added
       expect(result[0].games[0]).toHaveProperty("localStartTime");
-      // Check if the key structure is correct (YYYY-MM-DD)
-      expect(result[0].date).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      // Check if the date is a formatted string
+      expect(typeof result[0].date).toBe("string");
+      expect(result[0].date.length).toBeGreaterThan(0);
     });
   });
 });

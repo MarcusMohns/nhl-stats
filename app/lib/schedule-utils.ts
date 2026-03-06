@@ -31,18 +31,21 @@ export const fetchSchedule = async (): Promise<GameWeekType[]> => {
   }
 };
 
-export const utcToReadableDate = (utc: string) => {
+export const utcToReadableDate = (utc: string, locale?: string) => {
   const date = new Date(utc);
   const options: Intl.DateTimeFormatOptions = {
     weekday: "short",
     month: "short",
     day: "numeric",
   };
-  // undefined so the browser will use the locale of the user
-  return new Intl.DateTimeFormat(undefined, options).format(date);
+  // Use provided locale or fall back to browser locale
+  return new Intl.DateTimeFormat(locale, options).format(date);
 };
 
-export const groupGamesByLocalDate = (schedule: GameWeekType[]) => {
+export const groupGamesByLocalDate = (
+  schedule: GameWeekType[],
+  locale?: string,
+) => {
   // Group games by local date (based on the startTimeUTC inside the game, converted to local time)
   const groupedGames = schedule
     .flatMap((day) => day.games)
@@ -61,7 +64,7 @@ export const groupGamesByLocalDate = (schedule: GameWeekType[]) => {
         acc[localDateKey].push({
           // add the game to the array for this date, along with the local start time
           ...game,
-          localStartTime: gameDate.toLocaleTimeString([], {
+          localStartTime: gameDate.toLocaleTimeString(locale, {
             hour: "2-digit",
             minute: "2-digit",
           }),
@@ -77,7 +80,7 @@ export const groupGamesByLocalDate = (schedule: GameWeekType[]) => {
       .sort(([dateA], [dateB]) => dateA.localeCompare(dateB))
       .map(([date, games]) => ({
         games,
-        date: utcToReadableDate(date),
+        date: utcToReadableDate(date, locale),
       }))
   );
 };
