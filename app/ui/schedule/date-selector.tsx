@@ -1,4 +1,3 @@
-"use client";
 import type { GameType } from "@/app/types";
 
 type DateSelectorProps = {

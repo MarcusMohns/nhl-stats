@@ -1,5 +1,3 @@
-"use client";
-
 import type { GameType } from "@/app/types";
 import Game from "./game";
 import { CalendarDaysIcon } from "@heroicons/react/24/outline";

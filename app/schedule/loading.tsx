@@ -1,4 +1,4 @@
-const DateSelectorSkeleton = () => (
+export const DateSelectorSkeleton = () => (
   <div className="flex xl:flex-col h-full xl:min-h-100 w-full px-3 my-3 xl:w-40 gap-2 shadow-lg sticky top-0 xl:top-[35vh] xl:mr-auto justify-start xl:justify-around z-20 rounded-md bg-stone-100 dark:bg-stone-800 p-3 xl:mb-6 overflow-hidden">
     {[...Array(7)].map((_, i) => (
       <div
@@ -33,7 +33,7 @@ const GameSkeleton = () => (
   </div>
 );
 
-const DatesSkeleton = () => (
+export const DatesSkeleton = () => (
   <div className="flex flex-col w-full xl:w-5xl xl:mr-auto xl:pr-40">
     {[...Array(3)].map((_, i) => (
       <div key={i} className="flex flex-col w-full mb-8 xl:px-5">
