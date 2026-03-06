@@ -75,7 +75,7 @@ describe("schedule-utils", () => {
         },
       ] as unknown as GameWeekType[];
 
-      const result = groupGamesByLocalDate(mockSchedule, "en-US");
+      const result = groupGamesByLocalDate(mockSchedule);
 
       expect(result).toHaveLength(1);
       expect(result[0].games).toHaveLength(2);
