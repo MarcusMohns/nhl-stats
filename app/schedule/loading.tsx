@@ -11,29 +11,43 @@ export const DateSelectorSkeleton = () => (
 
 const GameSkeleton = () => (
   <div className="flex flex-col w-full mb-1">
-    <div className="flex flex-col items-center w-full justify-center shadow-sm bg-stone-100 dark:bg-stone-800 rounded h-22 animate-pulse">
+    <div className="flex flex-col items-center w-full justify-center shadow-sm bg-stone-100 dark:bg-stone-800 rounded h-24 animate-pulse">
       {/* Header line */}
-      <div className="flex w-full justify-between mb-2 px-2">
+      <div className="flex w-full justify-between mb-2 px-2 pt-2">
         <div className="w-20 h-4 bg-stone-200 dark:bg-stone-700 rounded" />
         <div className="w-16 h-4 bg-stone-200 dark:bg-stone-700 rounded" />
       </div>
       {/* Matchup line */}
-      <div className="flex flex-row w-full justify-center items-center gap-4 sm:gap-10">
+      <div className="flex flex-row items-center justify-center w-full xl:gap-10 pb-2">
         {/* Home Team */}
-        <div className="flex items-center justify-center gap-3">
-          <div className="flex items-center justify-center gap-2 sm:min-w-28">
-            <div className="w-12 h-12 rounded-full bg-stone-200 dark:bg-stone-700" />
-            <div className="w-10 h-5 bg-stone-200 dark:bg-stone-700 rounded" />
+        <div className="w-1/2">
+          <div className="flex flex-row items-center justify-start px-2 gap-3">
+            <div className="flex flex-row items-center justify-center md:justify-start w-full">
+              <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-stone-200 dark:bg-stone-700 shrink-0" />
+              <div className="hidden md:flex flex-col gap-1 ml-2">
+                <div className="w-16 h-3 bg-stone-200 dark:bg-stone-700 rounded" />
+                <div className="w-24 h-4 bg-stone-200 dark:bg-stone-700 rounded" />
+              </div>
+              <div className="md:hidden w-8 h-5 bg-stone-200 dark:bg-stone-700 rounded ml-2" />
+            </div>
+            <div className="w-8 h-8 md:w-10 md:h-10 bg-stone-200 dark:bg-stone-700 rounded" />
           </div>
-          <div className="w-8 h-8 bg-stone-200 dark:bg-stone-700 rounded" />
         </div>
+
         <div className="w-4 h-1 bg-stone-200 dark:bg-stone-700 rounded" />
+
         {/* Away Team */}
-        <div className="flex items-center justify-center gap-3">
-          <div className="w-8 h-8 bg-stone-200 dark:bg-stone-700 rounded" />
-          <div className="flex items-center justify-center gap-2 sm:min-w-28">
-            <div className="w-10 h-5 bg-stone-200 dark:bg-stone-700 rounded" />
-            <div className="w-12 h-12 rounded-full bg-stone-200 dark:bg-stone-700" />
+        <div className="w-1/2">
+          <div className="flex flex-row items-center justify-start px-2 gap-3">
+            <div className="w-8 h-8 md:w-10 md:h-10 bg-stone-200 dark:bg-stone-700 rounded" />
+            <div className="flex flex-row items-center justify-center md:justify-end w-full">
+              <div className="md:hidden w-8 h-5 bg-stone-200 dark:bg-stone-700 rounded mr-2" />
+              <div className="hidden md:flex flex-col gap-1 mr-2 items-end">
+                <div className="w-16 h-3 bg-stone-200 dark:bg-stone-700 rounded" />
+                <div className="w-24 h-4 bg-stone-200 dark:bg-stone-700 rounded" />
+              </div>
+              <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-stone-200 dark:bg-stone-700 shrink-0" />
+            </div>
           </div>
         </div>
       </div>

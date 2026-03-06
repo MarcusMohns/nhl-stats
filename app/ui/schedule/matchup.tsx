@@ -35,7 +35,7 @@ const Matchup = ({
         >
           <div className="flex flex-row items-center justify-center md:justify-start w-full">
             <Image
-              className="w-12 h-12 md:w-24 md:h-24 dark:hidden"
+              className="w-12 h-12 md:w-16 md:h-16 dark:hidden"
               src={homeTeam.logo}
               alt={`logo of the ${homeTeam.placeName.default} ${homeTeam.commonName.default}`}
               loading="eager"
@@ -43,7 +43,7 @@ const Matchup = ({
               height={640}
             />
             <Image
-              className="w-12 h-12 md:w-24 md:h-24 hidden dark:block"
+              className="w-12 h-12 md:w-16 md:h-16 hidden dark:block"
               src={homeTeam.darkLogo}
               alt={`logo of the ${homeTeam.placeName.default} ${homeTeam.commonName.default}`}
               loading="eager"
@@ -54,21 +54,21 @@ const Matchup = ({
               {homeTeam.abbrev}
             </p>
             <div className="mr-5">
-              <p className="hidden md:block font-semibold dark:text-stone-300 text-stone-800 text-sm">
+              <p className="hidden md:block font-semibold dark:text-stone-300 text-stone-800 text-xs">
                 {homeTeam.placeName.default}
               </p>
-              <p className="hidden md:block font-bold dark:text-stone-50 text-stone-800 text-xl">
+              <p className="hidden md:block font-bold dark:text-stone-50 text-stone-800 text-lg">
                 {homeTeam.commonName.default}
               </p>
             </div>
           </div>
-          <p className="font-bold dark:text-stone-300 text-stone-800 text-4xl md:text-6xl">
+          <p className="font-bold dark:text-stone-300 text-stone-800 text-4xl md:text-5xl">
             {homeTeam.score}
           </p>
         </div>
       </div>
       {/* Separator  */}
-      <span aria-hidden="true" className="md:text-4xl">
+      <span aria-hidden="true" className="md:text-3xl">
         -
       </span>
       {/* Away Team  */}
@@ -83,7 +83,7 @@ const Matchup = ({
               : "opacity-100"
           }`}
         >
-          <p className="font-bold dark:text-stone-300 text-stone-800 text-4xl md:text-6xl">
+          <p className="font-bold dark:text-stone-300 text-stone-800 text-4xl md:text-5xl">
             {awayTeam.score}
           </p>
           <div className="flex flex-row items-center justify-center md:justify-end w-full">
@@ -91,15 +91,15 @@ const Matchup = ({
               {awayTeam.abbrev}
             </p>
             <div>
-              <p className="hidden md:block font-semibold dark:text-stone-300 text-stone-800 text-sm text-end">
+              <p className="hidden md:block font-semibold dark:text-stone-300 text-stone-800 text-xs text-end">
                 {awayTeam.placeName.default}
               </p>
-              <p className="hidden md:block font-bold dark:text-stone-50 text-stone-800 text-xl">
+              <p className="hidden md:block font-bold dark:text-stone-50 text-stone-800 text-lg">
                 {awayTeam.commonName.default}
               </p>
             </div>
             <Image
-              className="w-10 h-10 md:w-24 md:h-24 dark:hidden"
+              className="w-10 h-10 md:w-16 md:h-16 dark:hidden"
               src={awayTeam.logo}
               alt={`logo of the ${awayTeam.placeName.default} ${awayTeam.commonName.default}`}
               loading="eager"
@@ -107,7 +107,7 @@ const Matchup = ({
               height={640}
             />
             <Image
-              className="w-10 h-10 md:w-24 md:h-24 hidden dark:block"
+              className="w-10 h-10 md:w-16 md:h-16 hidden dark:block"
               src={awayTeam.darkLogo}
               alt={`logo of the ${awayTeam.placeName.default} ${awayTeam.commonName.default}`}
               loading="eager"
