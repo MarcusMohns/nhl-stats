@@ -22,12 +22,18 @@ const ScheduleClient = ({ schedule }: ScheduleClientProps) => {
     [schedule],
   );
 
-  // Put a ref on each date element to track which one is active
-  const dateRefs = useRef<Record<string, HTMLDivElement | null>>({});
-  const { activeDate, scrollToDate } = useActiveDate(dateRefs, localSchedule);
-
   // Check if the client has hydrated
   const hydrated = useHydration();
+
+  // Put a ref on each date element to track which one is active
+  const dateRefs = useRef<Record<string, HTMLDivElement | null>>({});
+
+  // Get the date currently in view and a function to scroll to a date (initialized after hydration)
+  const { activeDate, scrollToDate } = useActiveDate(
+    dateRefs,
+    localSchedule,
+    hydrated,
+  );
 
   return (
     <section

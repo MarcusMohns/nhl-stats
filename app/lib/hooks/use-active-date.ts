@@ -8,10 +8,12 @@ type LocalScheduleItem = {
 export function useActiveDate(
   dateRefs: RefObject<Record<string, HTMLDivElement | null>>,
   localSchedule: LocalScheduleItem[],
+  ready: boolean = true,
 ) {
   const [activeDate, setActiveDate] = useState<string>("");
 
   useEffect(() => {
+    if (!ready) return;
     if (typeof window === "undefined" || !dateRefs.current) return;
 
     const elements = Object.values(dateRefs.current).filter(
@@ -61,7 +63,7 @@ export function useActiveDate(
     elements.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
-  }, [localSchedule, dateRefs]);
+  }, [localSchedule, dateRefs, ready]);
 
   const scrollToDate = useCallback(
     // onClick to scroll to a specific ref (date)
