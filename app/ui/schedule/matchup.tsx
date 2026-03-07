@@ -36,10 +36,10 @@ const Matchup = ({
           }`}
         >
           <div
-            className={`flex items-center justify-center w-full ${
+            className={`flex items-center w-full ${
               isScheduled
                 ? "justify-start flex-row-reverse"
-                : "justify-start flex-row"
+                : "justify-end md:justify-center flex-row"
             }`}
           >
             <Image
@@ -64,7 +64,7 @@ const Matchup = ({
             <div>
               <p
                 className={`hidden md:block font-semibold dark:text-stone-300 text-stone-800 text-xs ${
-                  isScheduled ? "md:text-end" : "md:text-end"
+                  isScheduled ? "md:text-end" : "md:text-start"
                 }`}
               >
                 {homeTeam.placeName.default}
@@ -103,7 +103,7 @@ const Matchup = ({
              ${
                isScheduled
                  ? "justify-end flex-row-reverse"
-                 : "justify-start flex-row"
+                 : "justify-start md:justify-center flex-row"
              }`}
           >
             <p className="md:hidden font-semibold dark:text-stone-300 text-stone-800 text-xl">
@@ -117,7 +117,7 @@ const Matchup = ({
               >
                 {awayTeam.placeName.default}
               </p>
-              <p className="hidden md:block font-bold dark:text-stone-50 text-stone-800 text-lg">
+              <p className="hidden md:block font-bold dark:text-stone-50 text-stone-800 text-lg text-end">
                 {awayTeam.commonName.default}
               </p>
             </div>
