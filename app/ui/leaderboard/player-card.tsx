@@ -15,8 +15,8 @@ const PlayerCard = ({ player }: { player: PlayerType }) => {
           src={player.headshot}
           alt={player.firstName.default}
           aria-hidden="true"
-          width={366}
-          height={366}
+          width={64}
+          height={64}
           className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-stone-200 dark:bg-stone-700 shrink-0 object-cover"
         />
         <div className="flex flex-col min-w-0">
@@ -42,20 +42,15 @@ const PlayerCard = ({ player }: { player: PlayerType }) => {
           src={player.teamLogo}
           className="w-10 h-10 sm:w-16 sm:h-16 dark:hidden object-contain"
           alt={player.teamName.default}
-          width={200}
-          height={200}
+          width={64}
+          height={64}
         />
         <Image
-          src={
-            // The 'Dark' logo used for Washington is the old logo that doesn't work better for our dark mode anyways, so use the regular one for now.
-            player.teamAbbrev === "WSH"
-              ? player.teamLogo
-              : `https://assets.nhle.com/logos/nhl/svg/${player.teamAbbrev}_dark.svg`
-          }
+          src={`https://assets.nhle.com/logos/nhl/svg/${player.teamAbbrev}_dark.svg`}
           className="w-10 h-10 sm:w-16 sm:h-16 hidden dark:block object-contain"
           alt={player.teamName.default}
-          width={200}
-          height={200}
+          width={64}
+          height={64}
         />
       </div>
       <LinkOut

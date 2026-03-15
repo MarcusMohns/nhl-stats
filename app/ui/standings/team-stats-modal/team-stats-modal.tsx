@@ -79,16 +79,16 @@ export const TeamStatsModal = ({ handleCloseModal, team }: ModalProps) => {
           <Image
             src={team.teamLogo}
             alt={`Logo of ${team.teamName.default}`}
-            className="w-30 h-20 rounded-sm shadow-xl bg-gray-200 dark:hidden mr-2"
-            width={960}
-            height={640}
+            className="w-30 h-20 rounded-sm shadow-xl bg-stone-200 dark:hidden mr-2 object-contain p-1"
+            width={120}
+            height={80}
           />
           <Image
             src={team.teamLogoDark}
-            className="w-30 h-20 rounded-sm shadow-xl bg-stone-800 hidden dark:block mr-2"
+            className="w-30 h-20 rounded-sm shadow-xl bg-stone-800 hidden dark:block mr-2 object-contain p-1"
             alt={`Dark mode logo of ${team.teamName.default}`}
-            width={960}
-            height={640}
+            width={120}
+            height={80}
           />
           <ul className="flex flex-row flex-wrap justify-center items-start gap-1">
             {chips.map((chip) => (

@@ -30,16 +30,16 @@ const Game = ({ game }: GameProps) => {
       `}
     >
       <div className="flex flex-row items-center justify-start w-full gap-2">
+        <p className="flex items-center text-sm font-bold rounded">
+          {game.localStartTime}
+        </p>
         {gameState === "Live" ? (
           <LiveChip />
         ) : (
-          <p className="flex items-center text-sm font-bold rounded">
-            {game.localStartTime}
-          </p>
+          <div className="font-bold dark:text-stone-300 text-stone-800 bg-stone-200 dark:bg-stone-700 p-2 py-1 rounded text-xs w-max">
+            {gameState}
+          </div>
         )}
-        <div className="font-bold dark:text-stone-300 text-stone-800 bg-stone-200 dark:bg-stone-700 p-2 py-1 rounded text-xs w-max">
-          {gameState}
-        </div>
         {homeTeamWon !== undefined && (
           <p className="font-bold dark:text-stone-300 text-stone-800 bg-stone-200 dark:bg-stone-700 p-2 py-1 rounded text-xs w-max">
             {`${homeTeamWon ? game.homeTeam.abbrev : game.awayTeam.abbrev} won`}

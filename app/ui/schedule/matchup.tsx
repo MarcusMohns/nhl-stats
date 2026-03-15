@@ -47,16 +47,16 @@ const Matchup = ({
               src={homeTeam.logo}
               alt={`logo of the ${homeTeam.placeName.default} ${homeTeam.commonName.default}`}
               loading="eager"
-              width={960}
-              height={640}
+              width={64}
+              height={64}
             />
             <Image
               className="w-12 h-12 md:w-16 md:h-16 hidden dark:block"
               src={homeTeam.darkLogo}
               alt={`logo of the ${homeTeam.placeName.default} ${homeTeam.commonName.default}`}
               loading="eager"
-              width={960}
-              height={640}
+              width={64}
+              height={64}
             />
             <p className="md:hidden font-semibold dark:text-stone-300 text-stone-800 text-xl">
               {homeTeam.abbrev}
@@ -122,20 +122,20 @@ const Matchup = ({
               </p>
             </div>
             <Image
-              className="w-10 h-10 md:w-16 md:h-16 dark:hidden"
+              className="w-12 h-12 md:w-16 md:h-16 dark:hidden"
               src={awayTeam.logo}
               alt={`logo of the ${awayTeam.placeName.default} ${awayTeam.commonName.default}`}
               loading="eager"
-              width={960}
-              height={640}
+              width={64}
+              height={64}
             />
             <Image
-              className="w-10 h-10 md:w-16 md:h-16 hidden dark:block"
+              className="w-12 h-12 md:w-16 md:h-16 hidden dark:block"
               src={awayTeam.darkLogo}
               alt={`logo of the ${awayTeam.placeName.default} ${awayTeam.commonName.default}`}
               loading="eager"
-              width={960}
-              height={640}
+              width={64}
+              height={64}
             />
           </div>
         </div>

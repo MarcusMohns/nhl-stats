@@ -26,7 +26,7 @@ export default function Home() {
             </span>
           </h1>
         </div>
-        <p className="text-lg md:text-xl text-stone-600 dark:text-stone-400 max-w-2xl leading-relaxed">
+        <p className="text-lg md:text-xl text-stone-600 dark:text-stone-300 max-w-2xl leading-relaxed">
           A modern lightweight app for real-time hockey scores, comprehensive
           standings, player leaderboards, and playoff brackets.
         </p>

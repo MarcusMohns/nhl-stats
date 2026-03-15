@@ -14,70 +14,53 @@ import { organizedTeamStats } from "./lib/team-stats-utils";
 import { fetchSchedule } from "./lib/schedule-utils";
 import { fetchPlayoffs } from "./lib/playoffs-utils";
 
-export const getLeaderboards = async (): Promise<Result<LeaderBoardsType>> => {
+async function handleApiCall<T>(
+  fetcher: () => Promise<T>,
+  errorMessagePrefix: string,
+): Promise<Result<T>> {
   try {
-    const data = await organizedLeaderboards();
+    const data = await fetcher();
     return { success: true, data };
   } catch (e) {
-    console.error("Error fetching leaders data from API", e);
+    console.error(errorMessagePrefix, e);
     return {
       success: false,
       error: String(e) || "Error fetching data from the server ☹️",
     };
   }
+}
+
+export const getLeaderboards = async (): Promise<Result<LeaderBoardsType>> => {
+  return handleApiCall(
+    organizedLeaderboards,
+    "Error fetching leaders data from API",
+  );
 };
 
 export const getStandings = async (): Promise<Result<StandingsType>> => {
-  try {
+  const fetchAndOrganizeStandings = async () => {
     const standingsData = await fetchStandingsData();
-    const data = organizeStandings(standingsData);
-    return { success: true, data };
-  } catch (e) {
-    console.error("Error fetching standings data from API", e);
-    return {
-      success: false,
-      error: String(e) || "Error fetching data from the server ☹️",
-    };
-  }
+    return organizeStandings(standingsData);
+  };
+  return handleApiCall(
+    fetchAndOrganizeStandings,
+    "Error fetching standings data from API",
+  );
 };
 
 export const getTeamStats = async (
   team: TeamType,
 ): Promise<Result<TeamStatsType>> => {
-  try {
-    const data = await organizedTeamStats(team);
-    return { success: true, data };
-  } catch (e) {
-    console.error("Error fetching team stats data from API", e);
-    return {
-      success: false,
-      error: String(e) || "Error fetching data from the server ☹️",
-    };
-  }
+  return handleApiCall(
+    () => organizedTeamStats(team),
+    "Error fetching team stats data from API",
+  );
 };
 
 export const getSchedule = async (): Promise<Result<GameWeekType[]>> => {
-  try {
-    const data = await fetchSchedule();
-    return { success: true, data };
-  } catch (e) {
-    console.error("Error fetching schedule data from API", e);
-    return {
-      success: false,
-      error: String(e) || "Error fetching data from the server ☹️",
-    };
-  }
+  return handleApiCall(fetchSchedule, "Error fetching schedule data from API");
 };
 
 export const getPlayoffs = async (): Promise<Result<PlayoffsType>> => {
-  try {
-    const data = await fetchPlayoffs();
-    return { success: true, data };
-  } catch (e) {
-    console.error("Error fetching playoffs data from API", e);
-    return {
-      success: false,
-      error: String(e) || "Error fetching data from the server ☹️",
-    };
-  }
+  return handleApiCall(fetchPlayoffs, "Error fetching playoffs data from API");
 };

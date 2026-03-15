@@ -47,8 +47,8 @@ const TeamStatsPlayerCard = ({
         <Image
           src={player.headshot}
           alt={`Headshot of ${player.firstName.default} ${player.lastName.default}`}
-          width={366}
-          height={366}
+          width={64}
+          height={64}
           className="w-16 h-16 rounded-full bg-stone-200 dark:bg-stone-700 object-cover ring-2 ring-stone-100 dark:ring-stone-600"
         />
       </div>

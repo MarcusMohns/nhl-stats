@@ -37,7 +37,7 @@ const WeeklySchedule = ({ games }: WeeklyScheduleProps) => {
 
         return (
           <li
-            key={game.gameDate}
+            key={game.id}
             className={`flex items-center gap-4 p-3 w-full bg-white dark:bg-stone-800 rounded-lg shadow-sm border-x-4 ${getGameStatusClass()}`}
           >
             {/* Date or Live Chip */}
@@ -127,16 +127,16 @@ const WeeklySchedule = ({ games }: WeeklyScheduleProps) => {
                   src={game.awayTeam.logo}
                   className="w-8 h-8 dark:hidden"
                   alt=""
-                  width={40}
-                  height={40}
+                  width={32}
+                  height={32}
                   aria-hidden="true"
                 />
                 <Image
                   src={game.awayTeam.darkLogo}
                   className="w-8 h-8 hidden dark:block"
                   alt=""
-                  width={40}
-                  height={40}
+                  width={32}
+                  height={32}
                   aria-hidden="true"
                 />
                 <span className="font-semibold text-sm sm:text-base text-left">

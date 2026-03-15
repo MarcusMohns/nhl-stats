@@ -33,8 +33,8 @@ const GameSeries = ({ series }: { series: SeriesType }) => {
             src={series.seriesLogo}
             alt={series.seriesTitle}
             className="h-full w-full object-contain invert dark:invert-0"
-            width={isFinals ? 360 : 452}
-            height={isFinals ? 537 : 120}
+            width={isFinals ? 171 : 256}
+            height={isFinals ? 256 : 68}
             loading="eager"
           />
         </div>

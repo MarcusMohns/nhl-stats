@@ -45,7 +45,7 @@ const TableRow = ({
       onKeyDown={handleKeyDown}
       tabIndex={0}
       role="button"
-      aria-label={`View details for ${team.teamName.default}`}
+      aria-label={`${team.teamName.default}. Rank ${team.rank}, ${team.points} points. Click to view full team statistics.`}
       className={`font-bold hover:bg-stone-200 dark:hover:bg-stone-900/40 cursor-pointer select-none border-b-2 ${
         (selectedTable === "Division" && team.rank === 3) ||
         (selectedTable === "Wild Card" &&
@@ -69,12 +69,7 @@ const TableRow = ({
             height={48}
           />
           <Image
-            src={
-              // Capitals dark logo is outdated so skip it for now
-              team.teamName.default === "Washington Capitals"
-                ? team.teamLogo
-                : team.teamLogoDark
-            }
+            src={team.teamLogoDark}
             className={`team-logo-dark h-8 w-8 sm:h-12 sm:w-12 hidden dark:block `}
             alt={`${team.teamName.default} logo`}
             width={48}

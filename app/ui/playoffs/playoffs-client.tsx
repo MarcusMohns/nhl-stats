@@ -37,8 +37,8 @@ const PlayoffsClient = ({ playoffs }: PlayoffsClientProps) => {
           src={playoffs.bracketLogo}
           className="invert dark:invert-0 mx-auto my-5 sm:my-0 px-4 w-200 h-auto"
           alt="NHL Playoffs"
-          width={1993}
-          height={266}
+          width={800}
+          height={107}
           loading="eager"
         />
         <small className="text-center w-full my-10 text-xs font-semibold text-stone-500 dark:text-stone-400 tracking-wide uppercase">

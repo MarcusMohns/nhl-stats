@@ -27,16 +27,16 @@ const Team = ({ team, score, winningTeamId }: TeamProps) => {
         <Image
           src={team.logo}
           alt={team.name.default}
-          className="w-11 h-11 md:w-[3.25rem] md:h-[3.25rem] dark:hidden"
-          width={960}
-          height={640}
+          className="w-11 h-11 md:w-[3.25rem] md:h-[3.25rem] dark:hidden object-contain"
+          width={64}
+          height={64}
         />
         <Image
           src={team.darkLogo}
           alt={team.name.default}
-          className="w-11 h-11 md:w-[3.25rem] md:h-[3.25rem] hidden dark:block"
-          width={960}
-          height={640}
+          className="w-11 h-11 md:w-[3.25rem] md:h-[3.25rem] hidden dark:block object-contain"
+          width={64}
+          height={64}
         />
         <p className="hidden xs:block font-semibold text-xl tracking-wide leading-tight dark:text-stone-300 md:text-base text-xs">
           {team.abbrev}
