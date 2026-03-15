@@ -2,26 +2,14 @@ import type { GameType } from "@/app/types";
 import LinkOut from "../link-out";
 import LiveChip from "../live-chip";
 import Matchup from "./matchup";
+import { getGameStatus } from "../../lib/schedule-utils";
 
 type GameProps = {
   game: GameType & { localStartTime: string };
 };
 const Game = ({ game }: GameProps) => {
-  const gameState =
-    game.gameState === "OFF" || game.gameState === "FINAL"
-      ? "Done"
-      : game.gameState === "LIVE" || game.gameState === "CRIT"
-        ? "Live"
-        : game.gameState === "FUT"
-          ? "Scheduled"
-          : game.gameState;
-
-  const homeTeamWon =
-    gameState === "Done" &&
-    game.homeTeam.score !== undefined &&
-    game.awayTeam.score !== undefined
-      ? game.homeTeam.score > game.awayTeam.score
-      : undefined;
+  const { status, winner } = getGameStatus(game);
+  const homeTeamWon = winner === "home";
 
   return (
     <article
@@ -33,11 +21,11 @@ const Game = ({ game }: GameProps) => {
         <p className="flex items-center text-sm font-bold rounded">
           {game.localStartTime}
         </p>
-        {gameState === "Live" ? (
+        {status === "Live" ? (
           <LiveChip />
         ) : (
           <div className="font-bold dark:text-stone-300 text-stone-800 bg-stone-200 dark:bg-stone-700 p-2 py-1 rounded text-xs w-max">
-            {gameState}
+            {status}
           </div>
         )}
         {homeTeamWon !== undefined && (
@@ -55,8 +43,8 @@ const Game = ({ game }: GameProps) => {
         homeTeam={game.homeTeam}
         awayTeam={game.awayTeam}
         homeTeamWon={homeTeamWon}
-        isDone={gameState === "Done"}
-        isScheduled={gameState === "Scheduled"}
+        isDone={status === "Done"}
+        isScheduled={status === "Scheduled"}
       />
     </article>
   );

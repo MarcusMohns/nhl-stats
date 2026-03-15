@@ -15,8 +15,7 @@ type ScheduleClientProps = {
 
 const ScheduleClient = ({ schedule }: ScheduleClientProps) => {
   const userLocalSchedule = useMemo(
-    // Group games converted to users local time since the API returns all times in UTC,
-    // but the day and date are based on US Eastern time which can cause confusion for users in other timezones.
+    // UTC is based on US timezones so in order to display the date correctly we need to convert it to local time
     () => groupGamesByLocalDate(schedule),
     [schedule],
   );
@@ -40,7 +39,7 @@ const ScheduleClient = ({ schedule }: ScheduleClientProps) => {
       className="schedule flex flex-col xl:flex-row xl:w-7xl w-full px-3 xl:px-0 justify-center items-start animate-fade-in"
     >
       {/* userLocalSchedule relies on the users locale & timezone to format the dates which isn't available on the server.
-       Therefore, wait for the client to hydrate before rendering the schedule
+       Therefore, wait for the client to hydrate before rendering the schedule to avoid hydration mismatching
       */}
       {hydrated ? (
         <>
