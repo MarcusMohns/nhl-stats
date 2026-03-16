@@ -259,3 +259,156 @@ export type ActionType = {
   sortBy: string;
   currentStandings: TeamType[];
 };
+
+export type GameDetailsType = {
+  id: number;
+  season: number;
+  gameType: number;
+  limitedScoring: boolean;
+  gameDate: string;
+  venue: VenueType;
+  venueLocation: VenueLocationType;
+  startTimeUTC: string;
+  easternUTCOffset: string;
+  venueUTCOffset: string;
+  tvBroadcasts: TvBroadcastType[];
+  gameState: string;
+  gameScheduleState: string;
+  periodDescriptor: PeriodDescriptorType;
+  awayTeam: TeamType;
+  homeTeam: TeamType;
+  shootoutInUse: boolean;
+  otInUse: boolean;
+  clock: ClockType;
+  displayPeriod: number;
+  maxPeriods: number;
+  gameOutcome?: GameOutcomeType;
+  plays: PlayType[];
+  rosterSpots: RosterSpotType[];
+  regPeriods: number;
+  summary: Record<string, never>; // Empty object
+};
+
+export type VenueType = {
+  default: string;
+};
+
+export type VenueLocationType = {
+  default: string;
+};
+
+export type TvBroadcastType = {
+  id: number;
+  market: string;
+  countryCode: string;
+  network: string;
+  sequenceNumber: number;
+};
+
+export type PeriodDescriptorType = {
+  number: number;
+  periodType: string;
+  maxRegulationPeriods: number;
+};
+
+// export type TeamType = {
+//   id: number;
+//   commonName: {
+//     default: string;
+//   };
+//   abbrev: string;
+//   score: number;
+//   sog: number;
+//   logo: string;
+//   darkLogo: string;
+//   placeName: {
+//     default: string;
+//   };
+//   placeNameWithPreposition: {
+//     default: string;
+//     fr?: string;
+//   };
+// };
+
+export type ClockType = {
+  timeRemaining: string;
+  secondsRemaining: number;
+  running: boolean;
+  inIntermission: boolean;
+};
+
+export type GameOutcomeType = {
+  lastPeriodType: string;
+};
+
+export type PlayType = {
+  eventId: number;
+  periodDescriptor: PeriodDescriptorType;
+  timeInPeriod: string;
+  timeRemaining: string;
+  situationCode: string;
+  homeTeamDefendingSide: string;
+  typeCode: number;
+  typeDescKey: string;
+  sortOrder: number;
+  details?: PlayDetailsType;
+  pptReplayUrl?: string;
+};
+
+export type PlayDetailsType = {
+  eventOwnerTeamId?: number;
+  losingPlayerId?: number;
+  winningPlayerId?: number;
+  xCoord?: number;
+  yCoord?: number;
+  zoneCode?: string;
+  reason?: string;
+  secondaryReason?: string;
+  blockingPlayerId?: number;
+  shootingPlayerId?: number;
+  goalieInNetId?: number;
+  shotType?: string;
+  awaySOG?: number;
+  homeSOG?: number;
+  hittingPlayerId?: number;
+  hitteePlayerId?: number;
+  scoringPlayerId?: number;
+  scoringPlayerTotal?: number;
+  assist1PlayerId?: number;
+  assist1PlayerTotal?: number;
+  assist2PlayerId?: number;
+  assist2PlayerTotal?: number;
+  awayScore?: number;
+  homeScore?: number;
+  highlightClipSharingUrl?: string;
+  highlightClipSharingUrlFr?: string;
+  highlightClip?: number;
+  highlightClipFr?: number;
+  discreteClip?: number;
+  discreteClipFr?: number;
+  playerId?: number;
+  typeCode?: string;
+  descKey?: string;
+  duration?: number;
+  committedByPlayerId?: number;
+  drawnByPlayerId?: number;
+};
+
+export type RosterSpotType = {
+  teamId: number;
+  playerId: number;
+  firstName: {
+    default: string;
+  };
+  lastName: {
+    default: string;
+    cs?: string;
+    de?: string;
+    fi?: string;
+    sk?: string;
+    sv?: string;
+  };
+  sweaterNumber: number;
+  positionCode: string;
+  headshot: string;
+};
