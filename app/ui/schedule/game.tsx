@@ -12,6 +12,8 @@ const Game = ({ game }: GameProps) => {
   // undefined for TBD
   const homeTeamWon = winner === undefined ? undefined : winner === "home";
 
+  // todo write call to https://api-web.nhle.com/v1/gamecenter/2025021057/play-by-play
+
   return (
     <article
       aria-label={`Game: ${game.awayTeam.abbrev} versus ${game.homeTeam.abbrev}`}
