@@ -2,9 +2,8 @@ import {
   fetchSchedule,
   utcToReadableDate,
   groupGamesByLocalDate,
-  getGameStatus,
 } from "./schedule-utils";
-import type { GameWeekType, GameType } from "../types";
+import type { GameWeekType } from "../types";
 
 // Mock global fetch
 global.fetch = jest.fn();
@@ -86,69 +85,6 @@ describe("schedule-utils", () => {
       // Check if the date is a formatted string
       expect(typeof result[0].date).toBe("string");
       expect(result[0].date.length).toBeGreaterThan(0);
-    });
-  });
-
-  describe("getGameStatus", () => {
-    it('should return "Done" for gameState "OFF" and determine winner', () => {
-      const game = {
-        gameState: "OFF",
-        homeTeam: { score: 3 },
-        awayTeam: { score: 2 },
-      } as unknown as GameType;
-      const { status, winner } = getGameStatus(game);
-      expect(status).toBe("Done");
-      expect(winner).toBe("home");
-    });
-
-    it('should return "Done" for gameState "FINAL" and determine winner', () => {
-      const game = {
-        gameState: "FINAL",
-        homeTeam: { score: 1 },
-        awayTeam: { score: 4 },
-      } as unknown as GameType;
-      const { status, winner } = getGameStatus(game);
-      expect(status).toBe("Done");
-      expect(winner).toBe("away");
-    });
-
-    it('should return "Live" for gameState "LIVE"', () => {
-      const game = { gameState: "LIVE" } as GameType;
-      const { status, winner } = getGameStatus(game);
-      expect(status).toBe("Live");
-      expect(winner).toBeUndefined();
-    });
-
-    it('should return "Live" for gameState "CRIT"', () => {
-      const game = { gameState: "CRIT" } as GameType;
-      const { status, winner } = getGameStatus(game);
-      expect(status).toBe("Live");
-      expect(winner).toBeUndefined();
-    });
-
-    it('should return "Scheduled" for gameState "FUT"', () => {
-      const game = { gameState: "FUT" } as GameType;
-      const { status, winner } = getGameStatus(game);
-      expect(status).toBe("Scheduled");
-      expect(winner).toBeUndefined();
-    });
-
-    it('should return "TBD" for other gameStates', () => {
-      const game = { gameState: "PRE" } as GameType;
-      const { status, winner } = getGameStatus(game);
-      expect(status).toBe("TBD");
-      expect(winner).toBeUndefined();
-    });
-
-    it("should return undefined winner if scores are missing for a done game", () => {
-      const game = {
-        gameState: "OFF",
-        homeTeam: {},
-        awayTeam: {},
-      } as unknown as GameType;
-      const { status, winner } = getGameStatus(game);
-      expect(status).toBe("Done");
-      expect(winner).toBeUndefined();
     });
   });
 });

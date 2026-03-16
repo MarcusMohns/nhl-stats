@@ -2,7 +2,7 @@ import type { GameType } from "@/app/types";
 import LinkOut from "../link-out";
 import LiveChip from "../live-chip";
 import Matchup from "./matchup";
-import { getGameStatus } from "../../lib/schedule-utils";
+import { getGameStatus } from "@/app/lib/game-utils";
 
 type GameProps = {
   game: GameType & { localStartTime: string };
