@@ -5,7 +5,6 @@ import {
   ChartBarIcon,
   ArrowRightIcon,
   GlobeEuropeAfricaIcon,
-  PlusIcon,
 } from "@heroicons/react/24/outline";
 import FeatureCard from "./ui/home/feature-card";
 
@@ -14,9 +13,9 @@ export default function Home() {
     <div className="flex flex-col items-center w-full gap-16 py-12 md:py-24 animate-fade-in">
       {/* Hero Section */}
       <section className="flex flex-col items-center text-center space-y-8 max-w-4xl px-6">
-        <h1 className="flex flex-row items-center justify-center group font-black text-6xl md:text-8xl tracking-tighter text-stone-900 dark:text-stone-50 drop-shadow-sm">
-          NHL Stats
-          <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-blue-300 via-blue-600 to-cyan-900 opacity-20 blur-xl" />
+        <h1 className="relative flex flex-row items-center justify-center group font-black text-6xl md:text-8xl tracking-tighter text-stone-900 dark:text-stone-50 drop-shadow-sm cursor-default">
+          <span className="relative z-10">NHL Stats</span>
+          <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-blue-100 via-blue-300 to-cyan-400 dark:from-blue-300 dark:via-blue-600 dark:to-cyan-900 opacity-20 blur-xl transition-all duration-300 group-hover:opacity-40 group-hover:blur-2xl" />
         </h1>
         <p className="text-xl md:text-2xl text-stone-600 dark:text-stone-400 max-w-2xl leading-relaxed font-medium">
           A modern lightweight app for real-time hockey scores, comprehensive
@@ -40,7 +39,8 @@ export default function Home() {
       </section>
 
       {/* Features Grid */}
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-7xl px-6 pb-10">
+      <section className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-7xl px-6 pb-10">
+        <div className="dark:hidden absolute -inset-1 rounded-lg bg-blue-900 opacity-10 blur-xl" />
         <FeatureCard
           href="/standings"
           title="Standings"
