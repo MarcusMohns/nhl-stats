@@ -9,7 +9,8 @@ type GameProps = {
 };
 const Game = ({ game }: GameProps) => {
   const { status, winner } = getGameStatus(game);
-  const homeTeamWon = winner === "home";
+  // undefined for TBD
+  const homeTeamWon = winner === undefined ? undefined : winner === "home";
 
   return (
     <article
