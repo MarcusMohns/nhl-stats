@@ -7,12 +7,14 @@ import {
   StandingsType,
   TeamStatsType,
   GameWeekType,
+  LiveGameType,
 } from "./types";
 import { organizeStandings, fetchStandingsData } from "./lib/standings-utils";
 import { organizedLeaderboards } from "./lib/leaderboard-utils";
 import { organizedTeamStats } from "./lib/team-stats-utils";
 import { fetchSchedule } from "./lib/schedule-utils";
 import { fetchPlayoffs } from "./lib/playoffs-utils";
+import { fetchLiveGame } from "./lib/game-utils";
 
 async function handleApiCall<T>(
   fetcher: () => Promise<T>,
@@ -63,4 +65,13 @@ export const getSchedule = async (): Promise<Result<GameWeekType[]>> => {
 
 export const getPlayoffs = async (): Promise<Result<PlayoffsType>> => {
   return handleApiCall(fetchPlayoffs, "Error fetching playoffs data from API");
+};
+
+export const getLiveGame = async (
+  id: string,
+): Promise<Result<LiveGameType>> => {
+  return handleApiCall(
+    () => fetchLiveGame(id),
+    "Error fetching schedule data from API",
+  );
 };

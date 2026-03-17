@@ -260,7 +260,7 @@ export type ActionType = {
   currentStandings: TeamType[];
 };
 
-export type GameDetailsType = {
+export type LiveGameType = {
   id: number;
   season: number;
   gameType: number;
@@ -275,8 +275,8 @@ export type GameDetailsType = {
   gameState: string;
   gameScheduleState: string;
   periodDescriptor: PeriodDescriptorType;
-  awayTeam: TeamType;
-  homeTeam: TeamType;
+  awayTeam: LiveTeamType;
+  homeTeam: LiveTeamType;
   shootoutInUse: boolean;
   otInUse: boolean;
   clock: ClockType;
@@ -311,24 +311,24 @@ export type PeriodDescriptorType = {
   maxRegulationPeriods: number;
 };
 
-// export type TeamType = {
-//   id: number;
-//   commonName: {
-//     default: string;
-//   };
-//   abbrev: string;
-//   score: number;
-//   sog: number;
-//   logo: string;
-//   darkLogo: string;
-//   placeName: {
-//     default: string;
-//   };
-//   placeNameWithPreposition: {
-//     default: string;
-//     fr?: string;
-//   };
-// };
+export type LiveTeamType = {
+  id: number;
+  commonName: {
+    default: string;
+  };
+  abbrev: string;
+  score: number;
+  sog: number;
+  logo: string;
+  darkLogo: string;
+  placeName: {
+    default: string;
+  };
+  placeNameWithPreposition: {
+    default: string;
+    fr?: string;
+  };
+};
 
 export type ClockType = {
   timeRemaining: string;

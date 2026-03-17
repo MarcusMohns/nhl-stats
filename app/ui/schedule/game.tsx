@@ -3,21 +3,19 @@ import LinkOut from "../link-out";
 import LiveChip from "../live-chip";
 import Matchup from "./matchup";
 import { getGameStatus } from "@/app/lib/game-utils";
+import { useLiveGame } from "@/app/lib/hooks/use-live-game";
 
 type GameProps = {
   game: GameType & { localStartTime: string };
 };
 const Game = ({ game }: GameProps) => {
   const { status, winner } = getGameStatus(game);
-  // undefined for TBD
-  const homeTeamWon = winner === undefined ? undefined : winner === "home";
-
-  // todo write call to https://api-web.nhle.com/v1/gamecenter/2025021057/play-by-play
+  const liveData = useLiveGame(game.id, status);
 
   return (
     <article
       aria-label={`Game: ${game.awayTeam.abbrev} versus ${game.homeTeam.abbrev}`}
-      className={`flex flex-col items-center w-full border-x-4 justify-center shadow-sm bg-stone-100 dark:bg-stone-800 dark:shadow-stone-800 p-1 px-2 rounded mb-1 ${homeTeamWon !== undefined ? (homeTeamWon ? "border-l-green-500 border-r-red-500" : "border-l-red-500 border-r-green-500") : "border-x-stone-100 dark:border-x-stone-800"}
+      className={`flex flex-col items-center w-full border-x-4 justify-center shadow-sm bg-stone-100 dark:bg-stone-800 dark:shadow-stone-800 p-1 px-2 rounded mb-1 ${winner !== undefined ? (winner === "home" ? "border-l-green-500 border-r-red-500" : "border-l-red-500 border-r-green-500") : "border-x-stone-100 dark:border-x-stone-800"}
       `}
     >
       <div className="flex flex-row items-center justify-start w-full gap-2">
@@ -31,9 +29,9 @@ const Game = ({ game }: GameProps) => {
             {status}
           </div>
         )}
-        {homeTeamWon !== undefined && (
+        {winner !== undefined && (
           <p className="font-bold dark:text-stone-300 text-stone-800 bg-stone-200 dark:bg-stone-700 p-2 py-1 rounded text-xs w-max">
-            {`${homeTeamWon ? game.homeTeam.abbrev : game.awayTeam.abbrev} won`}
+            {`${winner === "home" ? game.homeTeam.abbrev : game.awayTeam.abbrev} won`}
           </p>
         )}
         <LinkOut
@@ -42,13 +40,21 @@ const Game = ({ game }: GameProps) => {
           aria-label={`View game details for ${game.homeTeam.commonName} vs ${game.awayTeam.commonName}`}
         />
       </div>
-      <Matchup
-        homeTeam={game.homeTeam}
-        awayTeam={game.awayTeam}
-        homeTeamWon={homeTeamWon}
-        isDone={status === "Done"}
-        isScheduled={status === "Scheduled"}
-      />
+      {/* If the game is live, show the live scores */}
+      {liveData ? (
+        <Matchup
+          homeTeam={liveData.homeTeam}
+          awayTeam={liveData.awayTeam}
+          status={status}
+        />
+      ) : (
+        <Matchup
+          homeTeam={game.homeTeam}
+          awayTeam={game.awayTeam}
+          winner={winner}
+          status={status}
+        />
+      )}
     </article>
   );
 };

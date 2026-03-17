@@ -1,21 +1,15 @@
 import Image from "next/image";
-import { ScheduleTeamType } from "@/app/types";
+import { ScheduleTeamType, LiveTeamType } from "@/app/types";
 
 type MatchupProps = {
-  homeTeam: ScheduleTeamType;
-  awayTeam: ScheduleTeamType;
-  homeTeamWon: boolean | undefined;
-  isDone: boolean;
-  isScheduled: boolean;
+  homeTeam: ScheduleTeamType | LiveTeamType;
+  awayTeam: ScheduleTeamType | LiveTeamType;
+  winner?: "home" | "away";
+  status: "Done" | "Live" | "Scheduled" | "TBD";
 };
 
-const Matchup = ({
-  homeTeam,
-  awayTeam,
-  isDone,
-  isScheduled,
-  homeTeamWon,
-}: MatchupProps) => {
+const Matchup = ({ homeTeam, awayTeam, status, winner }: MatchupProps) => {
+  const homeTeamWon = winner === "home";
   const label = `${homeTeam.abbrev} ${homeTeam.score} - ${awayTeam.score} ${awayTeam.abbrev}`;
   return (
     <div
@@ -28,7 +22,7 @@ const Matchup = ({
         <div
           title={`${homeTeam.placeName.default} ${homeTeam.commonName.default}`}
           className={`flex flex-row items-center justify-start px-2 gap-3 rounded ${
-            isDone
+            status === "Done"
               ? homeTeamWon
                 ? "opacity-100"
                 : "opacity-40"
@@ -37,7 +31,7 @@ const Matchup = ({
         >
           <div
             className={`flex items-center w-full ${
-              isScheduled
+              status === "Scheduled"
                 ? "justify-start flex-row-reverse"
                 : "justify-end md:justify-center flex-row"
             }`}
@@ -64,7 +58,7 @@ const Matchup = ({
             <div>
               <p
                 className={`hidden md:block font-semibold dark:text-stone-300 text-stone-800 text-xs ${
-                  isScheduled ? "md:text-end" : "md:text-start"
+                  status === "Scheduled" ? "md:text-end" : "md:text-start"
                 }`}
               >
                 {homeTeam.placeName.default}
@@ -88,7 +82,7 @@ const Matchup = ({
         <div
           title={`${awayTeam.placeName.default} ${awayTeam.commonName.default}`}
           className={`flex flex-row items-center justify-start px-2 gap-3 rounded  ${
-            isDone
+            status === "Done"
               ? homeTeamWon
                 ? "opacity-40"
                 : "opacity-100"
@@ -101,7 +95,7 @@ const Matchup = ({
           <div
             className={`flex flex-row items-center w-full 
              ${
-               isScheduled
+               status === "Scheduled"
                  ? "justify-end flex-row-reverse"
                  : "justify-start md:justify-center flex-row"
              }`}
@@ -112,7 +106,7 @@ const Matchup = ({
             <div>
               <p
                 className={`hidden md:block font-semibold dark:text-stone-300 text-stone-800 text-xs ${
-                  isScheduled ? "md:text-start" : "md:text-end"
+                  status === "Scheduled" ? "md:text-start" : "md:text-end"
                 }`}
               >
                 {awayTeam.placeName.default}
