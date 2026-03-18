@@ -21,7 +21,6 @@ type Props = {
 
 const LiveDataRow = ({ liveData }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState<"all" | "summary">("all");
 
   const handleCloseModal = useCallback(() => {
     setIsModalOpen(false);
@@ -31,11 +30,14 @@ const LiveDataRow = ({ liveData }: Props) => {
     setIsModalOpen(true);
   }, []);
 
-  console.log(liveData);
+  // Optimization: Create a map for O(1) player lookup instead of O(N) array.find
+  const playerMap = useMemo(() => {
+    return new Map(liveData.rosterSpots.map((p) => [p.playerId, p]));
+  }, [liveData.rosterSpots]);
 
   const renderPlayer = (playerId: number | undefined) => {
     if (!playerId) return null;
-    const player = liveData.rosterSpots.find((p) => p.playerId === playerId);
+    const player = playerMap.get(playerId);
     if (!player)
       return <span className="font-bold text-xs mx-1">#{playerId}</span>;
 
@@ -90,15 +92,15 @@ const LiveDataRow = ({ liveData }: Props) => {
               <Image
                 src={teamLogo.dark}
                 alt={`${liveData.homeTeam.abbrev} Logo`}
-                width={24}
-                height={24}
+                width={48}
+                height={48}
                 className="rounded-full w-12 h-12 object-cover hidden dark:block"
               />
               <Image
                 src={teamLogo.light}
                 alt={`${liveData.awayTeam.abbrev} Logo`}
-                width={24}
-                height={24}
+                width={48}
+                height={48}
                 className="rounded-full w-12 h-12 object-cover dark:hidden"
               />
             </div>
@@ -145,9 +147,9 @@ const LiveDataRow = ({ liveData }: Props) => {
           content = (
             <span>
               Penalty on {renderPlayer(details.committedByPlayerId)} (
-              {details.descKey}, {details.duration} min).
+              {details.descKey}, {details.duration} min)
               {details.drawnByPlayerId && (
-                <> Drawn by {renderPlayer(details.drawnByPlayerId)}.</>
+                <> Drawn by {renderPlayer(details.drawnByPlayerId)}</>
               )}
             </span>
           );
@@ -157,16 +159,14 @@ const LiveDataRow = ({ liveData }: Props) => {
           content = (
             <span>
               Shot by {renderPlayer(details.shootingPlayerId)} saved by{" "}
-              {renderPlayer(details.goalieInNetId)}.
+              {renderPlayer(details.goalieInNetId)}
             </span>
           );
           break;
         case "missed-shot":
           icon = <XMarkIcon className="w-5 h-5 text-stone-400" />;
           content = (
-            <span>
-              Missed shot by {renderPlayer(details.shootingPlayerId)}.
-            </span>
+            <span>Missed shot by {renderPlayer(details.shootingPlayerId)}</span>
           );
           break;
         case "blocked-shot":
@@ -174,7 +174,7 @@ const LiveDataRow = ({ liveData }: Props) => {
           content = (
             <span>
               Shot by {renderPlayer(details.shootingPlayerId)} blocked by{" "}
-              {renderPlayer(details.blockingPlayerId)}.
+              {renderPlayer(details.blockingPlayerId)}
             </span>
           );
           break;
@@ -183,7 +183,7 @@ const LiveDataRow = ({ liveData }: Props) => {
           content = (
             <span>
               Hit by {renderPlayer(details.hittingPlayerId)} on{" "}
-              {renderPlayer(details.hitteePlayerId)}.
+              {renderPlayer(details.hitteePlayerId)}
             </span>
           );
           break;
@@ -192,7 +192,7 @@ const LiveDataRow = ({ liveData }: Props) => {
           content = (
             <span>
               Faceoff won by {renderPlayer(details.winningPlayerId)} vs{" "}
-              {renderPlayer(details.losingPlayerId)}.
+              {renderPlayer(details.losingPlayerId)}
             </span>
           );
           break;
@@ -224,30 +224,31 @@ const LiveDataRow = ({ liveData }: Props) => {
     );
   };
 
-  const displayedPeriod =
-    liveData.displayPeriod === 1
-      ? "1st"
-      : liveData.displayPeriod === 2
-        ? "2nd"
-        : liveData.displayPeriod === 3
-          ? "3rd"
-          : liveData.displayPeriod;
-
-  const filteredPlays =
-    activeTab === "all"
-      ? liveData.plays
-      : liveData.plays.filter((p) =>
-          ["goal", "penalty"].includes(p.typeDescKey),
-        );
+  const displayedPeriod = useMemo(() => {
+    switch (liveData.displayPeriod) {
+      case 1:
+        return "1st";
+      case 2:
+        return "2nd";
+      case 3:
+        return "3rd";
+      case 4:
+        return "OT";
+      case 5:
+        return "SO";
+      default:
+        return `${liveData.displayPeriod}`;
+    }
+  }, [liveData.displayPeriod]);
 
   const groupedPlays = useMemo(() => {
     const groups: { period: number; plays: PlayType[] }[] = [];
     let currentPeriod = -1;
     let currentGroup: { period: number; plays: PlayType[] } | null = null;
 
-    filteredPlays.forEach((play) => {
+    liveData.plays.forEach((play) => {
       // Fallback for period property if strict typing isn't available
-      const pVal = play.periodDescriptor?.number || play.period || 0;
+      const pVal = play.periodDescriptor?.number || 0;
 
       if (pVal !== currentPeriod) {
         currentPeriod = pVal;
@@ -259,7 +260,7 @@ const LiveDataRow = ({ liveData }: Props) => {
       }
     });
     return groups;
-  }, [filteredPlays]);
+  }, [liveData.plays]);
 
   const getPeriodLabel = (period: number) => {
     switch (period) {
@@ -305,32 +306,81 @@ const LiveDataRow = ({ liveData }: Props) => {
       </button>
       {isModalOpen && (
         <Modal closeModal={handleCloseModal}>
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 px-2 gap-4">
+          <small className="text-xs text-start mb-2 text-stone-200 dark:text-stone-400">
+            Updated every 60 seconds
+          </small>
+          {/* Scoreboard */}
+          <div className="mb-6 rounded-xl border border-stone-200 bg-stone-50 p-4 dark:border-stone-700 dark:bg-stone-800/50">
+            <div className="flex items-center justify-between">
+              {/* Away Team */}
+              <div className="flex flex-1 flex-row items-center">
+                <div className="relative h-16 w-16">
+                  <Image
+                    src={liveData.awayTeam.logo}
+                    alt={liveData.awayTeam.commonName.default}
+                    fill
+                    className="object-contain dark:hidden"
+                  />
+                  <Image
+                    src={liveData.awayTeam.darkLogo}
+                    alt={liveData.awayTeam.commonName.default}
+                    fill
+                    className="hidden object-contain dark:block"
+                  />
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-black">
+                    {liveData.awayTeam.score}
+                  </div>
+                  <div className="text-xs font-bold uppercase tracking-wider text-stone-500">
+                    SOG: {liveData.awayTeam.sog}
+                  </div>
+                </div>
+              </div>
+
+              {/* Game Info */}
+              <div className="flex flex-col items-center gap-1 px-4">
+                <div className="text-sm font-bold uppercase text-stone-500">
+                  {displayedPeriod}
+                </div>
+                <div className="font-mono text-xl font-black">
+                  {liveData.clock.inIntermission
+                    ? "INT"
+                    : liveData.clock.timeRemaining}
+                </div>
+              </div>
+
+              {/* Home Team */}
+              <div className="flex flex-1 flex-row-reverse items-center">
+                <div className="relative h-16 w-16">
+                  <Image
+                    src={liveData.homeTeam.logo}
+                    alt={liveData.homeTeam.commonName.default}
+                    fill
+                    className="object-contain dark:hidden"
+                  />
+                  <Image
+                    src={liveData.homeTeam.darkLogo}
+                    alt={liveData.homeTeam.commonName.default}
+                    fill
+                    className="hidden object-contain dark:block"
+                  />
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-black">
+                    {liveData.homeTeam.score}
+                  </div>
+                  <div className="text-xs font-bold uppercase tracking-wider text-stone-500">
+                    SOG: {liveData.homeTeam.sog}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="mb-4 flex flex-col justify-between gap-4 px-2 sm:flex-row sm:items-center">
             <h3 className="text-2xl font-bold dark:text-stone-100">
               Live Updates
             </h3>
-            <div className="flex gap-1 p-1 bg-stone-200 dark:bg-stone-800 rounded-full w-max">
-              <button
-                onClick={() => setActiveTab("all")}
-                className={`px-4 py-1.5 text-sm font-bold rounded-full transition-all ${
-                  activeTab === "all"
-                    ? "bg-white text-stone-900 shadow-sm dark:bg-stone-600 dark:text-white"
-                    : "text-stone-500 hover:text-stone-800 dark:text-stone-400 dark:hover:text-stone-200"
-                }`}
-              >
-                Play-by-Play
-              </button>
-              <button
-                onClick={() => setActiveTab("summary")}
-                className={`px-4 py-1.5 text-sm font-bold rounded-full transition-all ${
-                  activeTab === "summary"
-                    ? "bg-white text-stone-900 shadow-sm dark:bg-stone-600 dark:text-white"
-                    : "text-stone-500 hover:text-stone-800 dark:text-stone-400 dark:hover:text-stone-200"
-                }`}
-              >
-                Game Summary
-              </button>
-            </div>
           </div>
           <div className="flex flex-col-reverse max-h-[70vh] overflow-y-auto rounded-lg border border-stone-100 dark:border-stone-800">
             {groupedPlays.map((group, index) => (

@@ -286,7 +286,7 @@ export type LiveGameType = {
   plays: PlayType[];
   rosterSpots: RosterSpotType[];
   regPeriods: number;
-  summary: Record<string, never>; // Empty object
+  summary: LiveGameSummaryType;
 };
 
 export type VenueType = {
@@ -411,4 +411,35 @@ export type RosterSpotType = {
   sweaterNumber: number;
   positionCode: string;
   headshot: string;
+};
+
+export type LiveGameSummaryType = {
+  iceSurface?: IceSurfaceType;
+};
+
+export type IceSurfaceType = {
+  awayTeam: IceSurfaceTeamType;
+  homeTeam: IceSurfaceTeamType;
+};
+
+export type IceSurfaceTeamType = {
+  forwards: OnIcePlayerType[];
+  defensemen: OnIcePlayerType[];
+  goalies: OnIcePlayerType[];
+  penaltyBox: OnIcePlayerType[];
+};
+
+export type OnIcePlayerType = {
+  playerId: number;
+  name: {
+    default: string;
+    cs?: string;
+    fi?: string;
+    sk?: string;
+    sv?: string;
+  };
+  sweaterNumber: number;
+  positionCode: string;
+  headshot: string;
+  totalSOI: number;
 };
