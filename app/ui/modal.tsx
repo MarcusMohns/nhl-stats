@@ -22,7 +22,6 @@ const Modal = ({ closeModal, children }: ModalProps) => {
   }, []);
 
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-    console.log("keydown");
     if (event.key === "Escape") {
       closeModal();
       return;

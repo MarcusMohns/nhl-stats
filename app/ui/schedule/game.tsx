@@ -1,16 +1,17 @@
 import type { GameType } from "@/app/types";
 import LinkOut from "../link-out";
-import LiveChip from "../live-chip";
 import Matchup from "./matchup";
 import { getGameStatus } from "@/app/lib/game-utils";
 import { useLiveGame } from "@/app/lib/hooks/use-live-game";
+import liveData from "@/app/mock-data/livedata.json";
+import LiveDataRow from "./live-data-row";
 
 type GameProps = {
   game: GameType & { localStartTime: string };
 };
 const Game = ({ game }: GameProps) => {
   const { status, winner } = getGameStatus(game);
-  const liveData = useLiveGame(game.id, status);
+  // const liveData = useLiveGame(game.id, status);
 
   return (
     <article
@@ -22,17 +23,19 @@ const Game = ({ game }: GameProps) => {
         <p className="flex items-center text-sm font-bold rounded">
           {game.localStartTime}
         </p>
-        {status === "Live" ? (
-          <LiveChip />
+        {liveData ? (
+          <LiveDataRow liveData={liveData} />
         ) : (
-          <div className="font-bold dark:text-stone-300 text-stone-800 bg-stone-200 dark:bg-stone-700 p-2 py-1 rounded text-xs w-max">
-            {status}
+          <div>
+            <div className="font-bold dark:text-stone-300 text-stone-800 bg-stone-200 dark:bg-stone-700 p-2 py-1 rounded text-xs w-max">
+              {status}
+            </div>
+            {winner !== undefined && (
+              <p className="font-bold dark:text-stone-300 text-stone-800 bg-stone-200 dark:bg-stone-700 p-2 py-1 rounded text-xs w-max">
+                {`${winner === "home" ? game.homeTeam.abbrev : game.awayTeam.abbrev} won`}
+              </p>
+            )}
           </div>
-        )}
-        {winner !== undefined && (
-          <p className="font-bold dark:text-stone-300 text-stone-800 bg-stone-200 dark:bg-stone-700 p-2 py-1 rounded text-xs w-max">
-            {`${winner === "home" ? game.homeTeam.abbrev : game.awayTeam.abbrev} won`}
-          </p>
         )}
         <LinkOut
           linkOutStyles="flex items-center justify-end h-auto ml-auto w-5 h-5 mr-1 text-stone-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"

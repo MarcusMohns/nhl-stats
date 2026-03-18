@@ -28,7 +28,7 @@ export const getGameStatus = (game: GameType) => {
 };
 
 export const fetchLiveGame = async (id: string): Promise<LiveGameType> => {
-  const liveGameUrl = `https://api-web.nhle.com/v1/gamecenter/"${id}"/play-by-play`;
+  const liveGameUrl = `https://api-web.nhle.com/v1/gamecenter/${id}/play-by-play`;
   try {
     const response = await fetch(liveGameUrl, {
       // Cache the data for 1 minute server side
@@ -43,7 +43,7 @@ export const fetchLiveGame = async (id: string): Promise<LiveGameType> => {
     const data = await response.json();
     return data;
   } catch (e) {
-    console.error("Error fetching schedule data from API", e);
+    console.error("Error fetching live game data from API", e);
     throw new Error("Error fetching data from the server ☹️");
   }
 };
