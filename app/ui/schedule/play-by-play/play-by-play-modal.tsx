@@ -1,7 +1,7 @@
 import Modal from "../../modal";
 import Image from "next/image";
 import { LiveGameType } from "@/app/types";
-import LivePlay from "./play";
+import Play from "./play";
 import { useMemo } from "react";
 import { getGroupedPlays } from "@/app/lib/game-utils";
 
@@ -96,14 +96,14 @@ const PlayByPlayModal = ({ handleCloseModal, liveData, period }: Props) => {
         <h3 className="text-2xl font-bold dark:text-stone-100">Live Updates</h3>
       </div>
       <div className="flex flex-col max-h-[40vh] lg:max-h-[60vh] overflow-y-auto rounded-lg border border-stone-100 dark:border-stone-800">
-        {groupedPlays.map((group, index) => (
-          <div key={`${group.period}-${index}`} className="flex flex-col">
+        {groupedPlays.map((group) => (
+          <div key={group.period} className="flex flex-col">
             <div className="sticky top-0 z-10 bg-stone-100/95 backdrop-blur-sm dark:bg-stone-800/95 py-1 px-4 font-bold text-xs uppercase tracking-wider border-b border-stone-200 dark:border-stone-700 text-stone-600 dark:text-stone-400">
               {group.label}
             </div>
-            {group.plays.map((play, index) => (
-              <LivePlay
-                key={play.situationCode + play.timeRemaining + index}
+            {group.plays.map((play) => (
+              <Play
+                key={play.situationCode + play.timeRemaining + play.typeDescKey}
                 liveData={liveData}
                 playerMap={playerMap}
                 play={play}

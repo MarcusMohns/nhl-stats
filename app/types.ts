@@ -44,6 +44,19 @@ export type PlayoffsTeamType = {
   darkLogo: string;
 };
 
+export type RenderContextType = {
+  details: NonNullable<PlayType["details"]>;
+  playerMap: Map<number, RosterSpotType>;
+  liveData: LiveGameType;
+  typeDescKey: string;
+};
+
+export type RenderResultType = {
+  icon: React.ReactNode;
+  content: React.ReactNode;
+  extraClass?: string;
+};
+
 export type ScheduleTeamType = {
   id: number;
   commonName: {

@@ -4,7 +4,6 @@ import Matchup from "./matchup";
 import { getGameStatus } from "@/app/lib/game-utils";
 import { useLiveGame } from "@/app/lib/hooks/use-live-game";
 import LiveDataRow from "./live-data-row";
-// import liveData from "../../mock-data/livedata.json";
 
 type GameProps = {
   game: GameType & { localStartTime: string };

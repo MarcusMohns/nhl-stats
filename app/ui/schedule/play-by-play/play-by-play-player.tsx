@@ -2,10 +2,15 @@ import Image from "next/image";
 import { RosterSpotType } from "@/app/types";
 
 type Props = {
-  player: RosterSpotType | undefined;
-  id: number;
+  id: number | undefined;
+  map: Map<number, RosterSpotType>;
 };
-const PlayByPlayPlayer = ({ player, id }: Props) => {
+
+const PlayByPlayPlayer = ({ id, map }: Props) => {
+  if (!id) {
+    return <span className="mx-1 text-xs font-bold">N/A</span>;
+  }
+  const player = map.get(id);
   if (!player) {
     return <span className="mx-1 text-xs font-bold">#{id}</span>;
   }
