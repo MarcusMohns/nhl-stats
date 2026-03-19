@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { getLiveGame } from "@/app/_actions";
 import type { LiveGameType } from "@/app/types";
+import startViewTransitionWrapper from "../start-view-transition-wrapper";
 
 export function useLiveGame(id: number, status: string, interval = 60000) {
   const [data, setData] = useState<LiveGameType | null>(null);
@@ -14,7 +15,7 @@ export function useLiveGame(id: number, status: string, interval = 60000) {
       getLiveGame(String(id))
         .then((result) => {
           if (!ignore && result.success) {
-            setData(result.data);
+            startViewTransitionWrapper(() => setData(result.data));
           }
         })
         .catch((error) =>

@@ -3,15 +3,15 @@ import LinkOut from "../link-out";
 import Matchup from "./matchup";
 import { getGameStatus } from "@/app/lib/game-utils";
 import { useLiveGame } from "@/app/lib/hooks/use-live-game";
-import liveData from "@/app/mock-data/livedata.json";
 import LiveDataRow from "./live-data-row";
+// import liveData from "../../mock-data/livedata.json";
 
 type GameProps = {
   game: GameType & { localStartTime: string };
 };
 const Game = ({ game }: GameProps) => {
   const { status, winner } = getGameStatus(game);
-  // const liveData = useLiveGame(game.id, status);
+  const liveData = useLiveGame(game.id, status);
 
   return (
     <article
@@ -26,7 +26,7 @@ const Game = ({ game }: GameProps) => {
         {liveData ? (
           <LiveDataRow liveData={liveData} />
         ) : (
-          <div>
+          <div className="flex items-center gap-1">
             <div className="font-bold dark:text-stone-300 text-stone-800 bg-stone-200 dark:bg-stone-700 p-2 py-1 rounded text-xs w-max">
               {status}
             </div>
