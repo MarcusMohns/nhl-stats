@@ -13,24 +13,27 @@ export const SelectTableButtons = ({
   return (
     <div
       role="group"
-      className="flex flex-col justify-center items-center xs:flex-row text-sm sm:text-base sm:mt-0 mt-5 sm:w-fit font-bold shadow-lg bg-stone-200 dark:bg-stone-800 sm:rounded-md overflow-hidden"
+      className="flex flex-row flex-wrap justify-center items-center p-1 gap-1 text-sm font-bold bg-stone-100 dark:bg-stone-800/50 rounded-xl border border-stone-200 dark:border-stone-700/50 w-full sm:w-auto"
     >
-      {buttons.map((button) => (
-        <button
-          key={button.name}
-          onClick={() => handleSelectedTable(button.name)}
-          aria-pressed={button.name === selectedTable}
-          aria-label={`Select ${button.name}`}
-          className={`flex flex-row items-center justify-center flex-grow gap-1 sm:p-3 p-1 py-3 xs:w-max w-full h-full border-none cursor-pointer transition-colors hover:bg-stone-300 dark:hover:bg-stone-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-stone-800 focus-visible:z-10 ${
-            button.name === selectedTable
-              ? "bg-stone-300 dark:bg-stone-600"
-              : "bg-stone-200 dark:bg-stone-800"
-          }`}
-        >
-          {button.name === selectedTable ? button.iconSolid : button.icon}
-          {button.name}
-        </button>
-      ))}
+      {buttons.map((button) => {
+        const isSelected = button.name === selectedTable;
+        return (
+          <button
+            key={button.name}
+            onClick={() => handleSelectedTable(button.name)}
+            aria-pressed={isSelected}
+            aria-label={`Select ${button.name}`}
+            className={`flex items-center justify-center gap-2 px-3 py-2 rounded-lg transition-all duration-200 flex-1 sm:flex-none ${
+              isSelected
+                ? "bg-white dark:bg-stone-700 text-stone-900 dark:text-white shadow-sm ring-1 ring-stone-200 dark:ring-stone-600"
+                : "text-stone-500 dark:text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 hover:bg-stone-200/50 dark:hover:bg-stone-700/30"
+            } focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500`}
+          >
+            {isSelected ? button.iconSolid : button.icon}
+            <span>{button.name}</span>
+          </button>
+        );
+      })}
     </div>
   );
 };

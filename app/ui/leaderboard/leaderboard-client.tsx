@@ -112,18 +112,20 @@ const LeaderboardClient = ({ leaderboard }: LeaderboardClientProps) => {
   const skaterLeaders = leaderboard[selectedSkaterLeaders];
 
   return (
-    <section className="leaderboard h-max w-full p-2 animate-fade-in">
-      <div className="flex flex-col items-center justify-center xl:flex-row w-full gap-10">
-        <div className="w-full xl:max-w-2xl">
-          <h1 className="font-bold dark:text-stone-300 uppercase leading-tight tracking-wide mt-5 select-none text-2xl">
-            Skaters
-          </h1>
-          <SelectTableButtons
-            buttons={SKATER_TABS}
-            selectedTable={selectedSkaterLeaders}
-            handleSelectedTable={handleSelectedSkaterLeaders}
-          />
-          <ul className="w-full">
+    <section className="leaderboard w-full max-w-7xl mx-auto p-2 sm:p-4 animate-fade-in">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 w-full items-start">
+        <div className="w-full flex flex-col gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-2">
+            <h2 className="font-black text-stone-700 dark:text-stone-200 uppercase tracking-widest text-3xl drop-shadow-sm">
+              Skaters
+            </h2>
+            <SelectTableButtons
+              buttons={SKATER_TABS}
+              selectedTable={selectedSkaterLeaders}
+              handleSelectedTable={handleSelectedSkaterLeaders}
+            />
+          </div>
+          <ul className="w-full flex flex-col gap-2">
             {skaterLeaders.map((player) => (
               <li key={player.id}>
                 <PlayerCard player={player} />
@@ -131,16 +133,18 @@ const LeaderboardClient = ({ leaderboard }: LeaderboardClientProps) => {
             ))}
           </ul>
         </div>
-        <div className="w-full xl:max-w-2xl">
-          <h1 className="font-bold dark:text-stone-300 uppercase leading-tight tracking-wide mt-5 select-none text-2xl">
-            Goalies
-          </h1>
-          <SelectTableButtons
-            buttons={GOALIE_TABS}
-            selectedTable={selectedGoalieLeaders}
-            handleSelectedTable={handleSelectedGoalieLeaders}
-          />
-          <ul className="w-full">
+        <div className="w-full flex flex-col gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-2">
+            <h2 className="font-black text-stone-700 dark:text-stone-200 uppercase tracking-widest text-3xl drop-shadow-sm">
+              Goalies
+            </h2>
+            <SelectTableButtons
+              buttons={GOALIE_TABS}
+              selectedTable={selectedGoalieLeaders}
+              handleSelectedTable={handleSelectedGoalieLeaders}
+            />
+          </div>
+          <ul className="w-full flex flex-col gap-2">
             {goalieLeaders.map((player) => (
               <li key={player.id}>
                 <PlayerCard player={player} />
