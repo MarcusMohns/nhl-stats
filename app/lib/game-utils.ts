@@ -74,7 +74,7 @@ export const fetchLiveGame = async (id: string): Promise<LiveGameType> => {
   const liveGameUrl = `https://api-web.nhle.com/v1/gamecenter/${id}/play-by-play`;
   try {
     const response = await fetch(liveGameUrl, {
-      // Cache the data for 1 minute server side
+      // Cache for 1 minute to allow distribution among concurrent users
       next: { revalidate: 60 },
       cache: "force-cache",
     });

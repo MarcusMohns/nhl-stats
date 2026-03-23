@@ -27,44 +27,6 @@ const PlayByPlayModal = ({ handleCloseModal, liveData, period }: Props) => {
       {/* Scoreboard */}
       <div className="mb-6 rounded-xl border border-stone-200 bg-stone-50 p-4 dark:border-stone-700 dark:bg-stone-800/50">
         <div className="flex items-center justify-between">
-          {/* Away Team */}
-          <div className="flex flex-1 flex-row items-center">
-            <div className="relative h-16 w-16">
-              <Image
-                src={liveData.awayTeam.logo}
-                alt={liveData.awayTeam.commonName.default}
-                fill
-                className="object-contain dark:hidden"
-              />
-              <Image
-                src={liveData.awayTeam.darkLogo}
-                alt={liveData.awayTeam.commonName.default}
-                fill
-                className="hidden object-contain dark:block"
-              />
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-black">
-                {liveData.awayTeam.score}
-              </div>
-              <div className="text-xs font-bold uppercase tracking-wider text-stone-500">
-                SOG: {liveData.awayTeam.sog}
-              </div>
-            </div>
-          </div>
-
-          {/* Game Info */}
-          <div className="flex flex-col items-center gap-1 px-4">
-            <div className="text-sm font-bold uppercase text-stone-500">
-              {period}
-            </div>
-            <div className="font-mono text-xl font-black">
-              {liveData.clock.inIntermission
-                ? "INT"
-                : liveData.clock.timeRemaining}
-            </div>
-          </div>
-
           {/* Home Team */}
           <div className="flex flex-1 flex-row-reverse items-center">
             <div className="relative h-16 w-16">
@@ -87,6 +49,43 @@ const PlayByPlayModal = ({ handleCloseModal, liveData, period }: Props) => {
               </div>
               <div className="text-xs font-bold uppercase tracking-wider text-stone-500">
                 SOG: {liveData.homeTeam.sog}
+              </div>
+            </div>
+          </div>
+
+          {/* Game Info */}
+          <div className="flex flex-col items-center gap-1 px-4">
+            <div className="text-sm font-bold uppercase text-stone-500">
+              {period}
+            </div>
+            <div className="font-mono text-xl font-black">
+              {liveData.clock.inIntermission
+                ? "INT"
+                : liveData.clock.timeRemaining}
+            </div>
+          </div>
+          {/* Away Team */}
+          <div className="flex flex-1 flex-row items-center">
+            <div className="relative h-16 w-16">
+              <Image
+                src={liveData.awayTeam.logo}
+                alt={liveData.awayTeam.commonName.default}
+                fill
+                className="object-contain dark:hidden"
+              />
+              <Image
+                src={liveData.awayTeam.darkLogo}
+                alt={liveData.awayTeam.commonName.default}
+                fill
+                className="hidden object-contain dark:block"
+              />
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-black">
+                {liveData.awayTeam.score}
+              </div>
+              <div className="text-xs font-bold uppercase tracking-wider text-stone-500">
+                SOG: {liveData.awayTeam.sog}
               </div>
             </div>
           </div>

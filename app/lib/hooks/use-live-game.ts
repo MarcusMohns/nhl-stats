@@ -8,7 +8,6 @@ export function useLiveGame(id: number, status: string, interval = 60000) {
 
   useEffect(() => {
     if (status !== "Live") return;
-    // todo How would I add an AbortController to this hook to cancel the request if the component unmounts?
     let ignore = false;
 
     const fetchGame = () => {

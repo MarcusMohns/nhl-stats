@@ -10,8 +10,7 @@ type GameProps = {
 };
 const Game = ({ game }: GameProps) => {
   const { status, winner } = getGameStatus(game);
-  const liveData = useLiveGame(game.id, status);
-
+  const liveData = useLiveGame(game.id, status, 60000);
   return (
     <article
       aria-label={`Game: ${game.awayTeam.abbrev} versus ${game.homeTeam.abbrev}`}
