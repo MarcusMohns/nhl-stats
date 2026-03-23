@@ -81,7 +81,7 @@ const StandingsClient = ({ standings }: StandingsClientProps) => {
   };
 
   return (
-    <section className="standings w-full xl:w-6xl animate-fade-in h-max sm:p-5">
+    <section className="standings w-full xl:w-6xl animate-fade-in h-max sm:p-5 py-2">
       <SelectTableButtons
         buttons={TABLE_TABS}
         handleSelectedTable={handleSelectedTable}

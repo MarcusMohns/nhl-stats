@@ -13,7 +13,7 @@ export const SelectTableButtons = ({
   return (
     <div
       role="group"
-      className="flex flex-row flex-wrap justify-center items-center p-1 gap-1 text-sm font-bold bg-stone-100 dark:bg-stone-800/50 rounded-xl border border-stone-200 dark:border-stone-700/50 w-full sm:w-auto"
+      className="flex flex-row flex-wrap justify-center items-center p-1 gap-1 text-sm font-bold bg-stone-100 dark:bg-stone-800/50 rounded-xl border border-stone-200 dark:border-stone-700/50 w-full sm:w-max"
     >
       {buttons.map((button) => {
         const isSelected = button.name === selectedTable;
