@@ -9,6 +9,9 @@ import { useActiveDate } from "../../lib/hooks/use-active-date";
 import { useHydration } from "@/app/lib/hooks/use-hydration";
 import { DateSelectorSkeleton, DatesSkeleton } from "@/app/schedule/loading";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 60;
+
 type ScheduleClientProps = {
   schedule: GameWeekType[];
 };
