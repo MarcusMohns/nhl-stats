@@ -23,7 +23,7 @@ export const SelectTableButtons = ({
             onClick={() => handleSelectedTable(button.name)}
             aria-pressed={isSelected}
             aria-label={`Select ${button.name}`}
-            className={`flex items-center justify-center gap-2 px-3 py-2 rounded-lg transition-all duration-200 flex-1 sm:flex-none ${
+            className={`flex items-center justify-center gap-2 px-3 py-2 rounded-lg transition-all duration-200 flex-1 sm:flex-none cursor-pointer ${
               isSelected
                 ? "bg-white dark:bg-stone-700 text-stone-900 dark:text-white shadow-sm ring-1 ring-stone-200 dark:ring-stone-600"
                 : "text-stone-500 dark:text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 hover:bg-stone-200/50 dark:hover:bg-stone-700/30"
