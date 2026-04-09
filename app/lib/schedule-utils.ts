@@ -14,11 +14,7 @@ export const fetchSchedule = async (): Promise<GameWeekType[]> => {
   const scheduleUrl = "https://api-web.nhle.com/v1/schedule/now";
 
   try {
-    const response = await fetch(scheduleUrl, {
-      // Cache the data for 1 minute server side
-      next: { revalidate: 60 },
-      cache: "force-cache",
-    });
+    const response = await fetch(scheduleUrl);
     if (!response.ok) {
       throw new Error(
         `Fetch failed: ${response.status} ${response.statusText}`,

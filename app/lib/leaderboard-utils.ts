@@ -7,11 +7,7 @@ export const fetchLeaderboardData = async (
 ): Promise<PlayerType[]> => {
   const leadersUrl = `https://api-web.nhle.com/v1/${goalieOrSkater}-stats-leaders/current?categories=${category}&limit=${limit}`;
 
-  const res = await fetch(leadersUrl, {
-    // Cache the data for 1 minute server side
-    next: { revalidate: 60 },
-    cache: "force-cache",
-  });
+  const res = await fetch(leadersUrl);
   if (!res.ok) {
     throw new Error(`Failed to fetch player leaders for ${category}`);
   }

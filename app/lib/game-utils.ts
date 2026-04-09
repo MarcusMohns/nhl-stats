@@ -73,11 +73,7 @@ export const getGroupedPlays = (plays: PlayType[]) => {
 export const fetchLiveGame = async (id: string): Promise<LiveGameType> => {
   const liveGameUrl = `https://api-web.nhle.com/v1/gamecenter/${id}/play-by-play`;
   try {
-    const response = await fetch(liveGameUrl, {
-      // Cache for 1 minute to allow distribution among concurrent users
-      next: { revalidate: 60 },
-      cache: "force-cache",
-    });
+    const response = await fetch(liveGameUrl);
     if (!response.ok) {
       throw new Error(
         `Fetch failed: ${response.status} ${response.statusText}`,

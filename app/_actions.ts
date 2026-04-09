@@ -15,6 +15,7 @@ import { organizedTeamStats } from "./lib/team-stats-utils";
 import { fetchSchedule } from "./lib/schedule-utils";
 import { fetchPlayoffs } from "./lib/playoffs-utils";
 import { fetchLiveGame } from "./lib/game-utils";
+import { cacheLife } from "next/cache";
 
 async function handleApiCall<T>(
   fetcher: () => Promise<T>,
@@ -33,6 +34,8 @@ async function handleApiCall<T>(
 }
 
 export const getLeaderboards = async (): Promise<Result<LeaderBoardsType>> => {
+  "use cache";
+  cacheLife("minutes");
   return handleApiCall(
     organizedLeaderboards,
     "Error fetching leaders data from API",
@@ -40,6 +43,8 @@ export const getLeaderboards = async (): Promise<Result<LeaderBoardsType>> => {
 };
 
 export const getStandings = async (): Promise<Result<StandingsType>> => {
+  "use cache";
+  cacheLife("hours");
   const fetchAndOrganizeStandings = async () => {
     const standingsData = await fetchStandingsData();
     return organizeStandings(standingsData);
@@ -53,6 +58,8 @@ export const getStandings = async (): Promise<Result<StandingsType>> => {
 export const getTeamStats = async (
   team: TeamType,
 ): Promise<Result<TeamStatsType>> => {
+  "use cache";
+  cacheLife("hours");
   return handleApiCall(
     () => organizedTeamStats(team),
     "Error fetching team stats data from API",
@@ -60,10 +67,14 @@ export const getTeamStats = async (
 };
 
 export const getSchedule = async (): Promise<Result<GameWeekType[]>> => {
+  "use cache";
+  cacheLife("minutes");
   return handleApiCall(fetchSchedule, "Error fetching schedule data from API");
 };
 
 export const getPlayoffs = async (): Promise<Result<PlayoffsType>> => {
+  "use cache";
+  cacheLife("hours");
   return handleApiCall(fetchPlayoffs, "Error fetching playoffs data from API");
 };
 
