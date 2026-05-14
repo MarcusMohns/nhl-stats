@@ -6,7 +6,7 @@ const GameSeries = ({ series }: { series: SeriesType }) => {
   const isFinals = series.seriesAbbrev === "SCF";
   return (
     <div
-      className={`flex flex-col text-center justify-center items-center w-full h-full xl:w-auto xl:h-auto`}
+      className={`flex flex-col text-center justify-center items-center w-full h-full mx-0.5 xl:mx-0 xl:w-auto xl:h-auto`}
     >
       <p className="font-bold dark:text-stone-300 leading-tight tracking-wide select-none text-sm">
         {series.seriesAbbrev}

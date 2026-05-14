@@ -41,9 +41,6 @@ const PlayoffsClient = ({ playoffs }: PlayoffsClientProps) => {
           height={107}
           loading="eager"
         />
-        <small className="text-center w-full my-10 text-xs font-semibold text-stone-500 dark:text-stone-400 tracking-wide uppercase">
-          (if the playoffs started today)
-        </small>
         <div className="flex items-center justify-center gap-1 w-full">
           <Bracket
             roundOne={western.roundOneTop}
