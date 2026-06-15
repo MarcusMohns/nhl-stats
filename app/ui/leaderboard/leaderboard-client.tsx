@@ -115,8 +115,8 @@ const LeaderboardClient = ({ leaderboard }: LeaderboardClientProps) => {
     <section className="leaderboard w-full max-w-7xl mx-auto p-2 sm:p-4 animate-fade-in">
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 w-full items-start">
         <div className="w-full flex flex-col gap-4">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-2">
-            <h2 className="font-black text-stone-700 dark:text-stone-200 uppercase tracking-widest text-2xl drop-shadow-sm select-none">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 px-2 mt-4 md:mt-0">
+            <h2 className="font-black text-stone-700 dark:text-stone-200 uppercase tracking-widest text-xl md:text-2xl drop-shadow-sm select-none">
               Skaters
             </h2>
             <SelectTableButtons
@@ -134,8 +134,8 @@ const LeaderboardClient = ({ leaderboard }: LeaderboardClientProps) => {
           </ul>
         </div>
         <div className="w-full flex flex-col gap-4">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-2">
-            <h2 className="font-black text-stone-700 dark:text-stone-200 uppercase tracking-widest text-2xl drop-shadow-sm select-none">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 px-2 mt-2 md:mt-0">
+            <h2 className="font-black text-stone-700 dark:text-stone-200 uppercase tracking-widest text-xl md:text-2xl drop-shadow-sm select-none">
               Goalies
             </h2>
             <SelectTableButtons

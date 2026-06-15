@@ -82,11 +82,13 @@ const StandingsClient = ({ standings }: StandingsClientProps) => {
 
   return (
     <section className="standings w-full xl:w-6xl animate-fade-in h-max sm:p-5 py-2">
-      <SelectTableButtons
-        buttons={TABLE_TABS}
-        handleSelectedTable={handleSelectedTable}
-        selectedTable={selectedTable}
-      />
+      <div className="flex w-[90%] md:w-full mx-auto md:mx-0 mt-4 md:mt-0">
+        <SelectTableButtons
+          buttons={TABLE_TABS}
+          handleSelectedTable={handleSelectedTable}
+          selectedTable={selectedTable}
+        />
+      </div>
       {selectedTable === "League" && (
         <LeagueTable league={standings.League} selectedTable={selectedTable} />
       )}

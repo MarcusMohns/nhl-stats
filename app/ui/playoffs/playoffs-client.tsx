@@ -8,24 +8,24 @@ type PlayoffsClientProps = {
 };
 
 const PlayoffsClient = ({ playoffs }: PlayoffsClientProps) => {
-  // The API returns the series in a specific order, the first four series are the first round the next two are the second round and the last two are the conference finals
+  // The API returns the series in a specific order easter first then west
   const eastern = {
-    roundOneTop: playoffs.series.slice(0, 2),
-    roundOneBottom: playoffs.series.slice(2, 4),
-    roundTwoTop: playoffs.series[8],
-    roundTwoBottom: playoffs.series[9],
-    conferenceFinal: playoffs.series[12],
+    roundOneTop: playoffs.series.slice(0, 2), // First round
+    roundOneBottom: playoffs.series.slice(2, 4), // First round
+    roundTwoTop: playoffs.series[8], // Second round
+    roundTwoBottom: playoffs.series[9], // Second round
+    conferenceFinal: playoffs.series[12], // Conference Finals
   };
 
   const western = {
-    roundOneTop: playoffs.series.slice(4, 6),
-    roundOneBottom: playoffs.series.slice(6, 8),
-    roundTwoTop: playoffs.series[10],
-    roundTwoBottom: playoffs.series[11],
-    conferenceFinal: playoffs.series[13],
+    roundOneTop: playoffs.series.slice(4, 6), // First round
+    roundOneBottom: playoffs.series.slice(6, 8), // First round
+    roundTwoTop: playoffs.series[10], // Second round
+    roundTwoBottom: playoffs.series[11], // Second round
+    conferenceFinal: playoffs.series[13], // Conference Finals
   };
 
-  const stanleyCupFinals = playoffs.series[14];
+  const stanleyCupFinals = playoffs.series[14]; // Stanley Cup Finals
 
   return (
     <section
