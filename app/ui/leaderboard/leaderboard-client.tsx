@@ -116,7 +116,7 @@ const LeaderboardClient = ({ leaderboard }: LeaderboardClientProps) => {
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 w-full items-start">
         <div className="w-full flex flex-col gap-4">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-2">
-            <h2 className="font-black text-stone-700 dark:text-stone-200 uppercase tracking-widest text-3xl drop-shadow-sm">
+            <h2 className="font-black text-stone-700 dark:text-stone-200 uppercase tracking-widest text-2xl drop-shadow-sm select-none">
               Skaters
             </h2>
             <SelectTableButtons
@@ -135,7 +135,7 @@ const LeaderboardClient = ({ leaderboard }: LeaderboardClientProps) => {
         </div>
         <div className="w-full flex flex-col gap-4">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-2">
-            <h2 className="font-black text-stone-700 dark:text-stone-200 uppercase tracking-widest text-3xl drop-shadow-sm">
+            <h2 className="font-black text-stone-700 dark:text-stone-200 uppercase tracking-widest text-2xl drop-shadow-sm select-none">
               Goalies
             </h2>
             <SelectTableButtons

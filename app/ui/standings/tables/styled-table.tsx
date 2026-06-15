@@ -60,7 +60,7 @@ const StyledTable = ({
       {modal.open && modal.team && (
         <TeamStatsModal handleCloseModal={handleCloseModal} team={modal.team} />
       )}
-      <h2 className="font-bold dark:text-stone-300 my-5 pt-3 pl-2 md:pl-0 text-lg uppercase leading-tight tracking-wide select-none">
+      <h2 className="font-black text-stone-700 dark:text-stone-200 uppercase tracking-widest text-2xl drop-shadow-sm select-none mt-8 mb-4 pl-2 md:pl-0">
         {tableName}
       </h2>
       <table

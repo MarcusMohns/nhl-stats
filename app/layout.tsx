@@ -30,7 +30,7 @@ export default async function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Navbar />
           <main
-            className="flex flex-col justify-center items-center xl:p-10
+            className="flex flex-col md:justify-start items-center xl:p-10
     min-h-screen w-full md:pt-16"
           >
             {children}
