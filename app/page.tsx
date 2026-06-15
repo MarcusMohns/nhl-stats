@@ -18,8 +18,8 @@ export default function Home() {
           <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-blue-100 via-blue-300 to-cyan-400 dark:from-blue-300 dark:via-blue-600 dark:to-cyan-900 opacity-20 blur-xl transition-all duration-300 group-hover:opacity-40 group-hover:blur-2xl" />
         </h1>
         <p className="text-xl md:text-2xl text-stone-600 dark:text-stone-400 max-w-2xl leading-relaxed font-medium">
-          A modern lightweight app for real-time hockey scores, comprehensive
-          standings, player leaderboards, and playoff brackets.
+          A lightweight app for quick access to real-time NHL scores, standings,
+          player leaderboards and the Stanley Cup playoffs bracket
         </p>
         <div className="flex flex-wrap justify-center gap-4 pt-4">
           <Link
